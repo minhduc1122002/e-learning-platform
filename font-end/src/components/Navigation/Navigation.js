@@ -11,7 +11,7 @@ function Navigation() {
         </div>
         <div className="nav-auth">
             <a className="sign-up" href="/">Sign Up</a>
-            <a className="log-in" href="/">Log In</a>
+            <a className="log-in" href="/Login">Log In</a>
         </div>
     </div>
   )
