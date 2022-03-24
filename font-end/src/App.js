@@ -8,6 +8,7 @@ import {
 import Course from "./pages/Course";
 import Learning from "./pages/Learning";
 import Test from "./Test";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/course/:path" element={<Course />} />
         <Route path="/learn/:course_id/*" element={<Learning />} />
         <Route path="/test" element={<Test/>} />
+        <Route path="/Login" element={<Login/>} />
       </Routes>
     </Router>
   );
