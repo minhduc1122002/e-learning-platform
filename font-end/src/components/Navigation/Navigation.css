@@ -1,0 +1,49 @@
+.navigation {
+    border-bottom: 1px solid #eaecf3;
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.nav-links {
+    margin-right: auto;
+}
+.nav-links ul li {
+    list-style: none;
+    display: inline-block;
+    height: 65px;
+    position: relative;
+    line-height: 65px;
+}
+.nav-links ul li a {
+    font-size: 16px;
+    text-decoration: none;
+    color: #5c5589;
+    padding: 0 24px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.nav-auth a{
+    font-size: 14px;
+    text-decoration: none;
+    padding: 0 24px;
+    text-transform: uppercase;
+    border-radius: 25px;
+    padding: 8px 16px;
+    font-weight: 600;
+}
+.nav-auth .sign-up {
+    margin-right: 15px;
+    background-color: rgb(96, 79, 205, 1);
+    border-color: rgb(19, 11, 67, 1);
+    border-width: 1px;
+    color: rgb(255, 255, 255, 1);
+}
+
+.nav-auth .log-in {
+    background-color: rgb(250, 250, 255, 1);
+    border-color: rgb(96, 79, 205, 1);
+    border-width: 1px;
+    color: rgb(96, 79, 205, 1);
+}

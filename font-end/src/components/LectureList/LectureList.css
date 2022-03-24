@@ -1,0 +1,28 @@
+.lecture-list {
+    border-left: 0.375rem solid #3a10e5;
+}
+.lecture-box {
+    display: flex;
+}
+.lecture-index{
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: .15rem;
+    color: #646466;
+    width: 8rem;
+    padding: 2rem 1rem;
+    text-align: center;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+.lecture-overview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 1.5625rem;
+    padding: 2rem 0;
+}
+.lecture-overview h2 {
+    color: rgb(96, 79, 205, 1);
+    margin-bottom: 8px;
+}

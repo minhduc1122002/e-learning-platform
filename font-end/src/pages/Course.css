@@ -1,0 +1,105 @@
+.course-container .header {
+    display: flex;
+    padding: 16px 16px 16px;
+    align-items: center;
+    height: 100px;
+    box-shadow: 0px 4px 10px 0px rgba(79,114,205,.15);
+}
+.course-container .header-text {
+    display: flex;
+    align-items: center;
+}
+.course-container img.icon {
+    height: 54px;
+    width: 54px;
+    margin-right: 16px;
+}
+.course-container .title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-right: 16px;
+}
+.course-container .students {
+    display: flex;
+    align-items: center;
+}
+
+.course-container .students img {
+    margin-right: 8px;
+}
+
+.course-container .course-info {
+    padding: 48px 32px 64px 32px;
+    display: flex;
+    border-bottom: 3px solid #eaecf3;
+}
+.course-container .about-text {
+    max-width: 750px;
+    margin-right: auto;
+}
+.course-container .about-text-desc {
+    position: relative;
+}
+.hidden {
+    height: 180px;
+    overflow: hidden;
+}
+.course-container .about-text-desc.hidden::after {
+    bottom: 0;
+    box-shadow: 0 0 25px 15px #fff;
+    content: "";
+    position: absolute;
+    width: 100%;
+}
+.course-container .about-text h2 {
+    margin-bottom: 8px;
+    color: #130b43;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 140%;
+}
+.course-container .about-text p {
+    padding-top: 16px;
+    font-size: 18px;
+    white-space: pre-line;
+}
+.course-container .about-text button {
+    align-items: center;
+    background-color: rgb(225 235 255);
+    border-radius: 100px;
+    color: rgb(46 87 232);
+    display: flex;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 170%;
+    margin-top: 20px;
+    padding: 8px 24px;
+}
+.syllabus-info {
+    padding: 48px 32px 64px 32px;
+    display: flex;
+    border-bottom: 3px solid #eaecf3;
+    justify-content: center;
+    align-items: center;
+}
+.syllabus-header {
+    text-align: center;
+    margin-bottom: 16px;
+}
+.syllabus-header h2 {
+    margin-bottom: 8px;
+    font-size: 31px;
+    text-transform: uppercase;
+    color: #130b43;
+}
+.syllabus-header p {
+    font-size: 18px;
+    font-weight: 200;
+}
+.course-info .code-holder {
+    width: 35%;
+    height: 280px;
+    overflow: scroll !important;
+    font-size: 18px !important;
+}
