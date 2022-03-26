@@ -6,13 +6,17 @@ import './Course.css'
 import LectureList from "../components/LectureList/LectureList";
 import Footer from "../components/Footer/Footer";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
+import ReactMarkdown from 'react-markdown'
 
 function Course() {
     const location = useLocation();
     const path = location.pathname.split("/")[2];
     const [course, setCourse] = useState({})
     const [hidden, setHidden] = useState(true)
+    
     useEffect(() => {
         const getCourses = async () => {
             try {
@@ -25,7 +29,7 @@ function Course() {
         }
         getCourses()
     }, [path])
-
+    
     return (
         <>
             <Navigation/>
@@ -47,15 +51,15 @@ function Course() {
                     <div className="about-text">
                         <h2>About {course.title}</h2>
                         <div className={hidden ? "about-text-desc hidden" : "about-text-desc"}>
-                        <p dangerouslySetInnerHTML={{__html: `${course.description}`}}/>
+                            <ReactMarkdown children={course.description} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} className="markdown-container"/>
                         </div>
-                        <button type="button" onClick={(e) => setHidden(!hidden)}>{hidden ? `Read more on ${course.title}` : "Read less"}</button>
+                        <button type="button" onClick={() => setHidden(!hidden)}>{hidden ? `Read more on ${course.title}` : "Read less"}</button>
                     </div>
                     <SyntaxHighlighter
                         className="code-holder"
-                        children={`System.out.println("Hello World")`}
-                        style={vs}
-                        language="java"
+                        children={course.code}
+                        style={oneLight}
+                        language={course.path}
                         PreTag="div"
                     />
                 </div>
@@ -65,7 +69,7 @@ function Course() {
                             <h2>Your journey through {course.title}</h2>
                             <p>Learn and master concepts to achieve fluency in {course.title}.</p>
                         </div>
-                        <LectureList lectures={course.lectures}/>
+                        {course.lectures && <LectureList lectures={course.lectures}/>}
                     </div>
                 </div>
             </div>

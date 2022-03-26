@@ -66,7 +66,7 @@ router.get("/findpath/:path", async (req, res) => {
 router.get("/", async (req, res) => {
     try {
         const course = await Course.find();
-        res.status(200).json(course.reverse());
+        res.status(200).json(course);
     } catch (err) {
         res.status(500).json(err);
     }

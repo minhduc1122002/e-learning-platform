@@ -1,0 +1,46 @@
+.site-footer {
+    margin-top: 10%;
+    background: linear-gradient(180deg,#271b72,rgba(39,27,114,0) 48.1%,#271b72),linear-gradient(0deg,#271b72,#271b72),url(https://d24y9kuxp2d7l2.cloudfront.net/assets/bg-tracks-header@2x-8439ef30af6bf120107f6a84db31a62237d5ee8b.jpg);
+    background-position: -190px;
+    background-size: 100%;
+    box-shadow: 0 4px 24px 0 #00000026;
+    border-top: 8px solid rgb(96 79 205);
+}
+.site-info {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2em 2em;
+    font-size: 20px;
+    color: #fff;
+    display: flex;
+}
+.site-info a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+.site-info a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+.site-info .about {
+    width: 40%;
+    margin-right: auto;
+}
+.site-info p {
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+.soical-icon {
+    height: 1.5em;
+}
+.follow-icon-list {
+    display: flex;
+    align-items: center;
+}
+.follow-icon-list a {
+    margin-right: 2em;
+}
+.site-info img {
+    height: 310px
+}

@@ -34,7 +34,7 @@
     border-bottom: 3px solid #eaecf3;
 }
 .course-container .about-text {
-    max-width: 750px;
+    width: 50%;
     margin-right: auto;
 }
 .course-container .about-text-desc {
@@ -52,16 +52,11 @@
     width: 100%;
 }
 .course-container .about-text h2 {
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     color: #130b43;
     font-size: 28px;
     font-weight: 700;
     line-height: 140%;
-}
-.course-container .about-text p {
-    padding-top: 16px;
-    font-size: 18px;
-    white-space: pre-line;
 }
 .course-container .about-text button {
     align-items: center;
@@ -79,7 +74,6 @@
 .syllabus-info {
     padding: 48px 32px 64px 32px;
     display: flex;
-    border-bottom: 3px solid #eaecf3;
     justify-content: center;
     align-items: center;
 }
@@ -98,8 +92,31 @@
     font-weight: 200;
 }
 .course-info .code-holder {
-    width: 35%;
+    width: 36%;
     height: 280px;
     overflow: scroll !important;
     font-size: 18px !important;
+}
+.markdown-container a {
+    color: rgb(46 87 232);
+    font-weight: 600;
+    text-decoration: none;
+}
+.markdown-container ul {
+    margin-bottom: 24px;
+    margin-left: 14px;
+}
+.markdown-container ul li {
+    margin-bottom: 8px;
+    margin-left: 6px;
+    padding-left: 4px;
+}
+.markdown-container {
+    font-size: 18px;
+}
+.markdown-container p {
+    margin-top: 12px;
+}
+.about-text button:hover {
+    cursor: pointer;
 }
