@@ -10,7 +10,7 @@ function Navigation() {
             </ul>
         </div>
         <div className="nav-auth">
-            <a className="sign-up" href="/">Sign Up</a>
+            <a className="sign-up" href="/signup">Sign Up</a>
             <a className="log-in" href="/login">Log In</a>
         </div>
     </div>
