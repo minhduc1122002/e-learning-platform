@@ -2,27 +2,10 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    font-size: 18px;
-}
-
-.signup-content::before {
-    background-size: contain;
-    content: "";
-    position: absolute;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTQiIGhlaWdodD0iMTU4IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im01NSA0MS45MSAxMy45MzMtMTMuODU2IDEzLjkzMyAxMy44NTUtMTMuOTMzIDEzLjg1Nkw1NSA0MS45MDlaIiBmaWxsPSIjNTlEMkFFIi8+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Im02My44NjcgMzkuMzkgMTAuNzY2LTEwLjcwN2E0LjA0NiA0LjA0NiAwIDAgMSA1LjcgMEw5MS4xIDM5LjM5YTMuOTkyIDMuOTkyIDAgMCAxIDAgNS42NjhMODAuMzMzIDU1Ljc2NWE0LjA0NiA0LjA0NiAwIDAgMS01LjcgMEw2My44NjcgNDUuMDU4YTMuOTkyIDMuOTkyIDAgMCAxIDAtNS42NjhabTIuNTMzIDIuNTJhLjQ0NC40NDQgMCAwIDAgMCAuNjI5bDEwLjc2NyAxMC43MDdhLjQ1LjQ1IDAgMCAwIC42MzMgMGwxMC43NjYtMTAuNzA3YS40NDQuNDQ0IDAgMCAwIDAtLjYzTDc3LjggMzEuMjAzYS40NS40NSAwIDAgMC0uNjMzIDBMNjYuNCA0MS45MDlaIiBmaWxsPSIjMTMwQjQzIi8+PHBhdGggZD0iTTUuMjk3IDEzNS45NmExLjc5OCAxLjc5OCAwIDAgMSAyLjUzNCAwbDkuNSA5LjQ0N2MuNjk5LjY5NS42OTkgMS44MjMgMCAyLjUxOS0uNy42OTYtMS44MzQuNjk2LTIuNTM0IDBsLTkuNS05LjQ0N2MtLjctLjY5Ni0uNy0xLjgyNCAwLTIuNTE5Wk0xLjI2NyAxNDMuOTc2YTEuNzk4IDEuNzk4IDAgMCAxIDIuNTMzIDBsOS41IDkuNDQ3Yy43LjY5Ni43IDEuODIzIDAgMi41MTktLjcuNjk2LTEuODM0LjY5Ni0yLjUzMyAwbC05LjUtOS40NDdjLS43LS42OTYtLjctMS44MjMgMC0yLjUxOVoiIGZpbGw9IiMxMzBCNDMiLz48L3N2Zz4=);
-    height: 156px;
-    width: 94px;
-    left: 150px;
-}
-
-.signup-content::after {
-    background-size: contain;
-    content: "";
-    position: absolute;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTg2IiBoZWlnaHQ9IjE1MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCAuN2gxOC43NDh2MTguODIxSDBWLjcwMVoiIGZpbGw9IiNGQUU1NEUiLz48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTcuNjcgNC45NzhoMTQuNDg3YTMuODQyIDMuODQyIDAgMCAxIDMuODM1IDMuODVWMjMuMzdhMy44NDIgMy44NDIgMCAwIDEtMy44MzUgMy44NUg3LjY3YTMuODQyIDMuODQyIDAgMCAxLTMuODM1LTMuODVWOC44MjdhMy44NDIgMy44NDIgMCAwIDEgMy44MzUtMy44NVptMCAzLjQyMmEuNDI3LjQyNyAwIDAgMC0uNDI2LjQyN3YxNC41NDRjMCAuMjM2LjE5LjQyOC40MjYuNDI4aDE0LjQ4N2EuNDI3LjQyNyAwIDAgMCAuNDI2LS40MjhWOC44MjdhLjQyNy40MjcgMCAwIDAtLjQyNi0uNDI3SDcuNjdaIiBmaWxsPSIjMTMwQjQzIi8+PHBhdGggZD0iTTE3LjM1IDEwMi4zODJjMCAuOTI4LS43NSAxLjY4MS0xLjY3NSAxLjY4MUExLjY3OCAxLjY3OCAwIDAgMSAxNCAxMDIuMzgyYzAtLjkyOS43NS0xLjY4MSAxLjY3NS0xLjY4MXMxLjY3NS43NTIgMS42NzUgMS42ODFaTTE3LjM1IDEwOC40MzRjMCAuOTI5LS43NSAxLjY4MS0xLjY3NSAxLjY4MUExLjY3NyAxLjY3NyAwIDAgMSAxNCAxMDguNDM0YzAtLjkyOC43NS0xLjY4MSAxLjY3NS0xLjY4MXMxLjY3NS43NTMgMS42NzUgMS42ODFaTTE3LjM1IDExNC40ODdjMCAuOTI4LS43NSAxLjY4MS0xLjY3NSAxLjY4MUExLjY3OCAxLjY3OCAwIDAgMSAxNCAxMTQuNDg3YzAtLjkyOS43NS0xLjY4MiAxLjY3NS0xLjY4MnMxLjY3NS43NTMgMS42NzUgMS42ODJaTTIzLjM3OSAxMDIuMzgyYzAgLjkyOC0uNzUgMS42ODEtMS42NzUgMS42ODFhMS42NzggMS42NzggMCAwIDEtMS42NzUtMS42ODFjMC0uOTI5Ljc1LTEuNjgyIDEuNjc1LTEuNjgyczEuNjc1Ljc1MyAxLjY3NSAxLjY4MlpNMjMuMzc5IDEwOC40MzRjMCAuOTI5LS43NSAxLjY4MS0xLjY3NSAxLjY4MWExLjY3NyAxLjY3NyAwIDAgMS0xLjY3NS0xLjY4MWMwLS45MjguNzUtMS42ODEgMS42NzUtMS42ODFzMS42NzUuNzUzIDEuNjc1IDEuNjgxWk0yMy4zNzkgMTE0LjQ4N2MwIC45MjgtLjc1IDEuNjgxLTEuNjc1IDEuNjgxYTEuNjc4IDEuNjc4IDAgMCAxLTEuNjc1LTEuNjgxYzAtLjkyOS43NS0xLjY4MiAxLjY3NS0xLjY4MnMxLjY3NS43NTMgMS42NzUgMS42ODJaTTI5LjQwOCAxMDIuMzgyYzAgLjkyOC0uNzUgMS42ODEtMS42NzQgMS42ODFhMS42NzggMS42NzggMCAwIDEtMS42NzUtMS42ODFjMC0uOTI5Ljc1LTEuNjgyIDEuNjc1LTEuNjgyczEuNjc0Ljc1MyAxLjY3NCAxLjY4MlpNMjkuNDA4IDEwOC40MzRjMCAuOTI5LS43NSAxLjY4MS0xLjY3NCAxLjY4MWExLjY3OCAxLjY3OCAwIDAgMS0xLjY3NS0xLjY4MWMwLS45MjguNzUtMS42ODEgMS42NzUtMS42ODFzMS42NzQuNzUzIDEuNjc0IDEuNjgxWk0yOS40MDggMTE0LjQ4N2MwIC45MjgtLjc1IDEuNjgxLTEuNjc0IDEuNjgxYTEuNjc4IDEuNjc4IDAgMCAxLTEuNjc1LTEuNjgxYzAtLjkyOS43NS0xLjY4MiAxLjY3NS0xLjY4MnMxLjY3NC43NTMgMS42NzQgMS42ODJaIiBmaWxsPSIjMTMwQjQzIi8+PHBhdGggZD0iTTE3MS4yMzMgMTI4LjA3NWEuMzI4LjMyOCAwIDAgMSAuMzA1LjQ4OWwtOC43NzcgMTUuNTg2YS4zMjYuMzI2IDAgMCAxLS41NjIuMDEybC05LjAyNS0xNC40OThhLjMyOC4zMjggMCAwIDEgLjI1Ny0uNTAybDE3LjgwMi0xLjA4N1oiIGZpbGw9IiNGNjk2MDUiLz48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTE1OS41ODMgMTM0YS4zMjkuMzI5IDAgMCAwLS4yNDkuNTAxbDguNDQyIDEzLjU2MWEuMzI1LjMyNSAwIDAgMCAuNTU3LS4wMDVsOS4wMzktMTUuMDk4YS4zMjguMzI4IDAgMCAwLS4zMDktLjQ5NkwxNTkuNTgzIDEzNFptMjAuMDMyLjMxMy05LjAzOCAxNS4wOThjLTEuMTMzIDEuODkxLTMuODU2IDEuOTE1LTUuMDIxLjA0M2wtOC40NDEtMTMuNTYxYy0xLjE2NS0xLjg3Mi4wNS00LjMxOCAyLjI0LTQuNTFsMTcuNDgtMS41MzdjMi4zOTYtLjIxMSA0LjAxOSAyLjM5NyAyLjc4IDQuNDY3WiIgZmlsbD0iIzEzMEI0MyIvPjwvc3ZnPg==);
-    height: 151px;
-    width: 185px;
-    right: 90px;
+    text-align: left;
+    font-size: 20px;
+    background: linear-gradient(1turn,#5141bd,#3e2ea5),linear-gradient(0deg,#2f2768,#2f2768);
+    height: 100vh;
 }
 
 span.signup-input-login {
@@ -34,6 +17,7 @@ span.signup-input-login {
 .header-signup {
     text-align: center;
     margin: 0;
+    line-height: 1;
     padding-bottom: 20px;
 }
 
@@ -41,32 +25,38 @@ span.signup-input-login {
     width: 35%;
     margin: 6% auto;
     background: #ffffff;
-    box-shadow: 0px 12px 60px rgb(96, 79, 205, 0.8);
+    box-shadow: 0px 14px 80px rgb(96, 79, 205, 1);
     padding: 40px 55px 45px 55px;
     border-radius: 15px;
-    border-color: transparent;
   }
 
 .input-signup {
-    font-size: 15px;
+    --tw-ring-offset-shadow: 0 0 #0000;
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-shadow: 0px 4px 16px 0px rgba(79,114,205,.1);
+    font-size: 16px;
     width: 100%;
     padding: 12px 20px;
     display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    border: 1px solid #a9a6bd;
+    border-radius: 8px;
     box-sizing: border-box;
-    margin-bottom: 20px;
+    box-shadow: var(--tw-ring-offset-shadow,0 0 #0000), var(--tw-ring-shadow,0 0 #0000), var(--tw-shadow);
 }
 
 .signup-input-btn {
-    background-color: rgb(96, 79, 205, 1);
-    color: #fff;
-    width: 95%;
-    margin: 6% auto;
+    width: 100%;
+    margin: 1.5rem auto;
     display: block;
-    border-radius: 10px;
-    font-size: 22px;
+    background-color: rgb(96 79 205);
+    color: rgb(255, 255, 250);
+    border-radius: 8px;
+    font-size: 18px;
     padding: 12px 28px;
+    font-weight: 600;
+    height: 50px;
+    font-family: Poppins,sans-serif;
+    transition: background-color .1s ease-in;
 }
 
 .signup-input-btn:hover {
@@ -74,7 +64,20 @@ span.signup-input-login {
 }
 
 .label-signup {
-    font-size: 10px;
+    margin: 1rem 0;
+    display: block;
+    font-family: Source Code Pro,monospace;
+    font-size: 14px;
+    font-weight: 650;
+    text-transform: uppercase;
+    line-height: 160%;
+}
+
+.signup-option-login {
+    width: fit-content;
+    text-decoration: none;
+    color: rgb(46 87 232);
+    font-weight: 500;
 }
 
 

@@ -15,7 +15,7 @@ function Signup() {
     <div className="signup-content">
       <form className="signup-form">
         <div className="header-signup">
-          <h1>Sign up</h1>
+          <h1>Signup</h1>
         </div>
 
         <div className="signup-form-inputs">
@@ -65,10 +65,10 @@ function Signup() {
           type="submit"
           onClick={onSignUpClick}
         >
-          <strong>SIGN UP</strong>
+          <strong>Sign up</strong>
         </button>
         <span className="signup-input-login">
-          Already have an account? <a href="/Login">Login here</a>
+          Already have an account? <a href="/Login" className = "signup-option-login">Login here</a>
         </span>
       </form>
     </div>
