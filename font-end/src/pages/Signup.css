@@ -60,7 +60,9 @@ span.signup-input-login {
 }
 
 .signup-input-btn:hover {
-    background: rgb(71, 57, 160)
+    background-color: rgb(59 42 147);
+    cursor: pointer;
+    box-shadow: 0 4px 7px rgb(79 114 205 / 60%);
 }
 
 .label-signup {
@@ -80,6 +82,10 @@ span.signup-input-login {
     font-weight: 500;
 }
 
-
-
-
+input.input-signup:focus {
+    border: 1px solid #2e57e8;
+    outline: none;
+}
+.signup-form-inputs:focus-within label {
+    color: #2e57e8;
+}
