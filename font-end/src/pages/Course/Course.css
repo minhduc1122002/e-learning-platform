@@ -4,6 +4,7 @@
     align-items: center;
     height: 100px;
     box-shadow: 0px 4px 10px 0px rgba(79,114,205,.15);
+    position: relative;
 }
 .course-container .header-text {
     display: flex;
@@ -93,7 +94,7 @@
 }
 .course-info .code-holder {
     width: 36%;
-    height: 280px;
+    height: 250px;
     overflow: scroll !important;
     font-size: 18px !important;
 }
@@ -113,10 +114,23 @@
 }
 .markdown-container {
     font-size: 18px;
+    margin-top: 16px;
 }
 .markdown-container p {
-    margin-top: 12px;
+    margin-bottom: 12px;
 }
 .about-text button:hover {
     cursor: pointer;
+}
+.markdown-container blockquote {
+    border-left: 4px solid #cbc9d9;
+    color: #5c5589;
+    margin-bottom: 24px;
+    margin-top: 16px;
+    padding-left: 24px;
+}
+.markdown-container hr {
+    border-top: 1px solid;
+    color: inherit;
+    height: 0;
 }

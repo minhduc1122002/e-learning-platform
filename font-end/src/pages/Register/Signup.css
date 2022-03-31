@@ -9,9 +9,9 @@
 }
 
 span.signup-input-login {
-    display:block;
+    display: block;
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .header-signup {
@@ -46,7 +46,7 @@ span.signup-input-login {
 
 .signup-input-btn {
     width: 100%;
-    margin: 1.5rem auto;
+    margin: 2.5rem auto 1.5rem;
     display: block;
     background-color: rgb(96 79 205);
     color: rgb(255, 255, 250);

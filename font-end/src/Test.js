@@ -4,7 +4,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
-import { publicRequest } from "./request";
+import { publicRequest, userRequest } from "./request";
 function Test() {
     const [markdown, setMarkdown] = useState()
     const [code, setCode] = useState()
@@ -18,14 +18,14 @@ function Test() {
     }
     const handleClick = async () => {
         const course = {
-            path: "cpp",
-            title: "C++",
+            path: "python",
+            title: "Python",
             description: markdown,
-            image: "https://dg8krxphbh767.cloudfront.net/tracks/cpp.svg",
+            image: "https://dg8krxphbh767.cloudfront.net/tracks/python.svg",
             code: code
         }
         try {
-            const res = await publicRequest.post("/courses/", course)
+            const res = await userRequest.put(`/courses/update/${course.path}`, course)
             console.log(res.data)
         } catch (err) {
             console.log(err)

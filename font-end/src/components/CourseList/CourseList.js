@@ -13,7 +13,7 @@ function CourseList( {courses} ) {
             {courses && (<div className="course-list">
                 {courses.map(course => (
                     <a className="course-item" href={`/course/${course.path}`} key={course.path}>
-                        <img alt="Python" className="python" src={course.image}/>
+                        <img alt={course.path} className={course.path} src={course.image}/>
                         <div className="title">{course.title}</div>
                         <div className="students-count">172434 students</div>
                     </a>

@@ -1,15 +1,16 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { publicRequest } from "../request";
-import Navigation from "../components/Navigation/Navigation";
+import { publicRequest } from "../../request";
+import Navigation from "../../components/Navigation/Navigation";
 import './Course.css'
-import LectureList from "../components/LectureList/LectureList";
-import Footer from "../components/Footer/Footer";
+import LectureList from "../../components/LectureList/LectureList";
+import Footer from "../../components/Footer/Footer";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import ReactMarkdown from 'react-markdown'
+import Enroll from "../../components/Enrollment/Enroll";
 
 function Course() {
     const location = useLocation();
@@ -47,6 +48,7 @@ function Course() {
                         </div>
                     </div>
                 </div>
+                <Enroll course={course}/>
                 <div className="course-info">
                     <div className="about-text">
                         <h2>About {course.title}</h2>

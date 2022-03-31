@@ -5,13 +5,15 @@ import {
   Routes,
   Navigate
 } from "react-router-dom";
-import Course from "./pages/Course";
+import Course from "./pages/Course/Course";
 import Learning from "./pages/Learning";
 import Test from "./Test";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Login from "./pages/Login/Login";
+import Signup from "./pages/Register/Signup";
+import { useSelector, useDispatch } from "react-redux";
 
 function App() {
+  const user = useSelector((state) => state.auth.user);
   return (
     <Router>
       <Routes>
@@ -19,8 +21,8 @@ function App() {
         <Route path="/course/:path" element={<Course />} />
         <Route path="/learn/:course_id/*" element={<Learning />} />
         <Route path="/test" element={<Test/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path = "/signup" element = {<Signup/>} />
+        <Route path="/login" element={user ? <Navigate to="/"/> : <Login/>} />
+        <Route path = "/signup" element = {user ? <Navigate to="/"/> : <Signup/>} />
       </Routes>
     </Router>
   );

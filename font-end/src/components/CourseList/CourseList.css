@@ -33,7 +33,6 @@
     height: 151px;
     width: 185px;
     right: 32px;
-    
 }
 .course-list {
     margin-top: 64px;
@@ -48,6 +47,8 @@
     display: flex;
     flex-direction: column;
     padding: 24px 8px;
+    margin-left: auto;
+    margin-right: auto;
     transition: transform .2s ease-out;
     text-decoration: none;
     color: #130b43;

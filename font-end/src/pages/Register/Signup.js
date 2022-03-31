@@ -1,21 +1,61 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Signup.css";
+import { Link } from "react-router-dom";
+import { register, reset } from "../../redux/authSlice";
+import { toast, ToastContainer } from 'react-toastify'
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 
 function Signup() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const { isLoading, isError, message } = useSelector(
+    (state) => state.auth
+)
+  const dispatch = useDispatch();
+  useEffect(() => {
+      if (isError) {
+          toast.error(message, {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              onClose: () => dispatch(reset())
+          });
+      }
+      toast.clearWaitingQueue();
+  }, [isError, message, dispatch])
 
   const onSignUpClick = (e) => {
     e.preventDefault();
-    console.log({ email, password, confirmPassword });
+    dispatch(register({email, username, password}))
   };
 
   return (
     <div className="signup-content">
+      <ToastContainer limit={1}/>
       <form className="signup-form">
         <div className="header-signup">
           <h1>Signup</h1>
+        </div>
+
+        <div className="signup-form-inputs">
+          <label htmlFor="username" className="label-signup">
+            <strong>USERNAME</strong>
+          </label>
+          <input
+            id="username"
+            type="username"
+            name="username"
+            className="input-signup"
+            placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </div>
 
         <div className="signup-form-inputs">
@@ -68,7 +108,7 @@ function Signup() {
           <strong>Sign up</strong>
         </button>
         <span className="signup-input-login">
-          Already have an account? <a href="/Login" className = "signup-option-login">Login here</a>
+          Already have an account? <Link to="/login" className="signup-option-login">Login</Link>
         </span>
       </form>
     </div>

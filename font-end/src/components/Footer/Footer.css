@@ -5,14 +5,12 @@
     background-size: 100%;
     box-shadow: 0 4px 24px 0 #00000026;
     border-top: 8px solid rgb(96 79 205);
+    padding: 2em 2em 0 2em;
 }
 .site-info {
-    margin-left: auto;
-    margin-right: auto;
-    padding: 2em 2em;
-    font-size: 20px;
     color: #fff;
     display: flex;
+    align-items: center;
 }
 .site-info a {
     color: #fff;
@@ -23,13 +21,36 @@
     color: #fff;
     text-decoration: underline;
 }
-.site-info .about {
-    width: 40%;
+.site-info .info-col {
+    width: 15%;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.first {
+    width: 30% !important;
     margin-right: auto;
 }
-.site-info p {
-    margin-top: 24px;
-    margin-bottom: 24px;
+.middle {
+    margin-left: auto;
+    margin-right: auto;
+}
+.last {
+    margin-left: auto;
+}
+.site-info .info-col h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+}
+.site-info .info-col p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+.info-col hr {
+    width: 50px;
+    background-color: #fff;
+    height: 2px;
+    margin-bottom: 1.25rem;
 }
 .soical-icon {
     height: 1.5em;
@@ -37,10 +58,19 @@
 .follow-icon-list {
     display: flex;
     align-items: center;
+    margin-top: 1.75rem;
 }
 .follow-icon-list a {
     margin-right: 2em;
 }
-.site-info img {
-    height: 310px
+.site-footer .spilt {
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+    border-top: 2px solid #453a8f;
+}
+.end-footer {
+    padding: 1em 0 0.8em;
+    text-align: center;
+    color: #fff;
+    font-size: 1rem;
 }
