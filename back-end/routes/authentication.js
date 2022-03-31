@@ -14,7 +14,6 @@ router.post("/register", async (req, res) => {
         const savedUser = await newUser.save()
         res.status(201).json(savedUser)
     } catch(err) {
-        console.log(err)
         res.status(500).json(err)
     }
 })
@@ -23,9 +22,9 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
     try {
         const user = await User.findOne({ username: req.body.username })
-        if (!user) res.status(401).json("Wrong username")
+        if (!user) return res.status(401).json("Wrong username")
         const originalPass = CryptoJS.AES.decrypt(user.password, process.env.CRYPTO_KEY).toString(CryptoJS.enc.Utf8)
-        if (originalPass !== req.body.password) res.status(401).json("Wrong password")
+        if (originalPass !== req.body.password) return res.status(401).json("Wrong password")
         const accessToken = JWT.sign(
             {
                 id: user._id, 
@@ -37,7 +36,6 @@ router.post("/login", async (req, res) => {
         const { password, ...others } = user._doc
         res.status(200).json({ ...others, accessToken })
     } catch(err) {
-        console.log(err)
         res.status(500).json(err)
     }
 })

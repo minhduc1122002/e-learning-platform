@@ -29,6 +29,22 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
       res.status(500).json(err);
     }
 });
+
+//UPDATE
+router.put("/update/:path", async (req, res) => {
+  try {
+    const updatedCourse = await Course.findOneAndUpdate(
+        {path: req.params.path},
+        {
+            $set: req.body
+        },
+        { new: true}
+    )
+    res.status(200).json(updatedCourse)
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
   
 //DELETE
 router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
