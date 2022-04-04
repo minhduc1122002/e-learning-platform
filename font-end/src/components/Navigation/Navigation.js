@@ -5,13 +5,14 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../redux/authSlice';
 
 function Navigation() {
-  const user = localStorage.getItem("user")
+  const user = JSON.parse(localStorage.getItem('user'))
   const dispatch = useDispatch()
 
-  const handleClick = (e) => {
+  const handleLogout = (e) => {
     e.preventDefault()
     dispatch(logout())
   }
+
   return (
     <div className="navigation">
         <div className="nav-links">
@@ -21,9 +22,9 @@ function Navigation() {
             </ul>
         </div>
         {user ? (
-          <div className="user-dropdown">
+          <div className="user-section" onClick={handleLogout}>
             <div className="user-avatar"></div>
-            <button type="button" onClick={handleClick}>Logout</button>
+            <img alt="Profile Menu" className="dropdown-icon" src="https://d24y9kuxp2d7l2.cloudfront.net/assets/icons/more-vertical-371ef6f2314bb5dbe5d3892a7ee098c6ebc3cf30.svg"></img>
           </div>
         ) : (
         <div className="nav-auth">

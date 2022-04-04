@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const { verifyToken,  verifyTokenAndAuth, verifyTokenAndAdmin} = require("./verifyToken")
 const User = require("../models/User");
+const Course = require('../models/Course');
 
 //Update
 router.put("/:id", verifyTokenAndAuth, async (req, res) => {
@@ -51,6 +52,37 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
     } catch (err) {
       res.status(500).json(err);
     }
+});
+
+//ADD COURSE
+router.put("/enroll/:id",verifyTokenAndAuth, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id)
+    if (!user.courses.includes(req.body)) {
+      user.courses.push(req.body)
+      user.save()
+    }
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//GET COURSE ENROLLED
+router.get("/my_course/:path", async (req, res) => {
+  try {
+    const course = await Course.aggregate([
+      { "$addFields": {
+          "isEnrolled": {
+            "$in": [req.params.path ,"$courses"]
+          }
+        }
+      }
+    ]);
+    res.status(200).json(course);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router

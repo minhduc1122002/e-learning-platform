@@ -24,8 +24,13 @@ function Test() {
             image: "https://dg8krxphbh767.cloudfront.net/tracks/python.svg",
             code: code
         }
+        const lesson = {
+            title: "Not Java",
+            articles: markdown,
+            video: "https://www.youtube.com/embed/FQnPH-UqnRA?list=RDMMFQnPH-UqnRA",
+        }
         try {
-            const res = await userRequest.put(`/courses/update/${course.path}`, course)
+            const res = await publicRequest.put(`/lectures/lessons/62382a5ae8a0b97b77e6da92`, lesson)
             console.log(res.data)
         } catch (err) {
             console.log(err)

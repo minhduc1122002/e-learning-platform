@@ -21,8 +21,7 @@ function Course() {
     useEffect(() => {
         const getCourses = async () => {
             try {
-                const res = await publicRequest.get("/courses/findpath/" + path)
-                console.log(res.data)
+                const res = await publicRequest.get("/courses/findby/" + path)
                 setCourse(res.data)
             } catch (err) {
                 console.log(err)
