@@ -10,6 +10,7 @@ import Learning from "./pages/Learn/Learning";
 import Test from "./Test";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Register/Signup";
+import Profile from "./pages/Profile/Profile"
 import { useSelector, useDispatch } from "react-redux";
 
 function App() {
