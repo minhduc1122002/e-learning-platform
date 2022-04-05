@@ -30,7 +30,7 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
     }
 });
 
-//UPDATE
+//UPDATE BY PATH
 router.put("/update/:path", async (req, res) => {
   try {
     const updatedCourse = await Course.findOneAndUpdate(
@@ -57,18 +57,16 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 });
   
 //GET BY ID
-router.get("/findid/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
       const course = await Course.findById(req.params.id);
-      const lectures = await Lecture.find( {course_id: req.params.id} );
-      res.status(200).json({...course._doc, lectures});
     } catch (err) {
       res.status(500).json(err);
     }
 });
 
 //GET BY PATH
-router.get("/findpath/:path", async (req, res) => {
+router.get("/findby/:path", async (req, res) => {
   try {
     const course = await Course.findOne( {path: req.params.path} );
     const lectures = await Lecture.find( {course_path: req.params.path} );
@@ -86,16 +84,6 @@ router.get("/", async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-});
-
-//GET ALL LECTURE
-router.get("/lectures/:id", async (req, res) => {
-  try {
-      const lectures = await Lecture.find( {course_id: req.params.id} );
-      res.status(200).json(lectures);
-  } catch (err) {
-      res.status(500).json(err);
-  }
 });
   
   module.exports = router;

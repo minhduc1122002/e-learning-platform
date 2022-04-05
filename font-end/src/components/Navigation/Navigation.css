@@ -45,7 +45,10 @@
     border: 1px solid rgb(96, 79, 205, 1);
     color: rgb(96, 79, 205, 1);
 }
-
+.user-section {
+    display: flex;
+    align-items: center;
+}
 .user-avatar {
     background-image: url(https://avatars.githubusercontent.com/u/78080278?v=4);
     box-shadow: 0 4px 16px 0 rgb(79 114 205 / 30%);
@@ -56,4 +59,8 @@
     background-size: cover;
     border-radius: 100%;
     flex-shrink: 0;
+}
+.dropdown-icon {
+    height: 16px;
+    width: 16px;
 }

@@ -11,12 +11,12 @@ function LectureList( {lectures} ) {
         );
         setCheckedState(updatedCheckedState)
     }
-    console.log(checkedState)
+    
     return (
         <div className="lecture-list">
             {lectures.map((lecture, index) => (
-                <>
-                    <div className="lecture-box" key={`lecture-${index + 1}`}>
+                <div className="lecture-item" key={`lecture-${index + 1}`}>
+                    <div className="lecture-box">
                         <div className="lecture-index">{index + 1}</div>
                         <div className="lecture-overview">
                             <h2>{lecture.title}</h2>
@@ -30,23 +30,12 @@ function LectureList( {lectures} ) {
                     </div>
                     <div className={checkedState[index] ? "lesson-list-show" : "lesson-list-hidden"} key={`lecture-lessons-${index + 1}`}>
                         {lecture.lessons.map((lesson, i) => (
-                            <>
                             <div className="lesson-box" key={`lesson-${i + 1}`}>
                                 <p>{i + 1}. {lesson.title}</p>
                             </div>
-                            <div className="lesson-box" key={`lesson-${i + 1}`}>
-                                <p>{i + 1}. {lesson.title}</p>
-                            </div>
-                            <div className="lesson-box" key={`lesson-${i + 1}`}>
-                                <p>{i + 1}. {lesson.title}</p>
-                            </div>
-                            <div className="lesson-box" key={`lesson-${i + 1}`}>
-                                <p>{i + 1}. {lesson.title}</p>
-                            </div>
-                            </>
                         ))}
                     </div>
-                </>
+                </div>
             ))}
         </div>
     )

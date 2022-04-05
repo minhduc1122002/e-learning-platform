@@ -1,0 +1,46 @@
+.learn {
+    display: flex;
+    flex-flow: row nowrap;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    overflow: hidden;
+    height: 100%;
+    margin: 0 auto;
+    width: 90%;
+    margin-top: 64px;
+}
+.learn-navigation {
+    flex-grow: 0;
+    max-width: 20%;
+    flex-basis: 20%;
+    height: 100%;
+    overflow-y: scroll;
+    padding-left: 24px;
+}
+.learn .lecture-item h2{
+    font-weight: 700;
+    padding: 6px 0;
+    font-size: 21px;
+    line-height: 20px;
+    color: rgb(96, 79, 205, 1);
+    margin-bottom: 1rem;
+}
+.lesson-item {
+    padding: 8px 8px;
+    margin-bottom: 0.5rem;
+}
+.lesson-item:hover {
+    cursor: pointer;
+}
+.lessons {
+    margin-bottom: 1rem;
+}
+.lessons a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #000;
+}
+.selected {
+    background-color: #f5f7f8;
+    border-left: 0.25rem solid #3a10e5;
+}

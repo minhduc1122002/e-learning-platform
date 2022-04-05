@@ -1,0 +1,7 @@
+.lesson {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    padding: 1rem 1rem;
+    margin: 0 1rem;
+}

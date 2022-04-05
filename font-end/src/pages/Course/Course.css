@@ -53,7 +53,7 @@
     width: 100%;
 }
 .course-container .about-text h2 {
-    margin-bottom: 16px;
+    margin-bottom: 2rem;
     color: #130b43;
     font-size: 28px;
     font-weight: 700;
@@ -114,9 +114,8 @@
 }
 .markdown-container {
     font-size: 18px;
-    margin-top: 16px;
 }
-.markdown-container p {
+.markdown-container p, .markdown-container h2, .markdown-container h1{
     margin-bottom: 12px;
 }
 .about-text button:hover {

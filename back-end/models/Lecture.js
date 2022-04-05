@@ -27,14 +27,10 @@ const LectureSchema = new mongoose.Schema(
                 video: {
                     type: String,
                     default: ""
-                },
-                examples: {
-                    type: Array
                 }
-            }
+            }, {_id: true}
         ],
-    }, 
-    { timestamps : true}
+    }, { timestamps : true}
 );
 
 module.exports = Lecture = mongoose.model('Lectures',  LectureSchema)
