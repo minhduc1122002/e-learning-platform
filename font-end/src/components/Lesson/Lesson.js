@@ -8,10 +8,22 @@ import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import "./Lesson.css"
 import "github-markdown-css/github-markdown-light.css"
+import ReactPlayer from 'react-player'
 
 function Lesson( {lessonId} ) {
     const [lesson, setLesson] = useState({})
 
+    const videoStyle = {
+        marginLeft: "auto",
+        marginRight: "auto",
+        position: "absolute",
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+    }
+
+    
     useEffect(() => {
       const getLesson = async () => {
           try {
@@ -54,7 +66,15 @@ function Lesson( {lessonId} ) {
                 }
                 }}
             />
-            <iframe width="1280" height="720" src="https://www.youtube.com/embed/DmaGYyjDzTM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div className='video-container'>
+                <ReactPlayer 
+                    url={lesson.video}
+                    controls={true}
+                    style={videoStyle}
+                    width= "100%"
+                    height= "auto"
+                />
+            </div>
           </div>
       </div>
     )

@@ -1,9 +1,7 @@
 .learn {
     display: flex;
     flex-flow: row nowrap;
-    -webkit-box-pack: start;
-    justify-content: flex-start;
-    overflow: hidden;
+    justify-content: center;
     height: 100%;
     margin: 0 auto;
     width: 90%;
@@ -43,4 +41,45 @@
 .selected {
     background-color: #f5f7f8;
     border-left: 0.25rem solid #3a10e5;
+}
+.navigation-compact {
+    display: none;
+    position: sticky;
+    top: 65px;
+    background-color: #fff;
+    z-index: 2;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #eaecf3;
+}
+.learn-btn {
+    color: #271A71;
+    font-size: 16px;
+    
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.learn-btn svg {
+    margin-right: 0.5rem;
+}
+.dropdown-list {
+    padding: 1rem 1rem;
+    top: 123px;
+    z-index: 2;
+    position: sticky;
+    background-color: #fff;
+}
+@media screen and (max-width: 1000px) {
+    .learn-navigation {
+        display: none;
+    }
+    .navigation-compact {
+        display: flex;
+    }
+    .learn {
+        margin: 0;
+        flex-flow: column;
+        width: 100%;
+    }
 }

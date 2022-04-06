@@ -34,7 +34,7 @@ router.delete("/:id", verifyTokenAndAuth, async (req, res) => {
 });
 
 //Get User
-router.get("/find/:id", verifyToken, async (req, res) => {
+router.get("/find/:id", async (req, res) => {
     try {
       const user = await User.findById(req.params.id);
       const { password, ...others } = user._doc;
@@ -55,7 +55,7 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //ADD COURSE
-router.put("/enroll/:id",verifyTokenAndAuth, async (req, res) => {
+router.put("/enroll/:id", verifyTokenAndAuth, async (req, res) => {
   try {
     const user = await User.findById(req.params.id)
     if (!user.courses.includes(req.body)) {
@@ -68,21 +68,16 @@ router.put("/enroll/:id",verifyTokenAndAuth, async (req, res) => {
   }
 });
 
-//GET COURSE ENROLLED
-router.get("/my_course/:path", async (req, res) => {
+//GET ALL COURSE ENROLLED
+router.get("/my_course/:id", async (req, res) => {
   try {
-    const course = await Course.aggregate([
-      { "$addFields": {
-          "isEnrolled": {
-            "$in": [req.params.path ,"$courses"]
-          }
-        }
-      }
-    ]);
-    res.status(200).json(course);
+    const user = await User.findById(req.params.id)
+    const courses = await Course.find( { path : { $in : user.courses } } )
+    res.status(200).json(courses);
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
 module.exports = router

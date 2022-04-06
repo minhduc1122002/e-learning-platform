@@ -1,4 +1,4 @@
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import {
   BrowserRouter as Router,
   Route,
@@ -11,7 +11,7 @@ import Test from "./Test";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Register/Signup";
 import Profile from "./pages/Profile/Profile"
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function App() {
     const user = useSelector((state) => state.auth.user);
@@ -24,7 +24,7 @@ function App() {
           <Route path="/test" element={<Test/>} />
           <Route path="/login" element={user ? <Navigate to="/"/> : <Login/>} />
           <Route path = "/signup" element = {user ? <Navigate to="/"/> : <Signup/>} />
-          <Route path = "/profile" element = {<Profile />} />
+          <Route path = "/profiles/:id" element = {<Profile />} />
         </Routes>
       </Router>
     );

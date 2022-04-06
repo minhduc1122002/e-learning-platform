@@ -4,6 +4,7 @@
     align-items: center;
     padding-right: 15px;
     padding-left: 15px;
+    position: relative;
 }
 .nav-links {
     margin-right: auto;
@@ -49,8 +50,10 @@
     display: flex;
     align-items: center;
 }
+.user-section:hover {
+    cursor: pointer;
+}
 .user-avatar {
-    background-image: url(https://avatars.githubusercontent.com/u/78080278?v=4);
     box-shadow: 0 4px 16px 0 rgb(79 114 205 / 30%);
     height: 42px;
     margin-right: 16px;
@@ -63,4 +66,52 @@
 .dropdown-icon {
     height: 16px;
     width: 16px;
+}
+.user-menu-dropdown {
+    position: absolute;
+    inset: 0px 0px auto auto;
+    transform: translate(-20px, 70px);
+    z-index: 2;
+}
+.user-menu-dropdown ul {
+    --tw-shadow: 0px 4px 42px 0px rgba(79,114,205,.15);
+    background-color: #fff;
+    border-radius: 8px;
+    --tw-ring-shadow: 0 0 #0000;
+    box-shadow: var(--tw-ring-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
+    padding-bottom: 20px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+    min-width: 350px;
+    list-style: none;
+}
+.user-menu-dropdown ul li a, .sign-out{
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    background-color: #fff;
+    color: #5c5589;
+    display: flex;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 170%;
+    text-decoration: none;
+}
+.user-menu-dropdown ul li a:hover, .sign-out:hover {
+    background-color: rgb(250, 250, 250);
+    color: #000;
+}
+.sign-out:hover {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+    .navigation {
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+        z-index: 2;
+    }
 }

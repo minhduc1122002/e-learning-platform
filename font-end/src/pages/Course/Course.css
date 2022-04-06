@@ -35,8 +35,8 @@
     border-bottom: 3px solid #eaecf3;
 }
 .course-container .about-text {
-    width: 50%;
-    margin-right: auto;
+    max-width: 50%;
+    margin-right: 64px;
 }
 .course-container .about-text-desc {
     position: relative;
@@ -93,10 +93,11 @@
     font-weight: 200;
 }
 .course-info .code-holder {
-    width: 36%;
+    width: 40%;
     height: 250px;
     overflow: scroll !important;
     font-size: 18px !important;
+    margin-left: auto !important;
 }
 .markdown-container a {
     color: rgb(46 87 232);

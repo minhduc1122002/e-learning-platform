@@ -79,3 +79,11 @@
     color: rgb(96, 79, 205, 1);
     font-weight: 300;
 }
+@media screen and (max-width: 1000px) {
+    .lecture-list {
+        width: 100%;
+    }
+    .lecture-overview p{
+        font-size: 15px;
+    }
+}

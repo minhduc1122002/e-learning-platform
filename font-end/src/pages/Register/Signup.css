@@ -89,3 +89,8 @@ input.input-signup:focus {
 .signup-form-inputs:focus-within label {
     color: #2e57e8;
 }
+@media screen and (max-width: 1000px) {
+    .signup-form {
+        width: 70%;
+    }
+}

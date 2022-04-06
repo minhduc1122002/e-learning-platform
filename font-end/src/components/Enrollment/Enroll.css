@@ -6,8 +6,8 @@
     background-size: 100%;
 }
 .enroll-intro {
-    width: 680px;
-    margin-right: auto;
+    max-width: 680px;
+    margin-right: 64px;
 }
 .enroll-intro h1 {
     font-size: 39px;
@@ -89,4 +89,12 @@
     height: 20px;
     width: 20px;
     margin-right: 12px;
+}
+@media screen and (max-width: 1000px) {
+    .icon-graphics::after {
+        display: none;
+    }
+    .icon-graphics::before {
+        display: none;
+    }
 }

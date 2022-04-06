@@ -7,6 +7,18 @@ const UserSchema = new mongoose.Schema(
             required: true, 
             unique: true
         },
+        fullname: {
+            type: String, 
+            required: true,
+        },
+        location: {
+            type: String,
+            default: ""
+        },
+        bio: {
+            type: String,
+            default: ""
+        },
         email: {
             type: String, 
             required: true, 

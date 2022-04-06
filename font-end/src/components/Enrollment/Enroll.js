@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import "./Enroll.css"
 import { useNavigate } from "react-router-dom"
-import { userRequestText } from "../../request";
 import { useDispatch, useSelector } from "react-redux";
 import { enroll, reset } from '../../redux/authSlice'
 
@@ -18,17 +17,20 @@ function Enroll( {course} ) {
             navigate(`/learn/${course.path}`)
         }
         dispatch(reset())
-    }, [isSuccess, course.path, dispatch])
+    }, [isSuccess, course.path, dispatch, navigate])
 
-    const handleEnroll = async (e) => {
+    const handleEnroll = (e) => {
         e.preventDefault()
-        if (user) {
+        if (!user) {
+            return navigate("/login")
+        }
+        if (!user.courses.includes(course.path)) {
             dispatch(enroll({
                 "userId": user._id, 
                 "coursePath": course.path
             }))
-        } else {
-            navigate("/login")
+        } else if (user.courses.includes(course.path)) {
+            return navigate(`/learn/${course.path}`)
         }
     }
     return (

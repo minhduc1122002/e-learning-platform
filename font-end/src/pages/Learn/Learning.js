@@ -7,12 +7,15 @@ import { useSelector } from "react-redux";
 import Navigation from "../../components/Navigation/Navigation";
 import "./Learning.css"
 import Footer from "../../components/Footer/Footer";
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Learning() {
     const location = useLocation()
     const course_path = location.pathname.split("/")[2]
     const lesson_id = location.pathname.split("/")[3]
     const [lectures, setLectures] = useState([])
+    const [isActive, setIsActive] = useState(false)
     const { courses } = useSelector((state) => state.auth.user)
     const navigate = useNavigate()
 
@@ -32,13 +35,37 @@ function Learning() {
             }
         }
         getLectures()
-    }, [course_path, courses, navigate])
+    }, [course_path, courses, navigate, lesson_id])
 
     
     return (
         <>
         <Navigation/>
         <div className="learn">
+            <div className="navigation-compact">
+                <div className="learn-btn" onClick={(e) => setIsActive(!isActive)}>
+                    <FontAwesomeIcon icon={faBars}/>
+                    Item Navigation
+                </div>
+            </div>
+            {isActive && (
+                <div className="dropdown-list">
+                {lectures.map(lecture => (
+                    <div className="lecture-item" key={lecture.title}>
+                        <h2>{lecture.title}</h2>
+                        <div className="lessons">
+                            {lecture.lessons?.map(lesson => (
+                                <Link to={`/learn/${course_path}/${lesson._id}`}>
+                                    <div className={lesson._id == lesson_id ? "lesson-item selected" : "lesson-item"} key={lesson._id}>
+                                        {lesson.title}
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+                </div>
+            )}
             <div className="learn-navigation">
                 {lectures.map(lecture => (
                     <div className="lecture-item" key={lecture.title}>

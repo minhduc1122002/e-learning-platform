@@ -94,3 +94,8 @@ input.infor:focus {
 .input:focus-within label {
     color: #2e57e8;
 }
+@media screen and (max-width: 1000px) {
+    .form {
+        width: 70%;
+    }
+}

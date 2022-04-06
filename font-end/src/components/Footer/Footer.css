@@ -10,7 +10,6 @@
 .site-info {
     color: #fff;
     display: flex;
-    align-items: center;
 }
 .site-info a {
     color: #fff;
@@ -20,11 +19,6 @@
 .site-info a:hover {
     color: #fff;
     text-decoration: underline;
-}
-.site-info .info-col {
-    width: 15%;
-    padding-left: 12px;
-    padding-right: 12px;
 }
 .first {
     width: 30% !important;
@@ -36,6 +30,11 @@
 }
 .last {
     margin-left: auto;
+}
+.site-info .info-col {
+    width: 15%;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 .site-info .info-col h2 {
     margin-bottom: 0.5rem;
@@ -73,4 +72,15 @@
     text-align: center;
     color: #fff;
     font-size: 1rem;
+}
+@media screen and (max-width: 1000px) {
+    .info-col {
+        width: 40% !important;
+    }
+    .last {
+        display: none;
+    }
+    .middle {
+        margin-right: 0;
+    }
 }
