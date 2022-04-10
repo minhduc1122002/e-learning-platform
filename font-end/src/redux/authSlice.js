@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { publicRequest, userRequestText } from "../request";
+import { publicRequest, userRequestText, userRequest } from "../request";
 
 // Get user from localStorage
 const user = JSON.parse(localStorage.getItem('user'))
@@ -12,7 +12,7 @@ const initialState = {
   message: '',
 }
 
-// Register user
+//Register
 export const register = createAsyncThunk(
   'auth/register',
   async (user, thunkAPI) => {
@@ -21,32 +21,26 @@ export const register = createAsyncThunk(
       const { accessToken, ...userData } = response.data
       localStorage.setItem('user', JSON.stringify(userData))
       localStorage.setItem('accessToken', JSON.stringify(accessToken))
+      console.log(response)
       return response.data
     } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString()
+      const message = error.response.data
       return thunkAPI.rejectWithValue(message)
     }
   }
 )
 
-// Login user
+//Login
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
     const response = await publicRequest.post("/auth/login", user)
+    console.log(response)
     const { accessToken, ...userData } = response.data
     localStorage.setItem('user', JSON.stringify(userData))
     localStorage.setItem('accessToken', JSON.stringify(accessToken))
     return response.data
   } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString()
+    const message = error.response.data
     return thunkAPI.rejectWithValue(message)
   }
 })
@@ -58,10 +52,19 @@ export const enroll = createAsyncThunk('user/enroll', async (enroll, thunkAPI) =
     localStorage.setItem('user', JSON.stringify(response.data))
     return response.data
   } catch (error) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString()
+    const message = error.response.data
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+//Update
+export const update = createAsyncThunk('user/update', async (user, thunkAPI) => {
+  try {
+    const response = await userRequest.put(`/users/${user._id}`, user)
+    localStorage.setItem('user', JSON.stringify(response.data))
+    return response.data
+  } catch (error) {
+    const message = error.response.data
     return thunkAPI.rejectWithValue(message)
   }
 })
@@ -119,6 +122,14 @@ export const authSlice = createSlice({
         state.isLoading = true
       })
       .addCase(enroll.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.user = action.payload
+      })
+      .addCase(update.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(update.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
         state.user = action.payload

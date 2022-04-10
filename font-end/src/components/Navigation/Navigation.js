@@ -37,6 +37,12 @@ function Navigation() {
         {isActive && (
           <div className="user-menu-dropdown">
               <ul>
+                <li class="profile" tabindex="-1" role="menuitem">
+                  <a href={`/profiles/${user._id}`}>
+                    <div className="user-avatar" style={{backgroundImage: `url('${user.profileImage}')`}}></div>
+                    <div class="info"><div class="name">{user.fullname}</div><div class="handle">@{user.username}</div></div>
+                  </a>
+                </li>
                 <li><a href={`/profiles/${user._id}`}>Public Profile</a></li>
                 <li><a href="/settings">Settings</a></li>
                 <li><div className='sign-out' onClick={handleLogout}>Sign out</div></li>

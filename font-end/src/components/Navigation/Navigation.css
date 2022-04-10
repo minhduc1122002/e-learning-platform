@@ -106,7 +106,18 @@
 .sign-out:hover {
     cursor: pointer;
 }
-
+li.profile a .info .name {
+    color: #130b43;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 125%;
+}
+li.profile a .info .handle {
+    color: #5c5589;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 125%;
+}
 @media screen and (max-width: 1000px) {
     .navigation {
         position: sticky;

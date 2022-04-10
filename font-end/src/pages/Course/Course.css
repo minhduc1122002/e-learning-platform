@@ -31,19 +31,23 @@
 
 .course-container .course-info {
     padding: 48px 32px 64px 32px;
+    align-items: flex-start;
     display: flex;
     border-bottom: 3px solid #eaecf3;
 }
 .course-container .about-text {
-    max-width: 50%;
-    margin-right: 64px;
+    max-width: 750px;
+    margin-right: auto;
+    margin-bottom: 32px;
 }
 .course-container .about-text-desc {
-    position: relative;
+    max-width: 750px;
+    margin-bottom: 32px;
 }
 .hidden {
-    height: 180px;
+    height: 150px;
     overflow: hidden;
+    position: relative;
 }
 .course-container .about-text-desc.hidden::after {
     bottom: 0;
@@ -93,11 +97,10 @@
     font-weight: 200;
 }
 .course-info .code-holder {
-    width: 40%;
-    height: 250px;
+    width: 600px;
     overflow: scroll !important;
     font-size: 18px !important;
-    margin-left: auto !important;
+    margin-left: 72px !important;
 }
 .markdown-container a {
     color: rgb(46 87 232);
@@ -133,4 +136,19 @@
     border-top: 1px solid;
     color: inherit;
     height: 0;
+}
+@media screen and (max-width: 768px) {
+    .course-info {
+        flex-direction: column;
+    }
+    .course-info .code-holder {
+        width: 100%;
+        margin: 0 !important;
+    }
+}
+@media screen and (max-width: 640px) {
+    .syllabus-info {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
 }

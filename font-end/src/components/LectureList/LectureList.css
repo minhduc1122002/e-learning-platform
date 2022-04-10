@@ -6,7 +6,7 @@
 .lecture-box {
     display: flex;
     border-left: 0.375rem solid #3a10e5;
-    background-color: #fcfcfc;
+    background-color: #fff;
 }
 .lecture-index{
     font-size: 3rem;
@@ -84,6 +84,14 @@
         width: 100%;
     }
     .lecture-overview p{
+        font-size: 18px;
+    }
+}
+@media screen and (max-width: 640px) {
+    .lecture-overview p{
         font-size: 15px;
+    }
+    .view-button {
+        display: none;
     }
 }

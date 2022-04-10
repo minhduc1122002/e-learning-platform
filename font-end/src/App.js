@@ -12,6 +12,7 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/Register/Signup";
 import Profile from "./pages/Profile/Profile"
 import { useSelector } from "react-redux";
+import Settings from "./pages/Settings/Settings";
 
 function App() {
     const user = useSelector((state) => state.auth.user);
@@ -23,8 +24,9 @@ function App() {
           <Route path="/learn/:course_id/*" element={user ? <Learning/> : <Navigate to="/login"/>} />
           <Route path="/test" element={<Test/>} />
           <Route path="/login" element={user ? <Navigate to="/"/> : <Login/>} />
-          <Route path = "/signup" element = {user ? <Navigate to="/"/> : <Signup/>} />
-          <Route path = "/profiles/:id" element = {<Profile />} />
+          <Route path="/signup" element = {user ? <Navigate to="/"/> : <Signup/>} />
+          <Route path="/profiles/:id" element = {<Profile />}/>
+          <Route path="/settings" element={user ? <Settings/> : <Navigate to="/login"/>}/>
         </Routes>
       </Router>
     );

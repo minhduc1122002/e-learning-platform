@@ -7,7 +7,7 @@ function CourseList( {courses} ) {
                 <h2 className="info">
                     Explore
                     <br/>
-                    50 programming languages
+                    {courses.length} programming languages
                 </h2>    
             </div>
             {courses && (<div className="course-list">

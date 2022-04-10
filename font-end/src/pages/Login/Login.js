@@ -18,18 +18,30 @@ export default function Login() {
         if (isError) {
             toast.error(message, {
                 position: "top-right",
-                autoClose: 3000,
+                autoClose: 2000,
                 hideProgressBar: false,
                 closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
+                pauseOnHover: false,
+                draggable: false,
                 progress: undefined,
                 onClose: () => dispatch(reset())
-            });
+            })
         }
         toast.clearWaitingQueue();
     }, [isError, message, dispatch])
     const handleLogin = (e) => {
+        if (!username || !password) {
+            toast.error("All field is required", {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                onClose: () => dispatch(reset())
+            })
+        }
         e.preventDefault()
         dispatch(login({username, password}));
     }
@@ -66,7 +78,7 @@ export default function Login() {
                 <div className="forgot-account">
                     <a href ="/forgot">Forgot your password?</a>
                 </div>
-                <button className="press" type="submit" onClick={handleLogin}>Login</button>
+                <button className="press" type="submit" onClick={handleLogin} disabled={isLoading || isError}>Login</button>
                 <div className="account">Don’t have an account yet? {' '} 
                     <Link to="/signup" className="signup">Sign Up</Link>
                 </div>
