@@ -79,7 +79,31 @@ router.get("/findby/:path", async (req, res) => {
 //GET ALL
 router.get("/", async (req, res) => {
     try {
-        const course = await Course.find();
+        const course = await Course.aggregate([
+          { $lookup:
+              {
+                from: "lectures",
+                localField: "path",
+                foreignField: "course_path",
+                as: "lectures"
+              }
+          },
+          { $lookup:
+            {
+              from: "users",
+              localField: "path",
+              foreignField: "courses",
+              as: "students"
+            }
+        },
+          { $addFields: {
+              totalLessons: { $size: "$lectures.lessons" },
+              totalLectures: { $size: "$lectures" },
+              totalStudents: { $size: "$students" }
+            }
+          },
+          { $unset: ["students", "lectures"] }
+        ]);
         res.status(200).json(course);
     } catch (err) {
         res.status(500).json(err);

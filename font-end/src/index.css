@@ -1,25 +1,89 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 0;
 }
 body {
-  font-family: Poppins,sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: Poppins,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    --tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    --tw-border-opacity: 1;
+    --tw-ring-shadow: 0 0 #0000;
 }
-
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-  font-size: 85%;
-  background-color: rgba(27,31,35,.05);
-  border-radius: 3px;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+    font-size: 85%;
+    background-color: rgba(27,31,35,.05);
+    border-radius: 3px;
 }
 .test {
-  padding: 16px 16px;
+    padding: 16px 16px;
 }
 textarea {
-  padding: 16px 16px;
+    padding: 16px 16px;
+}
+a {
+    text-decoration: none;
+}
+ul {
+    list-style: none;
+}
+.btn-primary {
+    background-color: rgb(96 79 205);
+    align-items: center;
+    display: flex;
+    font-weight: 600;
+    justify-content: center;
+    transition: background-color .1s ease-in;
+    white-space: nowrap;
+    border-radius: 8px;
+    font-size: 18px;
+    height: 50px;
+    padding: 0 24px;
+    color: #fff;
+    margin-right: 1rem;
+}
+.btn-secondary {
+    box-shadow: 0 4px 7px rgb(79 114 205 / 40%);
+    border-radius: 8px;
+    font-size: 18px;
+    padding-left: 24px;
+    padding-right: 24px;
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    font-weight: 600;
+    justify-content: center;
+    transition: background-color .1s ease-in;
+    white-space: nowrap;
+    background-color: rgb(250 250 255/var(--tw-bg-opacity));
+    border: 1px solid rgb(96 79 205/var(--tw-border-opacity));
+    color: rgb(96 79 205/var(--tw-text-opacity));
+}
+.btn-primary:hover {
+    box-shadow: 0 4px 7px rgb(79 114 205 / 60%);
+    cursor: pointer;
+}
+.btn-secondary:hover {
+    box-shadow: 0 4px 7px rgb(79 114 205 / 60%);
+    cursor: pointer;
+}
+.container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 32px !important;
+    padding-top: 28px !important;
+    text-align: center;
+}
+.lg-container {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 2rem;
+    width: 100%;
 }

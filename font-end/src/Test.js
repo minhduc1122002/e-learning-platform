@@ -18,19 +18,19 @@ function Test() {
     }
     const handleClick = async () => {
         const course = {
-            path: "python",
-            title: "Python",
+            path: "rust",
+            title: "Rust",
             description: markdown,
-            image: "https://dg8krxphbh767.cloudfront.net/tracks/python.svg",
+            image: "https://dg8krxphbh767.cloudfront.net/tracks/rust.svg",
             code: code
         }
         const lesson = {
-            title: "Not Java",
+            title: "Put Java",
             articles: markdown,
             video: "https://www.youtube.com/embed/FQnPH-UqnRA?list=RDMMFQnPH-UqnRA",
         }
         try {
-            const res = await publicRequest.put(`/lectures/lessons/62382a5ae8a0b97b77e6da92`, lesson)
+            const res = await publicRequest.put(`/courses/update/${course.path}`, course)
             console.log(res.data)
         } catch (err) {
             console.log(err)

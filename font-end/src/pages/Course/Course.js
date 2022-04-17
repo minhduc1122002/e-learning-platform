@@ -11,6 +11,8 @@ import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import ReactMarkdown from 'react-markdown'
 import Enroll from "../../components/Enrollment/Enroll";
+import { useDispatch, useSelector } from 'react-redux';
+import { getCourse } from '../../redux/courseSlice'
 
 function Course() {
     const location = useLocation();
@@ -29,9 +31,21 @@ function Course() {
         }
         getCourses()
     }, [path])
+
+    // const location = useLocation()
+    // const [hidden, setHidden] = useState(true)
+    // const path = location.pathname.split("/")[2]
+    // const course = useSelector(state => state.courses.course)
+    // const dispatch = useDispatch()
+
+    // useEffect(() => {
+    //     dispatch(getCourse(path))
+    // }, [dispatch]);
     
     return (
         <>
+        {course && (
+            <>
             <Navigation/>
             <div className="course-container">
                 <div className="header">
@@ -48,21 +62,23 @@ function Course() {
                     </div>
                 </div>
                 <Enroll course={course}/>
-                <div className="course-info">
-                    <div className="about-text">
-                        <h2>About {course.title}</h2>
-                        <div className={hidden ? "about-text-desc hidden" : "about-text-desc"}>
-                            <ReactMarkdown children={course.description} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} className="markdown-container"/>
+                <div className="lg-container">
+                    <div className="course-info">
+                        <div className="about-text">
+                            <h2>About {course.title}</h2>
+                            <div className={hidden ? "about-text-desc hidden" : "about-text-desc"}>
+                                <ReactMarkdown children={course.description} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} className="markdown-container"/>
+                            </div>
+                            <button type="button" onClick={() => setHidden(!hidden)}>{hidden ? `Read more on ${course.title}` : "Read less"}</button>
                         </div>
-                        <button type="button" onClick={() => setHidden(!hidden)}>{hidden ? `Read more on ${course.title}` : "Read less"}</button>
+                        <SyntaxHighlighter
+                            className="code-holder"
+                            children={course.code}
+                            style={oneLight}
+                            language={course.path}
+                            PreTag="div"
+                        />
                     </div>
-                    <SyntaxHighlighter
-                        className="code-holder"
-                        children={course.code}
-                        style={oneLight}
-                        language={course.path}
-                        PreTag="div"
-                    />
                 </div>
                 <div className="syllabus-info">
                     <div className="syllabus">
@@ -75,6 +91,7 @@ function Course() {
                 </div>
             </div>
             <Footer/>
+            </>)}
         </>
     );
   }

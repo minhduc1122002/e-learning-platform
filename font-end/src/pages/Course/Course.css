@@ -30,11 +30,12 @@
 }
 
 .course-container .course-info {
-    padding: 48px 32px 64px 32px;
-    align-items: flex-start;
     display: flex;
+    padding: 40px 32px 56px 32px;
+    align-items: flex-start;
     border-bottom: 3px solid #eaecf3;
 }
+
 .course-container .about-text {
     max-width: 750px;
     margin-right: auto;
@@ -97,7 +98,7 @@
     font-weight: 200;
 }
 .course-info .code-holder {
-    width: 600px;
+    width: 450px;
     overflow: scroll !important;
     font-size: 18px !important;
     margin-left: 72px !important;

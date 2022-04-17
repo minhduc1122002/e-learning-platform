@@ -13,6 +13,7 @@ import Signup from "./pages/Register/Signup";
 import Profile from "./pages/Profile/Profile"
 import { useSelector } from "react-redux";
 import Settings from "./pages/Settings/Settings";
+import Search from "./pages/Search/Search";
 
 function App() {
     const user = useSelector((state) => state.auth.user);
@@ -20,6 +21,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/courses" element={<Search/>}/>
           <Route path="/course/:path" element={<Course />} />
           <Route path="/learn/:course_id/*" element={user ? <Learning/> : <Navigate to="/login"/>} />
           <Route path="/test" element={<Test/>} />

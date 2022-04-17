@@ -20,7 +20,7 @@ function Navigation() {
         <div className="nav-links">
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/">Language Tracks</a></li>
+                <li><a href="/courses">Language Tracks</a></li>
             </ul>
         </div>
         {user ? (

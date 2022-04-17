@@ -3,20 +3,18 @@
     max-width: 1440px;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 32px;
+    padding: 40px 32px 56px 32px;
 }
 .home-header {
-    padding: 40px 32px 56px 32px;
     background: linear-gradient(180deg,rgba(251,251,255,0) 79.36%,#f4f4fd),linear-gradient(180deg,#fafaff,rgba(250,250,255,.678) 24.48%,rgba(250,250,255,0) 77.6%,#fafaff),url(https://d24y9kuxp2d7l2.cloudfront.net/assets/bg-tracks-header@2x-8439ef30af6bf120107f6a84db31a62237d5ee8b.jpg),#fafaff;
     background-position: -190px;
     background-size: 100%;
 }
 .home-header-intro {
-    width: 680px;
     margin-right: auto;
 }
 .home-header-intro h1 {
-    font-size: 39px;
+    font-size: 48px;
     font-weight: 700;
     line-height: 1.25;
     color: #130b43;
@@ -27,10 +25,15 @@
     max-width: 780px;
     font-size: 20px;
     line-height: 160%;
+    width: 680px;
 }
 .intro-image img {
-    height: 270px;
-    width: 336px;
+    height: 280px;
+}
+.buttons-holder {
+    display: flex;
+    flex-direction: row;
+    margin-top: 24px;
 }
 @media screen and (max-width: 768px) {
     .intro-image img {
