@@ -4,6 +4,9 @@ import { getCourseList } from '../../redux/courseSlice'
 import Footer from '../../components/Footer/Footer'
 import Navigation from '../../components/Navigation/Navigation'
 import "./Search.css"
+import Edit from "../../ModificationCourse/Edit/Edit"
+import Delete from "../../ModificationCourse/Delete/Delete";
+import Add from '../../ModificationCourse/Add/Add'
 
 function Search() {
     const [input, setInput] = useState("")
@@ -44,6 +47,10 @@ function Search() {
                                             <div className="heading">
                                                 <img alt={course.path} className="small-icon" src={course.image}/>
                                                 <h3 className="title">{course.title}</h3>
+                                                <div className="modify-btn">
+                                                    <Edit />
+                                                    <Delete />
+                                                </div>
                                             </div>
                                             <ul className="counts"> 
                                                 <li>
@@ -58,6 +65,7 @@ function Search() {
                                         </div>
                                     </a>
                             ))}
+                            <Add />
                         </div>
                     </div>
                 </section>

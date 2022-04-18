@@ -128,3 +128,11 @@ img.r-icon {
         grid-template-columns: repeat(2,minmax(0,1fr));
     }
 }
+
+.modify-btn {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    display: grid;
+    grid-column-gap: 40px;
+    margin-left: auto; 
+    margin-right: 0;
+}
