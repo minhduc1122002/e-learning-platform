@@ -127,7 +127,7 @@ function Settings() {
                                 </label>
                                 <div class="--details">
                                     <div class="faux-button">
-                                        <div class="btn btn-enhanced btn-s">Upload new image</div>
+                                        <div class="btn-enhanced">Upload new image</div>
                                         <input type="file" id="avatar" onChange={(e) => setprofileImage(e.target.files[0])} />
                                         <div class="hover-bg"></div>
                                     </div>

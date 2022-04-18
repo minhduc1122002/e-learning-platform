@@ -41,32 +41,34 @@ function Search() {
                             {courses.filter(course => 
                                 course.title.toLowerCase().includes(input.toLowerCase())
                                 ).map(course => (
-                                    <a href={`/course/${course.path}`} className="result-item" key={course.path}>
-                                        <img alt={course.path} className="big-icon" src={course.image}/>
-                                        <div className='result-info'>
-                                            <div className="heading">
-                                                <img alt={course.path} className="small-icon" src={course.image}/>
-                                                <h3 className="title">{course.title}</h3>
-                                                <div className="modify-btn">
-                                                    <Edit />
-                                                    <Delete />
+                                    <div className="result-item" key={course.path}>
+                                        <a href={`/course/${course.path}`}>
+                                            <img alt={course.path} className="big-icon" src={course.image}/>
+                                            <div className='result-info'>
+                                                <div className="heading">
+                                                    <img alt={course.path} className="small-icon" src={course.image}/>
+                                                    <h3 className="title">{course.title}</h3>
                                                 </div>
+                                                <ul className="counts"> 
+                                                    <li>
+                                                        <img src="https://d24y9kuxp2d7l2.cloudfront.net/assets/icons/exercises-8a7df249fbfb76cc18efbbee844d9bd742830404.svg" alt="Number of lectures" className="r-icon"/>
+                                                        {course.totalLectures} lectures
+                                                    </li>
+                                                    <li>
+                                                        <img src="https://d24y9kuxp2d7l2.cloudfront.net/assets/icons/concepts-982e268a7b685697712765d69d08e624c07a611a.svg" alt="Number of lessons" className="r-icon"/>
+                                                        {course.totalLessons} lessons
+                                                    </li>
+                                                </ul>
                                             </div>
-                                            <ul className="counts"> 
-                                                <li>
-                                                    <img src="https://d24y9kuxp2d7l2.cloudfront.net/assets/icons/exercises-8a7df249fbfb76cc18efbbee844d9bd742830404.svg" alt="Number of lectures" className="r-icon"/>
-                                                    {course.totalLectures} lectures
-                                                </li>
-                                                <li>
-                                                    <img src="https://d24y9kuxp2d7l2.cloudfront.net/assets/icons/concepts-982e268a7b685697712765d69d08e624c07a611a.svg" alt="Number of lessons" className="r-icon"/>
-                                                    {course.totalLessons} lessons
-                                                </li>
-                                            </ul>
+                                        </a>
+                                        <div className="modify-btn">
+                                            <Edit course={course}/>
+                                            <Delete />
                                         </div>
-                                    </a>
+                                    </div>
                             ))}
-                            <Add />
                         </div>
+                        <Add />
                     </div>
                 </section>
             </div>

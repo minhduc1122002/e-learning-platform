@@ -31,7 +31,7 @@
 
 .course-container .course-info {
     display: flex;
-    padding: 40px 32px 56px 32px;
+    padding: 40px 0 56px 0;
     align-items: flex-start;
     border-bottom: 3px solid #eaecf3;
 }

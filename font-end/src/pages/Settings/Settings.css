@@ -175,12 +175,7 @@
     position: relative;
     width: 230px;
 }
-.c-avatar-selector .faux-button .btn {
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 1;
+.btn-enhanced {
     align-items: center;
     border-radius: 5px;
     border: 2px solid rgb(19 11 67);
@@ -197,7 +192,14 @@
     background-color: #fff;
     color: #130b43;
 }
-.c-avatar-selector .faux-button .btn:hover {
+.btn-s {
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+.btn-enhanced:hover {
     cursor: pointer;
 }
 .c-avatar-selector .faux-button input {

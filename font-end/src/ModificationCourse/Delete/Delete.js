@@ -16,15 +16,19 @@ function Delete() {
     <div className="delete">
       <button onClick={toggleModal} id="delete" ><FontAwesomeIcon icon ={faTrash} className="delete-fa-icon"/></button>
 
-      <Modal className="modal-edit"
+      <Modal
         isOpen={isOpen}
         onRequestClose={toggleModal}
         contentLabel="editmodal"
+        className="modal-container"
+        overlayClassName="c-modal"
       >
-        <h2 className="delete-label">Are you sure to delete this lecture?</h2>
-        <div className="btn-delete">
-            <button className="confirm-delete">Delete</button>
-            <button className="confirm-cancel" onClick={toggleModal}>Cancel</button>
+        <div className="modal-content">
+          <h2 className="delete-label">Are you sure to delete this lecture?</h2>
+          <div className="btn-list">
+            <button class="btn-primary" onClick={toggleModal}>Submit</button>
+            <button class="btn-secondary" onClick={toggleModal}>Cancel</button>
+          </div>
         </div>
       </Modal>
     </div>

@@ -38,6 +38,9 @@
     gap: 16px;
     margin-bottom: 40px;
 }
+.result-item a {
+    display: flex;
+}
 .result-item {
     --tw-shadow: 0px 4px 24px 0px rgba(79,114,205,.15);
     box-shadow: var(--tw-ring-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
