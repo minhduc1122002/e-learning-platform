@@ -1,7 +1,7 @@
 import React from 'react'
 import { getCourseList } from '../../redux/courseSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import "./CourseList.css"
 
 function CourseList() {

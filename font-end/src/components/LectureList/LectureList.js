@@ -1,6 +1,13 @@
 import { useState } from "react";
-import React from 'react'
-import './LectureList.css'
+import React from 'react';
+import './LectureList.css';
+import EditLecture from "../ModificationLecture/EditLecture/EditLecture";
+import DeleteLecture from "../ModificationLecture/DeleteLecture/DeleteLecture";
+import AddLesson from "../ModificationLesson/AddLesson/AddLesson";
+import EditLesson from "../ModificationLesson/EditLesson/EditLesson";
+import DeleteLesson from "../ModificationLesson/DeleteLesson/DeleteLesson";
+import AddLecture from "../ModificationLecture/AddLecture/AddLecture";
+
 function LectureList( {lectures} ) {
     const [checkedState, setCheckedState] = useState(
         new Array(lectures.length).fill(false)
@@ -19,7 +26,12 @@ function LectureList( {lectures} ) {
                     <div className="lecture-box">
                         <div className="lecture-index">{index + 1}</div>
                         <div className="lecture-overview">
-                            <h2>{lecture.title}</h2>
+                        <div className="lecture-modify">
+                            <h2>{lecture.title}</h2> 
+                            <AddLesson />
+                            <EditLecture />
+                            <DeleteLecture />
+                        </div>
                             <p>{lecture.description}</p>
                         </div>
                         <div className="lecture-view">
@@ -32,11 +44,16 @@ function LectureList( {lectures} ) {
                         {lecture.lessons.map((lesson, i) => (
                             <div className="lesson-box" key={`lesson-${i + 1}`}>
                                 <p>{i + 1}. {lesson.title}</p>
+                                <div className="lesson-modify">
+                                    <EditLesson />
+                                    <DeleteLesson />
+                                </div>
                             </div>
                         ))}
                     </div>
                 </div>
             ))}
+            <AddLecture />
         </div>
     )
 }

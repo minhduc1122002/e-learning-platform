@@ -4,9 +4,9 @@ import { getCourseList } from '../../redux/courseSlice'
 import Footer from '../../components/Footer/Footer'
 import Navigation from '../../components/Navigation/Navigation'
 import "./Search.css"
-import Edit from "../../ModificationCourse/Edit/Edit"
-import Delete from "../../ModificationCourse/Delete/Delete";
-import Add from '../../ModificationCourse/Add/Add'
+import EditCourse from "../../components/ModificationCourse/EditCourse/EditCourse"
+import DeleteCourse from "../../components/ModificationCourse/DeleteCourse/DeleteCourse";
+import AddCourse from '../../components/ModificationCourse/AddCourse/AddCourse'
 
 function Search() {
     const [input, setInput] = useState("")
@@ -62,13 +62,13 @@ function Search() {
                                             </div>
                                         </a>
                                         <div className="modify-btn">
-                                            <Edit course={course}/>
-                                            <Delete />
+                                            <EditCourse course={course}/>
+                                            <DeleteCourse />
                                         </div>
                                     </div>
                             ))}
                         </div>
-                        <Add />
+                        <AddCourse />
                     </div>
                 </section>
             </div>

@@ -1,0 +1,11 @@
+.fa-delete-lecture {
+    background-color: white;
+    padding-top: 6px;
+    font-size: 18px;
+    color: #FD5D5D;
+    transition: transform .2s;
+    cursor: pointer;
+}
+.fa-delete-lecture:hover {
+    transform: scale(1.5);
+}
