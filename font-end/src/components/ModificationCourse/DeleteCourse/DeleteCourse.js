@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import "./Delete.css";
+import "./DeleteCourse.css";
 import Modal from "react-modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 Modal.setAppElement("#root");
 
-function Delete() {
+function DeleteCourse() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -35,4 +35,4 @@ function Delete() {
   );
 }
 
-export default Delete;
+export default DeleteCourse;

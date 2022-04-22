@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import "./Add.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import "./AddCourse.css";
 import Modal from "react-modal";
 
 Modal.setAppElement("#root");
 
-export default function Add() {
+export default function AddCourse() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("")
   function toggleModal() {
