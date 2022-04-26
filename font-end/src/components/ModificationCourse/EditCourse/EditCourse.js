@@ -3,15 +3,27 @@ import "./EditCourse.css";
 import Modal from "react-modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
-
+import {updateCoursebyId} from "../../../redux/courseSlice.js";
+import {useDispatch} from "react-redux"
 Modal.setAppElement("#root");
 
 function Edit( {course} ) {
   const [isOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useState("")
+  const [inputs, setInputs] = useState({})
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
+  }
+  const dispatch = useDispatch()
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+  const handleEditCourse = (e) => {
+    e.preventDefault()
+    dispatch(updateCoursebyId({...inputs, _id: course._id}))
+    toggleModal()
   }
 
   return (
@@ -40,7 +52,7 @@ function Edit( {course} ) {
                 name="path"
                 className="input-edit"
                 defaultValue={course.path}
-                onChange={(e) => setInput(e.target.value)}
+                onChange={handleChange}
               />
             </div>
 
@@ -53,7 +65,7 @@ function Edit( {course} ) {
                 name="title"
                 className="input-edit"
                 defaultValue={course.title}
-                onChange={(e) => setInput(e.target.value)}
+                onChange={handleChange}
               />
             </div>
 
@@ -67,7 +79,7 @@ function Edit( {course} ) {
                   name="description"
                   style={{height: "120px", width: "100%", resize: "vertical"}}
                   defaultValue={course.description}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={handleChange}
               />
             </div>
 
@@ -81,7 +93,7 @@ function Edit( {course} ) {
                   name="code"
                   style={{height: "120px", width:"100%", resize: "vertical"}}
                   defaultValue={course.code}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={handleChange}
               />
             </div>
 
@@ -94,11 +106,11 @@ function Edit( {course} ) {
                 name="image"
                 className="input-edit"
                 defaultValue={course.image}
-                onChange={(e) => setInput(e.target.value)}
+                onChange={handleChange}
               />
             </div>
             <div className="btn-list">
-                <button class="btn-primary" onClick={toggleModal}>Submit</button>
+                <button class="btn-primary" onClick={handleEditCourse}>Submit</button>
                 <button class="btn-secondary" onClick={toggleModal}>Cancel</button>
             </div>
           </form>

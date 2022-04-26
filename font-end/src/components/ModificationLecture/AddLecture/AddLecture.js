@@ -1,16 +1,30 @@
 import React, { useState } from "react";
 import "./AddLecture.css";
 import Modal from "react-modal";
-
+import { useDispatch, useSelector } from 'react-redux';
+import {addLecture} from '../../../redux/lectureSlice'
 Modal.setAppElement("#root");
 
 function AddLecture() {
   const [isOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useState("")
+  const [inputs, setInputs] = useState({})
   function toggleModal() {
     setIsOpen(!isOpen);
   }
 
+  const dispatch = useDispatch()
+
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  const handleAddLecture = (e) => {
+    e.preventDefault()
+    dispatch(addLecture(inputs))
+    toggleModal()
+  }
   return (
     <div className="add">
       <button class="btn-enhanced" onClick={toggleModal}>
@@ -41,21 +55,21 @@ function AddLecture() {
                   name="title"
                   className="input-add"
                   placeholder="Title"
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={handleChange}
                 />
               </div>
 
               <div className="add-form-inputs">
                 <label htmlFor="path" className="label-add">
-                  <strong>PATH</strong>
+                  <strong>COURSE PATH</strong>
                 </label>
                 <input
-                  id="path"
-                  type="url"
-                  name="path"
+                  id="course_path"
+                  type="text"
+                  name="course_path"
                   className="input-add"
-                  placeholder="Path"
-                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="course path"
+                  onChange={handleChange}
                 />
               </div>
 
@@ -68,12 +82,12 @@ function AddLecture() {
                   type="description"
                   name="description"
                   style={{height: "120px", width: "100%", resize: "vertical"}}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={handleChange}
                 />
               </div>
 
               <div className="btn-list">
-                <button class="btn-primary" onClick={toggleModal}>Submit</button>
+                <button class="btn-primary" onClick={handleAddLecture}>Submit</button>
                 <button class="btn-secondary" onClick={toggleModal}>Cancel</button>
               </div>
             </form>

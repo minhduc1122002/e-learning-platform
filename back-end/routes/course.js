@@ -4,7 +4,7 @@ const Course = require("../models/Course");
 const Lecture = require('../models/Lecture');
 
 //CREATE
-router.post("/", async (req, res) => {
+router.post("/",verifyTokenAndAdmin, async (req, res) => {
     const newCourse = new Course(req.body);
     try {
       const savedCourse = await newCourse.save();
@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 });
   
 //UPDATE
-router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.put("/update/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
       const updatedCourse = await Course.findByIdAndUpdate(
           req.params.id,
@@ -47,7 +47,7 @@ router.put("/update/:path", async (req, res) => {
 });
   
 //DELETE
-router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.delete("/delete/:id",verifyTokenAndAdmin, async (req, res) => {
     try {
       await Course.findByIdAndDelete(req.params.id);
       res.status(200).json("Product has been deleted...");

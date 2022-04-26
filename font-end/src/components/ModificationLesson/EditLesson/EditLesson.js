@@ -3,15 +3,30 @@ import "./EditLesson.css";
 import Modal from "react-modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
-
-function EditLesson() { // {lessons}
+import {useDispatch} from "react-redux"
+import {updateLessontoLecture} from "../../../redux/lectureSlice"
+function EditLesson({lessons}) {
     const [isOpen, setIsOpen] = useState(false);
-    const [input, setInput] = useState("")
+    const [input, setInput] = useState({})
   
     const toggleModal = () => {
       setIsOpen(!isOpen);
     }
-  
+
+    const dispatch = useDispatch();
+
+    const handleChange = (e) => {
+      setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+      });
+    };
+
+    const handleUpdateLesson = (e) => {
+      e.preventDefault()
+      dispatch(updateLessontoLecture({...inputs, _id: lecture._id}))
+      toggleModal()
+    } 
+
     return (
       <div className="edit">
         <button onClick={toggleModal} className="fa-edit"><FontAwesomeIcon icon={faEdit}/></button>

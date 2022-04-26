@@ -29,8 +29,8 @@ function LectureList( {lectures} ) {
                         <div className="lecture-modify">
                             <h2>{lecture.title}</h2> 
                             <AddLesson />
-                            <EditLecture />
-                            <DeleteLecture />
+                            <EditLecture lecture={lecture}/>
+                            <DeleteLecture lecture={lecture}/>
                         </div>
                             <p>{lecture.description}</p>
                         </div>

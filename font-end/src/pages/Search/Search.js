@@ -63,7 +63,7 @@ function Search() {
                                         </a>
                                         <div className="modify-btn">
                                             <EditCourse course={course}/>
-                                            <DeleteCourse />
+                                            <DeleteCourse course={course}/>
                                         </div>
                                     </div>
                             ))}

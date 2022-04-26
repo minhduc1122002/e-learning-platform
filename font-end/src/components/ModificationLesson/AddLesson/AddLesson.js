@@ -3,15 +3,30 @@ import Modal from "react-modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import './AddLesson.css';
-
+import {useDispatch} from "react-redux"
+import {addLessontoLecture} from "../../../redux/lectureSlice"
 Modal.setAppElement("#root");
 
 function AddLesson() {
     const [isOpen, setIsOpen] = useState(false);
-    const [input, setInput] = useState("")
+    const [inputs, setInputs] = useState("")
     function toggleModal() {
       setIsOpen(!isOpen);
     }
+
+    const dispatch = useDispatch();
+
+    const handleChange = (e) => {
+      setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+      });
+    };
+
+    const handleAddLesson = (e) => {
+      e.preventDefault()
+      dispatch(addLessontoLecture(inputs))
+      toggleModal()
+    } 
   
     return (
       <div className="add">
@@ -41,7 +56,7 @@ function AddLesson() {
                     name="title"
                     className="input-add"
                     placeholder="Title"
-                    onChange={(e) => setInput(e.target.value)}
+                    onChange={handleChange}
                   />
                 </div>
   
@@ -55,7 +70,7 @@ function AddLesson() {
                     name="id"
                     className="input-add"
                     placeholder="ID"
-                    onChange={(e) => setInput(e.target.value)}
+                    onChange={handleChange}
                   />
                 </div>
   
@@ -68,7 +83,7 @@ function AddLesson() {
                     type="description"
                     name="description"
                     style={{height: "120px", width: "100%", resize: "vertical"}}
-                    onChange={(e) => setInput(e.target.value)}
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -82,12 +97,12 @@ function AddLesson() {
                   name="path"
                   className="input-add"
                   placeholder="Video"
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={handleChange}
                 />
               </div>
   
                 <div className="btn-list">
-                  <button class="btn-primary" onClick={toggleModal}>Submit</button>
+                  <button class="btn-primary" onClick={handleAddLesson}>Submit</button>
                   <button class="btn-secondary" onClick={toggleModal}>Cancel</button>
                 </div>
               </form>

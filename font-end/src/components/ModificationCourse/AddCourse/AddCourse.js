@@ -1,15 +1,30 @@
 import React, { useState } from "react";
 import "./AddCourse.css";
 import Modal from "react-modal";
-
+import { useDispatch, useSelector } from 'react-redux';
+import {addCourse} from '../../../redux/courseSlice.js'
 Modal.setAppElement("#root");
 
 export default function AddCourse() {
   const [isOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useState("")
+  const [inputs, setInputs] = useState({})
   function toggleModal() {
     setIsOpen(!isOpen);
   }
+
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  const handleAddCourse = (e) => {
+    e.preventDefault()
+    dispatch(addCourse(inputs))
+    toggleModal()
+  } 
 
   return (
     <div className="add">
@@ -41,7 +56,7 @@ export default function AddCourse() {
                   name="path"
                   className="input-add"
                   placeholder="Path"
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -55,7 +70,7 @@ export default function AddCourse() {
                   name="title"
                   className="input-add"
                   placeholder="Title"
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -68,7 +83,7 @@ export default function AddCourse() {
                   type="description"
                   name="description"
                   style={{height: "120px", width: "100%", resize: "vertical"}}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -81,7 +96,7 @@ export default function AddCourse() {
                   type="code"
                   name="code"
                   style={{height: "120px", width:"100%", resize: "vertical"}}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -95,11 +110,11 @@ export default function AddCourse() {
                   name="image"
                   className="input-add"
                   placeholder="Image"
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={handleChange}
                 />
               </div>
               <div className="btn-list">
-                <button class="btn-primary" onClick={toggleModal}>Submit</button>
+                <button class="btn-primary" onClick={handleAddCourse}>Submit</button>
                 <button class="btn-secondary" onClick={toggleModal}>Cancel</button>
               </div>
             </form>

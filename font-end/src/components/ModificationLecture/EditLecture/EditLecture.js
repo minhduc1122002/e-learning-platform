@@ -3,17 +3,30 @@ import "./EditLecture.css";
 import Modal from "react-modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
-
+import {useDispatch} from "react-redux"
+import {updateLecture} from "../../../redux/lectureSlice"
 Modal.setAppElement("#root");
 
-function EditLecture(  ) { //{lecture}
+function EditLecture( {lecture} ) { 
   const [isOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useState("")
+  const [inputs, setInputs] = useState({})
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
   }
 
+  const dispatch = useDispatch()
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  const handleEditLecture = (e) => {
+    e.preventDefault()
+    dispatch(updateLecture({...inputs, _id: lecture._id}))
+    toggleModal()
+  }
   return (
     <div className="edit">
       <button onClick={toggleModal} className="fa-edit-lecture"><FontAwesomeIcon icon={faEdit}/></button>
@@ -40,7 +53,7 @@ function EditLecture(  ) { //{lecture}
                 name="title"
                 className="input-edit"
                 // defaultValue={lecture.title}
-                onChange={(e) => setInput(e.target.value)}
+                onChange={handleChange}
               />
             </div>
 
@@ -53,7 +66,7 @@ function EditLecture(  ) { //{lecture}
                 name="path"
                 className="input-edit"
                 // defaultValue={lecture.course_path}
-                onChange={(e) => setInput(e.target.value)}
+                onChange={handleChange}
               />
             </div>
 
@@ -66,13 +79,13 @@ function EditLecture(  ) { //{lecture}
                   type="description"
                   name="description"
                   style={{height: "120px", width: "100%", resize: "vertical"}}
-                //   defaultValue={lecture.description}
-                  onChange={(e) => setInput(e.target.value)}
+                  // defaultValue={lecture.description}
+                  onChange={handleChange}
               />
             </div>
 
             <div className="btn-list">
-                <button class="btn-primary" onClick={toggleModal}>Submit</button>
+                <button class="btn-primary" onClick={handleEditLecture}>Submit</button>
                 <button class="btn-secondary" onClick={toggleModal}>Cancel</button>
             </div>
           </form>

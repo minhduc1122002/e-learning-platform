@@ -1,14 +1,16 @@
 const router = require('express').Router()
 const { verifyToken,  verifyTokenAndAuth, verifyTokenAndAdmin} = require("./verifyToken")
 const Lecture = require("../models/Lecture");
+const Course = require("../models/Course")
 const mongoose = require("mongoose")
 const ObjectId = mongoose.Types.ObjectId;
 
 //CREATE
-router.post("/", async (req, res) => {
+router.post("/",verifyTokenAndAdmin, async (req, res) => {
     const newLecture = new Lecture(req.body);
     try {
       const savedLecture = await newLecture.save();
+      console.log(savedLecture)
       res.status(200).json(savedLecture);
     } catch (err) {
       res.status(500).json(err);
@@ -21,7 +23,9 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
       const updatedLecture = await Lecture.findByIdAndUpdate(
           req.params.id,
           {
-              $set: req.body
+              course_path: req.body.course_path,
+              title: req.body.title,
+              description: req.body.description
           },
           { new: true}
       )
@@ -82,13 +86,67 @@ router.get("/lessons/:lessonId", async (req, res) => {
 });
 
 //ADD LESSONS
-router.put("/lessons/:id", async (req, res) => {
+router.put("/lessons/:id",verifyTokenAndAdmin, async (req, res) => {
   try {
     const lecture = await Lecture.findById(req.params.id)
     lecture.lessons.push(req.body)
     lecture.save()
     res.status(200).json(lecture);
   } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//UPDATE A LESSON
+router.put("/lessons/update/:id/:lessonId", verifyTokenAndAdmin,async(req, res) => {
+  try {
+    const lecture = await Lecture.findOneAndUpdate(
+      {_id: req.params.id, 
+      lessons: {$elemMatch: {_id: req.params.lessonId}}
+    },
+    {$set : {"lessons.$" : req.body}},
+    { new: true}
+    )
+    console.log(lecture)
+    res.status(200).json(lecture);
+  }catch(err){
+    res.status(500).json(err)
+  }
+});
+
+//DELETE A LESSON
+router.put("/lessons/delete/:id/:lessonId",verifyTokenAndAdmin, async(req, res) => {
+  try {
+    const lecture = await Lecture.findOneAndUpdate(
+      {_id: req.params.id},
+      {
+        $pull: {lessons : {_id: req.params.lessonId}}
+      },
+      { new: true}
+    )
+    console.log(lecture)
+    res.status(200).json(lecture)
+  }catch(err){
+    res.status(500).json(err)
+  }
+});
+
+//GET ALL LECTURES
+router.get("/", async (req, res) => {
+  try {
+    const lecture = await Lecture.aggregate( [
+      { $lookup:
+        {
+          from: "courses",
+          localField: "course_path",
+          foreignField: "path",
+          as: "course",
+        }
+      },
+      // { $unset: ["lessons"]}
+    ])
+    res.status(200).json(lecture);
+  }catch(err) {
     res.status(500).json(err);
   }
 });
