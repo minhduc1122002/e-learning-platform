@@ -5,7 +5,7 @@
     text-align: left;
     font-size: 20px;
     background: linear-gradient(1turn,#5141bd,#3e2ea5),linear-gradient(0deg,#2f2768,#2f2768);
-    height: 100vh;
+    height: 120vh;
 }
 
 span.signup-input-login {
@@ -22,7 +22,7 @@ span.signup-input-login {
 }
 
 .signup-form {
-    width: 35%;
+    width: 40%;
     margin: 6% auto;
     background: #ffffff;
     box-shadow: 0px 14px 80px rgb(96, 79, 205, 1);
@@ -89,8 +89,14 @@ input.input-signup:focus {
 .signup-form-inputs:focus-within label {
     color: #2e57e8;
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
     .signup-form {
         width: 70%;
+    }
+}
+@media screen and (max-width: 596px) {
+    .signup-form {
+        width: 90%;
+        padding: 16px 24px 16px 24px;
     }
 }

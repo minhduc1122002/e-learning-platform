@@ -2,21 +2,17 @@ import { useEffect, useState } from "react";
 import CourseList from "../../components/CourseList/CourseList";
 import Footer from "../../components/Footer/Footer";
 import Navigation from "../../components/Navigation/Navigation";
+import { useDispatch, useSelector } from 'react-redux';
+import { getCourseList } from '../../redux/courseSlice'
 import "./Home.css"
 
 function Home() {
-    // const [courses, setCourses] = useState([])
-    // useEffect(() => {
-    //     const getCourses = async () => {
-    //         try {
-    //             const res = await publicRequest.get("/courses")
-    //             setCourses(res.data)
-    //         } catch (err) {
-    //             console.log(err)
-    //         }
-    //     }
-    //     getCourses()
-    // }, [])
+    const courses = useSelector(state => state.course.courses)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getCourseList())
+    }, [dispatch]);
     
     return (
         <>
@@ -26,7 +22,7 @@ function Home() {
                     <div className="home-header-intro">
                         <h1>Get really good at programming.</h1>
                         <p>
-                            Develop fluency in 57 programming languages with our unique blend of learning, practice and mentoring. Exercism is fun, effective and 100% free, forever.
+                            Develop fluency in {courses.length} programming languages with our unique blend of learning, practice and mentoring. Exercism is fun, effective and 100% free, forever.
                         </p>
                         <div className="buttons-holder">
                             <a href="/signup" className="btn-primary" type="button">

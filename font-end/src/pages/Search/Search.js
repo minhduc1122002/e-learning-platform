@@ -4,25 +4,75 @@ import { getCourseList } from '../../redux/courseSlice'
 import Footer from '../../components/Footer/Footer'
 import Navigation from '../../components/Navigation/Navigation'
 import "./Search.css"
-import EditCourse from "../../components/ModificationCourse/EditCourse/EditCourse"
-import DeleteCourse from "../../components/ModificationCourse/DeleteCourse/DeleteCourse";
-import AddCourse from '../../components/ModificationCourse/AddCourse/AddCourse'
+import EditCourse from "../../components/Modal/Course/EditCourse"
+import AddCourse from '../../components/Modal/Course/AddCourse'
+import { reset } from '../../redux/courseSlice'
+import { toast, ToastContainer } from 'react-toastify'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import DeleteCourse from '../../components/Modal/Course/DeleteCourse'
 
 function Search() {
     const [input, setInput] = useState("")
     const dispatch = useDispatch()
-    const courses = useSelector(state => state.course.courses)
-    
+    const { isLoading, isError, message, isSuccess, courses } = useSelector(
+        (state) => state.course
+    )
+    const user = useSelector(state => state.auth.user)
+    const [addModal, setAddModal] = useState(false)
+    const [editModal, setEditModal] = useState(false)
+    const [deleteModal, setDeleteModal] = useState(false)
+    const [selectedCourse, setSelectedCourse] = useState({})
+    // const { isLoading, isError, message, isSuccess } = useSelector(
+    //     (state) => state.course
+    // )
+    // useEffect(() => {
+    //     if (isError.includes(true)) {
+    //         toast.error(message, {
+    //             position: "top-right",
+    //             autoClose: 2000,
+    //             hideProgressBar: false,
+    //             closeOnClick: true,
+    //             pauseOnHover: false,
+    //             draggable: false,
+    //             progress: undefined,
+    //             onClose: () => {
+    //               dispatch(reset())
+    //             }
+    //         })
+    //     }
+    //     if (isSuccess.includes(true)) {
+    //         dispatch(reset())
+    //     }
+    //     if (!isSuccess.includes(true) && !isError.includes(true)) {
+    //         dispatch(getCourseList())  
+    //     }
+    //     toast.clearWaitingQueue();
+    // }, [isError, message, dispatch, isSuccess])
     useEffect(() => {
         dispatch(getCourseList())
-    }, [dispatch]);
+    }, [dispatch])
 
+    const handleEdit = (course) => {
+        setSelectedCourse(course)
+        setEditModal(true)
+    }
+
+    const handleDelete = (course) => {
+        setSelectedCourse(course)
+        setDeleteModal(true)
+    }
     return (
         <>
+            <ToastContainer limit={1} />
+            <AddCourse isOpen={addModal} setIsOpen={setAddModal} />
+            <EditCourse isOpen={editModal} setIsOpen={setEditModal} course={selectedCourse} setCourse={setSelectedCourse}/>
+            <DeleteCourse isOpen={deleteModal} setIsOpen={setDeleteModal} course={selectedCourse} setCourse={setSelectedCourse} />
             <Navigation/>
             <header className="tracks-header">
                 <div className="lg-container container">
-                    <h1>57 languages for you to master</h1>
+                    <h1>{courses.length} languages for you to master</h1>
                     <p>
                         Become fluent in your chosen programming languages by completing these tracks created by our
                         <a href="/"> awesome team of contributors</a>
@@ -61,14 +111,22 @@ function Search() {
                                                 </ul>
                                             </div>
                                         </a>
-                                        <div className="modify-btn">
-                                            <EditCourse course={course}/>
-                                            <DeleteCourse course={course}/>
+                                        <div className='modify-btn'>
+                                            <div className="edit">
+                                                <button onClick={() => handleEdit(course)} className="fa-edit"><FontAwesomeIcon icon={faEdit}/></button>
+                                            </div>
+                                            <div className="delete">
+                                                <button onClick={() => handleDelete(course)} className="delete-fa-icon"><FontAwesomeIcon icon ={faTrash}/></button>
+                                            </div>
                                         </div>
                                     </div>
                             ))}
                         </div>
-                        <AddCourse />
+                        <div className="add">
+                            <button className="btn-enhanced" onClick={() => setAddModal(true)}>
+                                Add A Course
+                            </button>
+                        </div>
                     </div>
                 </section>
             </div>

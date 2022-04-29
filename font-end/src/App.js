@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import Course from "./pages/Course/Course";
 import Learning from "./pages/Learn/Learning";
-import Test from "./Test";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Register/Signup";
 import Profile from "./pages/Profile/Profile"
@@ -24,7 +23,6 @@ function App() {
           <Route path="/courses" element={<Search/>}/>
           <Route path="/course/:path" element={<Course />} />
           <Route path="/learn/:course_id/*" element={user ? <Learning/> : <Navigate to="/login"/>} />
-          <Route path="/test" element={<Test/>} />
           <Route path="/login" element={user ? <Navigate to="/"/> : <Login/>} />
           <Route path="/signup" element = {user ? <Navigate to="/"/> : <Signup/>} />
           <Route path="/profiles/:id" element = {<Profile />}/>

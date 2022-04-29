@@ -6,18 +6,18 @@ import { enroll, reset } from '../../redux/authSlice'
 
 function Enroll( {course} ) {
     const user = useSelector((state) => state.auth.user)
-    const { isSuccess } = useSelector(
+    const { enrollSuccess } = useSelector(
         (state) => state.auth
     )
     const navigate = useNavigate()
     const dispatch = useDispatch()
-
+    
     useEffect(() => {
-        if (isSuccess) {
+        if (enrollSuccess) {
             navigate(`/learn/${course.path}`)
+            dispatch(reset())
         }
-        dispatch(reset())
-    }, [isSuccess, course.path, dispatch, navigate])
+    }, [enrollSuccess, course.path, dispatch, navigate])
 
     const handleEnroll = (e) => {
         e.preventDefault()

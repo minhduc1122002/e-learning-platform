@@ -4,15 +4,17 @@
     align-items: center;
     padding-right: 15px;
     padding-left: 15px;
+    padding-top: 16px;
+    padding-bottom: 16px;
     position: relative;
+    background-color: #fff;
 }
 .nav-links {
-    margin-right: auto;
+    flex-grow: 1;
 }
 .nav-links ul li {
     display: inline-block;
     position: relative;
-    line-height: 65px;
 }
 .nav-links ul li a {
     font-size: 16px;
@@ -69,7 +71,7 @@
     position: absolute;
     inset: 0px 0px auto auto;
     transform: translate(-20px, 70px);
-    z-index: 2;
+    z-index: 3;
 }
 .user-menu-dropdown ul {
     --tw-shadow: 0px 4px 42px 0px rgba(79,114,205,.15);
@@ -116,11 +118,25 @@ li.profile a .info .handle {
     font-weight: 500;
     line-height: 125%;
 }
+.compact {
+    display: none;
+}
 @media screen and (max-width: 1000px) {
     .navigation {
         position: sticky;
         top: 0;
         background-color: #fff;
         z-index: 2;
+    }
+}
+@media screen and (max-width: 450px) {
+    .nav-links {
+        display: none;
+    }
+    .compact {
+        display: block;
+    }
+    .user-section {
+        margin-left: auto;
     }
 }

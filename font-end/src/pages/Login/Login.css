@@ -94,8 +94,19 @@ input.infor:focus {
 .input:focus-within label {
     color: #2e57e8;
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
     .form {
         width: 70%;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .form {
+        width: 70%;
+    }
+}
+@media screen and (max-width: 596px) {
+    .form {
+        width: 90%;
+        padding: 16px 24px 16px 24px;
     }
 }

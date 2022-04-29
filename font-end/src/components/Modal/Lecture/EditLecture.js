@@ -1,19 +1,18 @@
-import React, { useState } from "react";
-import "./EditLecture.css";
+import React, { useState, useEffect } from 'react'
 import Modal from "react-modal";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import {useDispatch} from "react-redux"
-import {updateLecture} from "../../../redux/lectureSlice"
-Modal.setAppElement("#root");
+import { useDispatch, useSelector } from 'react-redux';
+import { updateLecture, reset } from '../../../redux/lectureSlice';
+import { toast } from 'react-toastify'
 
-function EditLecture( {lecture} ) { 
-  const [isOpen, setIsOpen] = useState(false);
-  const [inputs, setInputs] = useState({})
+function EditLecture( {isOpen, setIsOpen, lecture, setLecture} ) {
+  const [inputs, setInputs] = useState({
+    title: lecture.title,
+    description: lecture.description
+  })
 
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
-  }
+  const { isLoading, isError, message, isSuccess } = useSelector(
+    (state) => state.lecture
+  )
 
   const dispatch = useDispatch()
   const handleChange = (e) => {
@@ -22,18 +21,42 @@ function EditLecture( {lecture} ) {
     });
   };
 
+  useEffect(() => {
+    if (isError[2]) {
+        toast.error(message, {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            onClose: () => {
+              dispatch(reset())
+            }
+        })
+    }
+    if (isSuccess[2]) {
+        dispatch(reset())
+        handleClose()
+    }
+    toast.clearWaitingQueue();
+}, [isError, message, dispatch, isSuccess])
+
+  const handleClose = () => {
+    setIsOpen(false)
+    setLecture({})
+    setInputs({})
+  }
   const handleEditLecture = (e) => {
     e.preventDefault()
     dispatch(updateLecture({...inputs, _id: lecture._id}))
-    toggleModal()
   }
   return (
-    <div className="edit">
-      <button onClick={toggleModal} className="fa-edit-lecture"><FontAwesomeIcon icon={faEdit}/></button>
-
+    <>
       <Modal
         isOpen={isOpen}
-        onRequestClose={toggleModal}
+        onRequestClose={handleClose}
         contentLabel="editmodal"
         className="modal-container"
         overlayClassName="c-modal"
@@ -52,20 +75,7 @@ function EditLecture( {lecture} ) {
                 type="title"
                 name="title"
                 className="input-edit"
-                // defaultValue={lecture.title}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="edit-form-inputs">
-              <label htmlFor="path" className="label-edit">
-                <strong>PATH</strong>
-              </label>
-              <input
-                type="text"
-                name="path"
-                className="input-edit"
-                // defaultValue={lecture.course_path}
+                defaultValue={lecture.title}
                 onChange={handleChange}
               />
             </div>
@@ -79,20 +89,20 @@ function EditLecture( {lecture} ) {
                   type="description"
                   name="description"
                   style={{height: "120px", width: "100%", resize: "vertical"}}
-                  // defaultValue={lecture.description}
+                  defaultValue={lecture.description}
                   onChange={handleChange}
               />
             </div>
 
             <div className="btn-list">
-                <button class="btn-primary" onClick={handleEditLecture}>Submit</button>
-                <button class="btn-secondary" onClick={toggleModal}>Cancel</button>
+                <button className="btn-primary" onClick={handleEditLecture} type="button" disabled={isLoading[2] || isError[2]}>Submit</button>
+                <button className="btn-secondary" onClick={handleClose} type="button">Cancel</button>
             </div>
           </form>
         </div>
       </Modal>
-    </div>
-  );
+    </>
+  )
 }
-
-export default EditLecture;
+Modal.setAppElement("#root");
+export default EditLecture

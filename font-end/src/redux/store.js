@@ -7,7 +7,10 @@ import {
   initMessageListener,
 } from "redux-state-sync";
 
-const syncMiddleware = createStateSyncMiddleware()
+const config = {
+  whitelist: ['auth/register/fulfilled', 'auth/login/fulfilled', 'user/enroll/fulfilled', 'user/update/fulfilled', 'auth/logout/fulfilled']
+}
+const syncMiddleware = createStateSyncMiddleware(config)
 
 export const store = configureStore({
   reducer: {

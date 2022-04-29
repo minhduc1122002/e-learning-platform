@@ -78,7 +78,7 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //ADD COURSE
-router.put("/enroll/:id", verifyTokenAndAuth, async (req, res) => {
+router.put("/enroll/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
     const user = await User.findById(req.params.id)
     if (!user.courses.includes(req.body)) {

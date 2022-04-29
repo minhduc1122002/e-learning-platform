@@ -9,3 +9,13 @@
 .fa-delete-lecture:hover {
     transform: scale(1.5);
 }
+.fa-edit-lecture {
+    font-size: 18px;
+    color:rgb(96, 79, 205, 1);
+    background-color: transparent;
+    transition: transform .2s;
+    cursor: pointer;
+}
+.fa-edit-lecture:hover {
+    transform: scale(1.5);
+}

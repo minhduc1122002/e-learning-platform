@@ -38,6 +38,7 @@
     align-items: center;
     display: flex;
     margin-left: auto;
+    flex-direction: column;
 }
 .view-button {
     cursor: pointer;
@@ -55,7 +56,6 @@
     height: 40px;
     border: 2px solid #3A10E5;
     color: #3A10E5;
-    margin-right: 0.5rem;
     background-color: #fff;
 }
 .lesson-list-show {
@@ -79,6 +79,18 @@
     line-height: 48px;
     color: rgb(96, 79, 205, 1);
     font-weight: 300;
+    flex-grow: 1;
+}
+.lecture-modify {
+    display: flex;
+    grid-column-gap: 2.5rem;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.lesson-modify {
+    display: flex;
+    grid-column-gap: 30px;
+    margin-left: 50px;
 }
 @media screen and (max-width: 1000px) {
     .lecture-list {
@@ -95,15 +107,4 @@
     .view-button {
         display: none;
     }
-}
-
-.lecture-modify {
-    display: flex;
-    grid-column-gap: 50px;
-}
-
-.lesson-modify {
-    display: flex;
-    grid-column-gap: 30px;
-    margin-left: 50px;
 }

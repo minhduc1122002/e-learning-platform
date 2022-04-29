@@ -46,6 +46,8 @@ function Navigation() {
                 <li><a href={`/profiles/${user._id}`}>Public Profile</a></li>
                 <li><a href="/settings">Settings</a></li>
                 <li><div className='sign-out' onClick={handleLogout}>Sign out</div></li>
+                <li className='compact'><a href="/">Home</a></li>
+                <li className='compact'><a href="/courses">Language Tracks</a></li>
               </ul>
           </div>
         )}

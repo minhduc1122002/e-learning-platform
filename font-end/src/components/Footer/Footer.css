@@ -1,11 +1,12 @@
 .site-footer {
-    margin-top: 10%;
+    margin-top: 20%;
     background: linear-gradient(180deg,#271b72,rgba(39,27,114,0) 48.1%,#271b72),linear-gradient(0deg,#271b72,#271b72),url(https://d24y9kuxp2d7l2.cloudfront.net/assets/bg-tracks-header@2x-8439ef30af6bf120107f6a84db31a62237d5ee8b.jpg);
     background-position: -190px;
     background-size: 100%;
     box-shadow: 0 4px 24px 0 #00000026;
     border-top: 8px solid rgb(96 79 205);
     padding: 2em 2em 0 2em;
+     
 }
 .site-info {
     color: #fff;

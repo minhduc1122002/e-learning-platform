@@ -27,7 +27,7 @@ function CourseList() {
                     <hr className="divider-large"/> 
                 </div>
                 {courses && (<div className="course-list">
-                    {courses.map(course => (
+                    {courses.map((course, index) => index < 6 && (
                         <a className="course-item" href={`/course/${course.path}`} key={course.path}>
                             <img alt={course.path} className={course.path} src={course.image}/>
                             <div className="title">{course.title}</div>
@@ -37,7 +37,7 @@ function CourseList() {
                 </div>)}
                 <div className="border-view">
                     <a href="/courses">
-                        <span>See all 57 Language Tracks</span>
+                        <span>See all {courses.length} Language Tracks</span>
                     </a>
                 </div>
             </div>

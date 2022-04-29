@@ -15,32 +15,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCourse } from '../../redux/courseSlice'
 
 function Course() {
-    const location = useLocation();
-    const path = location.pathname.split("/")[2];
-    const [course, setCourse] = useState({})
+    const location = useLocation()
     const [hidden, setHidden] = useState(true)
-    
+    const path = location.pathname.split("/")[2]
+    const course = useSelector(state => state.course.course)
+    const dispatch = useDispatch()
+
     useEffect(() => {
-        const getCourses = async () => {
-            try {
-                const res = await publicRequest.get("/courses/findby/" + path)
-                setCourse(res.data)
-            } catch (err) {
-                console.log(err)
-            }
-        }
-        getCourses()
-    }, [path])
-
-    // const location = useLocation()
-    // const [hidden, setHidden] = useState(true)
-    // const path = location.pathname.split("/")[2]
-    // const course = useSelector(state => state.courses.course)
-    // const dispatch = useDispatch()
-
-    // useEffect(() => {
-    //     dispatch(getCourse(path))
-    // }, [dispatch]);
+        dispatch(getCourse(path))
+    }, [dispatch, path]);
     
     return (
         <>
@@ -49,15 +32,19 @@ function Course() {
             <Navigation/>
             <div className="course-container">
                 <div className="header">
-                    <img className="icon" alt="JavaScript" src={course.image}/>
-                    <div className="header-text">
-                        <div className="title">{course.title}</div>
-                        <div className="students">
-                            <img role="presentation" alt="" src="https://d24y9kuxp2d7l2.cloudfront.net/assets/icons/students-caf4c344871c7bb1e0988f33a3ead0944160d4e0.svg"/>
-                            <span>
-                                151,867
-                                students
-                            </span>
+                    <div className="lg-container">
+                        <div className="header-content">
+                            <img className="icon" alt="JavaScript" src={course.image}/>
+                            <div className="header-text">
+                                <div className="title">{course.title}</div>
+                                <div className="students">
+                                    <img role="presentation" alt="" src="https://d24y9kuxp2d7l2.cloudfront.net/assets/icons/students-caf4c344871c7bb1e0988f33a3ead0944160d4e0.svg"/>
+                                    <span>
+                                        {course.totalStudents}
+                                        {" "}students
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -66,7 +53,7 @@ function Course() {
                     <div className="course-info">
                         <div className="about-text">
                             <h2>About {course.title}</h2>
-                            <div className={hidden ? "about-text-desc hidden" : "about-text-desc"}>
+                            <div className={hidden ? "about-text-desc hidden-overflow" : "about-text-desc"}>
                                 <ReactMarkdown children={course.description} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} className="markdown-container"/>
                             </div>
                             <button type="button" onClick={() => setHidden(!hidden)}>{hidden ? `Read more on ${course.title}` : "Read less"}</button>
@@ -86,7 +73,7 @@ function Course() {
                             <h2>Your journey through {course.title}</h2>
                             <p>Learn and master concepts to achieve fluency in {course.title}.</p>
                         </div>
-                        {course.lectures && <LectureList lectures={course.lectures}/>}
+                        {course.path && <LectureList course_path={course.path}/>}
                     </div>
                 </div>
             </div>

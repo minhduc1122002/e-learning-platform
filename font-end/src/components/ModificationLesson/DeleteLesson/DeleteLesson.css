@@ -1,8 +1,0 @@
-.fa-delete-lesson {
-    color: #FD5D5D;
-    transition: transform .2s;
-    cursor: pointer;
-}
-.fa-delete-lesson:hover {
-    transform: scale(1.5);
-}

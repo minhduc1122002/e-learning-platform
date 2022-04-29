@@ -6,11 +6,12 @@
     margin: 0 auto;
     width: 90%;
     margin-top: 64px;
+    flex-grow: 1;
 }
 .learn-navigation {
     flex-grow: 0;
-    max-width: 20%;
-    flex-basis: 20%;
+    max-width: 25%;
+    flex-basis: 25%;
     height: 100%;
     overflow-y: scroll;
     padding-left: 24px;
@@ -47,7 +48,6 @@
     position: sticky;
     top: 65px;
     background-color: #fff;
-    z-index: 2;
     justify-content: center;
     align-items: center;
     padding: 1rem 1rem;

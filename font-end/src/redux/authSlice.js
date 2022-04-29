@@ -10,6 +10,7 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: '',
+  enrollSuccess: false,
 }
 
 //Register
@@ -83,6 +84,7 @@ export const authSlice = createSlice({
       state.isSuccess = false
       state.isError = false
       state.message = ''
+      state.enrollSuccess = false
     },
   },
   extraReducers: (builder) => {
@@ -125,6 +127,7 @@ export const authSlice = createSlice({
         state.isLoading = false
         state.isSuccess = true
         state.user = action.payload
+        state.enrollSuccess = true
       })
       .addCase(update.pending, (state) => {
         state.isLoading = true
