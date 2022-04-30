@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Modal from "react-modal";
 import { useDispatch, useSelector } from 'react-redux';
 import { updateLecture, reset } from '../../../redux/lectureSlice';
@@ -10,8 +10,17 @@ function EditLecture( {isOpen, setIsOpen, lecture, setLecture} ) {
     description: lecture.description
   })
 
-  const { isLoading, isError, message, isSuccess } = useSelector(
+  const { message } = useSelector(
     (state) => state.lecture
+  )
+  const isSuccess = useSelector(
+      (state) => state.lecture.isSuccess[2]
+  )
+  const isError = useSelector(
+      (state) => state.lecture.isError[2]
+  )
+  const isLoading = useSelector(
+      (state) => state.lecture.isLoading[2]
   )
 
   const dispatch = useDispatch()
@@ -20,9 +29,14 @@ function EditLecture( {isOpen, setIsOpen, lecture, setLecture} ) {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
+  const handleClose = useCallback(() => {
+    setIsOpen(false)
+    setLecture({})
+    setInputs({})
+  }, [setIsOpen, setLecture])
 
   useEffect(() => {
-    if (isError[2]) {
+    if (isError) {
         toast.error(message, {
             position: "top-right",
             autoClose: 2000,
@@ -36,18 +50,13 @@ function EditLecture( {isOpen, setIsOpen, lecture, setLecture} ) {
             }
         })
     }
-    if (isSuccess[2]) {
+    if (isSuccess) {
         dispatch(reset())
         handleClose()
     }
     toast.clearWaitingQueue();
-}, [isError, message, dispatch, isSuccess])
+  }, [isError, message, dispatch, isSuccess, handleClose])
 
-  const handleClose = () => {
-    setIsOpen(false)
-    setLecture({})
-    setInputs({})
-  }
   const handleEditLecture = (e) => {
     e.preventDefault()
     dispatch(updateLecture({...inputs, _id: lecture._id}))
@@ -95,7 +104,7 @@ function EditLecture( {isOpen, setIsOpen, lecture, setLecture} ) {
             </div>
 
             <div className="btn-list">
-                <button className="btn-primary" onClick={handleEditLecture} type="button" disabled={isLoading[2] || isError[2]}>Submit</button>
+                <button className="btn-primary" onClick={handleEditLecture} type="button" disabled={isLoading || isError}>Submit</button>
                 <button className="btn-secondary" onClick={handleClose} type="button">Cancel</button>
             </div>
           </form>

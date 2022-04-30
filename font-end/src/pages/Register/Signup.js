@@ -12,9 +12,10 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isMissing, setIsMissing] = useState(false)
   const { isLoading, isError, message } = useSelector(
     (state) => state.auth
-)
+  )
   const dispatch = useDispatch();
   useEffect(() => {
       if (isError) {
@@ -35,6 +36,7 @@ function Signup() {
   const onSignUpClick = (e) => {
       e.preventDefault()
       if (!password || !username || !fullname || !email || !confirmPassword) {
+        setIsMissing(true)
         return toast.error("All field is required", {
           position: "top-right",
           autoClose: 2000,
@@ -43,9 +45,11 @@ function Signup() {
           pauseOnHover: false,
           draggable: false,
           progress: undefined,
+          onClose: () => setIsMissing(false)
         });
       }
       if (password.length < 8) {
+        setIsMissing(true)
         return toast.error("Password must be at least 8 characters", {
           position: "top-right",
           autoClose: 2000,
@@ -54,12 +58,14 @@ function Signup() {
           pauseOnHover: false,
           draggable: false,
           progress: undefined,
+          onClose: () => setIsMissing(false)
         });
       }
       if (password === confirmPassword) {
         dispatch(register({fullname, email, username, password}))
       }
       else {
+        setIsMissing(true)
         toast.error("Password confirmation doesn't match Password", {
           position: "top-right",
           autoClose: 2000,
@@ -68,6 +74,7 @@ function Signup() {
           pauseOnHover: false,
           draggable: false,
           progress: undefined,
+          onClose: () => setIsMissing(false)
         });
       }
   };
@@ -154,7 +161,7 @@ function Signup() {
           className="signup-input-btn"
           type="submit"
           onClick={onSignUpClick}
-          disabled={isLoading}
+          disabled={isLoading || isError || isMissing}
         >
           <strong>Sign up</strong>
         </button>

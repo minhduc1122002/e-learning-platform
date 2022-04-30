@@ -82,16 +82,26 @@ function Settings() {
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                         updatedUser.profileImage = downloadURL
-                        console.log(updatedUser)
-                        dispatch(update(updatedUser))
                     });
                 }
             );
         }
+        dispatch(update(updatedUser)) 
     }
 
     const handleChangePass = (e) => {
         e.preventDefault()
+        if (!newPassword || !confirmNewPassword || !oldPassword) {
+            return toast.error("Please Fill In The Form", {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+            });
+        }
         if (newPassword !== confirmNewPassword) {
             return toast.error("Password confirmation doesn't match Password", {
                 position: "top-right",
@@ -174,7 +184,7 @@ function Settings() {
                                 <input type="password" id="user_password_confirmation" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)}/>
                             </div>
                             <div class="form-footer">
-                                <button class="save-profile-btn" onClick={handleChangePass}>Change password</button>
+                                <button class="save-profile-btn" onClick={handleChangePass} disabled={isLoading}>Change password</button>
                             </div>
                         </form>
                     </section>

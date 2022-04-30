@@ -72,7 +72,7 @@
     align-items: center;
     justify-content: left;
     padding: 8px 8px;
-    margin-left: 110px;
+    margin-left: 10%;
 }
 .lesson-box p {
     font-size: 18px;
@@ -102,9 +102,12 @@
 }
 @media screen and (max-width: 640px) {
     .lecture-overview p{
-        font-size: 15px;
+        font-size: 14px;
     }
     .view-button {
         display: none;
+    }
+    .lesson-box p {
+        font-size: 14px;
     }
 }

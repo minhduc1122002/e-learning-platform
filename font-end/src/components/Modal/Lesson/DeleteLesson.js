@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import Modal from "react-modal";
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteLessontoLecture, reset } from '../../../redux/lectureSlice';
@@ -6,16 +6,24 @@ import { toast } from 'react-toastify'
 
 function DeleteLesson( {isOpen, setIsOpen, lesson, setLesson} ) {
     const dispatch = useDispatch()
-    const handleClose = () => {
-        setIsOpen(false)
-        setLesson({})
-    }
-    const { isLoading, isError, message, isSuccess } = useSelector(
+    const { message } = useSelector(
         (state) => state.lecture
     )
-
+    const isSuccess = useSelector(
+        (state) => state.lecture.isSuccess[6]
+    )
+    const isError = useSelector(
+        (state) => state.lecture.isError[6]
+    )
+    const isLoading = useSelector(
+        (state) => state.lecture.isLoading[6]
+    )
+    const handleClose = useCallback(() => {
+        setIsOpen(false)
+        setLesson({})
+    }, [setIsOpen, setLesson])
     useEffect(() => {
-        if (isError[6]) {
+        if (isError) {
             toast.error(message, {
                 position: "top-right",
                 autoClose: 2000,
@@ -29,12 +37,12 @@ function DeleteLesson( {isOpen, setIsOpen, lesson, setLesson} ) {
                 }
             })
         }
-        if (isSuccess[6]) {
+        if (isSuccess) {
             dispatch(reset())
             handleClose()
         }
         toast.clearWaitingQueue();
-    }, [isError, message, dispatch, isSuccess])
+    }, [isError, message, dispatch, isSuccess, handleClose])
 
     const handleDeleteLesson = (e) => {
         e.preventDefault()
@@ -52,7 +60,7 @@ function DeleteLesson( {isOpen, setIsOpen, lesson, setLesson} ) {
             <div className="modal-content">
             <h2 className="delete-label">Are you sure to delete this lesson?</h2>
             <div className="btn-list">
-                <button className="btn-primary" onClick={handleDeleteLesson} disabled={isLoading[6] || isError[6]}>Submit</button>
+                <button className="btn-primary" onClick={handleDeleteLesson} disabled={isLoading || isError}>Submit</button>
                 <button className="btn-secondary" onClick={handleClose}>Cancel</button>
             </div>
             </div>

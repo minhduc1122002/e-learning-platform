@@ -6,8 +6,7 @@ import Navigation from '../../components/Navigation/Navigation'
 import "./Search.css"
 import EditCourse from "../../components/Modal/Course/EditCourse"
 import AddCourse from '../../components/Modal/Course/AddCourse'
-import { reset } from '../../redux/courseSlice'
-import { toast, ToastContainer } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -16,7 +15,7 @@ import DeleteCourse from '../../components/Modal/Course/DeleteCourse'
 function Search() {
     const [input, setInput] = useState("")
     const dispatch = useDispatch()
-    const { isLoading, isError, message, isSuccess, courses } = useSelector(
+    const { courses } = useSelector(
         (state) => state.course
     )
     const user = useSelector(state => state.auth.user)
@@ -24,32 +23,7 @@ function Search() {
     const [editModal, setEditModal] = useState(false)
     const [deleteModal, setDeleteModal] = useState(false)
     const [selectedCourse, setSelectedCourse] = useState({})
-    // const { isLoading, isError, message, isSuccess } = useSelector(
-    //     (state) => state.course
-    // )
-    // useEffect(() => {
-    //     if (isError.includes(true)) {
-    //         toast.error(message, {
-    //             position: "top-right",
-    //             autoClose: 2000,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: false,
-    //             draggable: false,
-    //             progress: undefined,
-    //             onClose: () => {
-    //               dispatch(reset())
-    //             }
-    //         })
-    //     }
-    //     if (isSuccess.includes(true)) {
-    //         dispatch(reset())
-    //     }
-    //     if (!isSuccess.includes(true) && !isError.includes(true)) {
-    //         dispatch(getCourseList())  
-    //     }
-    //     toast.clearWaitingQueue();
-    // }, [isError, message, dispatch, isSuccess])
+
     useEffect(() => {
         dispatch(getCourseList())
     }, [dispatch])
@@ -66,9 +40,9 @@ function Search() {
     return (
         <>
             <ToastContainer limit={1} />
-            <AddCourse isOpen={addModal} setIsOpen={setAddModal} />
-            <EditCourse isOpen={editModal} setIsOpen={setEditModal} course={selectedCourse} setCourse={setSelectedCourse}/>
-            <DeleteCourse isOpen={deleteModal} setIsOpen={setDeleteModal} course={selectedCourse} setCourse={setSelectedCourse} />
+            {addModal && <AddCourse isOpen={addModal} setIsOpen={setAddModal} />}
+            {editModal && <EditCourse isOpen={editModal} setIsOpen={setEditModal} course={selectedCourse} setCourse={setSelectedCourse}/>}
+            {deleteModal && <DeleteCourse isOpen={deleteModal} setIsOpen={setDeleteModal} course={selectedCourse} setCourse={setSelectedCourse} />}
             <Navigation/>
             <header className="tracks-header">
                 <div className="lg-container container">
@@ -111,21 +85,25 @@ function Search() {
                                                 </ul>
                                             </div>
                                         </a>
-                                        <div className='modify-btn'>
-                                            <div className="edit">
-                                                <button onClick={() => handleEdit(course)} className="fa-edit"><FontAwesomeIcon icon={faEdit}/></button>
+                                        {user?.isAdmin && 
+                                            <div className='modify-btn'>
+                                                <div className="edit">
+                                                    <button onClick={() => handleEdit(course)} className="fa-edit"><FontAwesomeIcon icon={faEdit}/></button>
+                                                </div>
+                                                <div className="delete">
+                                                    <button onClick={() => handleDelete(course)} className="delete-fa-icon"><FontAwesomeIcon icon ={faTrash}/></button>
+                                                </div>
                                             </div>
-                                            <div className="delete">
-                                                <button onClick={() => handleDelete(course)} className="delete-fa-icon"><FontAwesomeIcon icon ={faTrash}/></button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        }
+                                </div>
                             ))}
                         </div>
                         <div className="add">
-                            <button className="btn-enhanced" onClick={() => setAddModal(true)}>
-                                Add A Course
-                            </button>
+                            {user?.isAdmin && 
+                                <button className="btn-enhanced" onClick={() => setAddModal(true)}>
+                                    Add A Course
+                                </button>
+                            }   
                         </div>
                     </div>
                 </section>

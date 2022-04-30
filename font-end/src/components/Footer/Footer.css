@@ -22,7 +22,6 @@
     text-decoration: underline;
 }
 .first {
-    width: 30% !important;
     margin-right: auto;
 }
 .middle {
@@ -32,10 +31,14 @@
 .last {
     margin-left: auto;
 }
+.site-info {
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    display: grid;
+}
 .site-info .info-col {
-    width: 15%;
     padding-left: 12px;
     padding-right: 12px;
+    margin-bottom: 2rem;
 }
 .site-info .info-col h2 {
     margin-bottom: 0.5rem;
@@ -75,13 +78,20 @@
     font-size: 1rem;
 }
 @media screen and (max-width: 1000px) {
-    .info-col {
-        width: 40% !important;
-    }
     .last {
-        display: none;
+        margin-left: 0;
     }
     .middle {
         margin-right: 0;
+    }
+    .site-info {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        display: grid;
+    }
+}
+@media screen and (max-width: 596px) {
+    .site-info {
+        grid-template-columns: repeat(1, minmax(0,1fr));
+        display: grid;
     }
 }

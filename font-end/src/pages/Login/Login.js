@@ -10,13 +10,14 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [isMissing, setIsMissing] = useState(false)
     const { isLoading, isError, message } = useSelector(
         (state) => state.auth
     )
     const dispatch = useDispatch();
     useEffect(() => {
         if (isError) {
-            toast.error(message, {
+           toast.error(message, {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -29,9 +30,12 @@ export default function Login() {
         }
         toast.clearWaitingQueue();
     }, [isError, message, dispatch])
+
     const handleLogin = (e) => {
+        e.preventDefault()
         if (!username || !password) {
-            toast.error("All field is required", {
+            setIsMissing(true)
+            return toast.error("All field is required", {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -39,11 +43,11 @@ export default function Login() {
                 pauseOnHover: false,
                 draggable: false,
                 progress: undefined,
-                onClose: () => dispatch(reset())
+                onClose: () => setIsMissing(false)
             })
+        } else {
+            dispatch(login({username, password}));
         }
-        e.preventDefault()
-        dispatch(login({username, password}));
     }
     return (
         <>
@@ -78,7 +82,7 @@ export default function Login() {
                 <div className="forgot-account">
                     <a href ="/forgot">Forgot your password?</a>
                 </div>
-                <button className="press" type="submit" onClick={handleLogin} disabled={isLoading || isError}>Login</button>
+                <button className="press" type="submit" onClick={handleLogin} disabled={isLoading || isError || isMissing}>Login</button>
                 <div className="account">Don’t have an account yet? {' '} 
                     <Link to="/signup" className="signup">Sign Up</Link>
                 </div>

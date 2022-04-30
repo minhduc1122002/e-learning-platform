@@ -24,7 +24,9 @@
     text-transform: uppercase;
     font-weight: 600;
 }
-
+.nav-auth {
+    margin-left: auto;
+}
 .nav-auth a {
     font-size: 14px;
     text-decoration: none;

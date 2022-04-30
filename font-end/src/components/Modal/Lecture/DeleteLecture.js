@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import Modal from "react-modal";
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteLecture, reset } from '../../../redux/lectureSlice';
@@ -6,12 +6,26 @@ import { toast } from 'react-toastify'
 
 function DeleteLecture( {isOpen, setIsOpen, lecture, setLecture} ) {
     const dispatch = useDispatch()
-    const { isLoading, isError, message, isSuccess } = useSelector(
+    const { message } = useSelector(
         (state) => state.lecture
     )
+    const isSuccess = useSelector(
+        (state) => state.lecture.isSuccess[3]
+    )
+    const isError = useSelector(
+        (state) => state.lecture.isError[3]
+    )
+    const isLoading = useSelector(
+        (state) => state.lecture.isLoading[3]
+    )
+
+    const handleClose = useCallback(() => {
+        setIsOpen(false)
+        setLecture({})
+    }, [setIsOpen, setLecture])
 
     useEffect(() => {
-        if (isError[3]) {
+        if (isError) {
             toast.error(message, {
                 position: "top-right",
                 autoClose: 2000,
@@ -25,17 +39,12 @@ function DeleteLecture( {isOpen, setIsOpen, lecture, setLecture} ) {
                 }
             })
         }
-        if (isSuccess[3]) {
+        if (isSuccess) {
             dispatch(reset())
             handleClose()
         }
         toast.clearWaitingQueue();
-    }, [isError, message, dispatch, isSuccess])
-
-    const handleClose = () => {
-        setIsOpen(false)
-        setLecture({})
-    }
+    }, [isError, message, dispatch, isSuccess, handleClose])
 
     const handleDeleteLecture = (e) => {
         e.preventDefault()
@@ -53,7 +62,7 @@ function DeleteLecture( {isOpen, setIsOpen, lecture, setLecture} ) {
             <div className="modal-content">
             <h2 className="delete-label">Are you sure to delete this lecture?</h2>
             <div className="btn-list">
-                <button className="btn-primary" onClick={handleDeleteLecture} type="button" disabled={isLoading[3] || isError[3]}>Submit</button>
+                <button className="btn-primary" onClick={handleDeleteLecture} type="button" disabled={isLoading || isError}>Submit</button>
                 <button className="btn-secondary" onClick={handleClose} type="button">Cancel</button>
             </div>
             </div>

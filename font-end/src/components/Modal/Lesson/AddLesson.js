@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from "react-modal";
 import { addLessontoLecture, reset } from '../../../redux/lectureSlice';
@@ -16,12 +16,25 @@ function AddLesson( {isOpen, setIsOpen, lecture, setLecture} ) {
     const [isEdit, setIsEdit] = useState(true)
     const dispatch = useDispatch()
 
-    const { isLoading, isError, message, isSuccess } = useSelector(
+    const { message } = useSelector(
         (state) => state.lecture
     )
-
+    const isSuccess = useSelector(
+        (state) => state.lecture.isSuccess[4]
+    )
+    const isError = useSelector(
+        (state) => state.lecture.isError[4]
+    )
+    const isLoading = useSelector(
+        (state) => state.lecture.isLoading[4]
+    )
+    const handleClose = useCallback(() => {
+        setIsOpen(false)
+        setLecture({})
+        setInputs({})
+    }, [setIsOpen, setLecture])
     useEffect(() => {
-        if (isError[4]) {
+        if (isError) {
             toast.error(message, {
                 position: "top-right",
                 autoClose: 2000,
@@ -35,12 +48,12 @@ function AddLesson( {isOpen, setIsOpen, lecture, setLecture} ) {
                 }
             })
         }
-        if (isSuccess[4]) {
+        if (isSuccess) {
             dispatch(reset())
             handleClose()
         }
         toast.clearWaitingQueue();
-    }, [isError, message, dispatch, isSuccess])
+    }, [isError, message, dispatch, isSuccess, handleClose])
 
     const handleEdit = (e) => {
       e.preventDefault()
@@ -56,11 +69,6 @@ function AddLesson( {isOpen, setIsOpen, lecture, setLecture} ) {
     const handleView = (e) => {
       e.preventDefault()
       setIsEdit(false)
-    }
-    const handleClose = () => {
-        setIsOpen(false)
-        setLecture({})
-        setInputs({})
     }
     const handleAddLesson = (e) => {
         e.preventDefault()
@@ -155,7 +163,7 @@ function AddLesson( {isOpen, setIsOpen, lecture, setLecture} ) {
                     </div>
         
                     <div className="btn-list">
-                        <button className="btn-primary" onClick={handleAddLesson} type="button" disabled={isLoading[4] || isError[4]}>Submit</button>
+                        <button className="btn-primary" onClick={handleAddLesson} type="button" disabled={isLoading || isError}>Submit</button>
                         <button className="btn-secondary" onClick={handleClose} type="button">Cancel</button>
                     </div>
                     </form>

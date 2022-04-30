@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Modal from "react-modal";
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCoursebyId, reset } from '../../../redux/courseSlice';
@@ -14,27 +14,31 @@ function EditCourse( {isOpen, setIsOpen, course, setCourse} ) {
         image: course.image
     })
     const dispatch = useDispatch()
-    const { isLoading, isError, message, isSuccess } = useSelector(
+    const { message } = useSelector(
         (state) => state.course
+    )
+    const isSuccess = useSelector(
+        (state) => state.course.isSuccess[1]
+    )
+    const isError = useSelector(
+        (state) => state.course.isError[1]
+    )
+    const isLoading = useSelector(
+        (state) => state.course.isLoading[1]
     )
     const handleChange = (e) => {
         setInputs((prev) => {
           return { ...prev, [e.target.name]: e.target.value }
         })
     }
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         setIsOpen(false)
         setCourse({})
-        setInputs({
-            path: course.path,
-            title: course.title,
-            description: course.description,
-            code: course.code,
-            image: course.image
-        })
-    }
+        setInputs({})
+    }, [setIsOpen, setCourse])
+
     useEffect(() => {
-        if (isError[1]) {
+        if (isError) {
             toast.error(message, {
                 position: "top-right",
                 autoClose: 2000,
@@ -48,12 +52,12 @@ function EditCourse( {isOpen, setIsOpen, course, setCourse} ) {
                 }
             })
         }
-        if (isSuccess[1]) {
+        if (isSuccess) {
             dispatch(reset())
             handleClose()
         }
         toast.clearWaitingQueue();
-    }, [isError, message, dispatch, isSuccess])
+    }, [isError, message, dispatch, isSuccess, handleClose])
     
     const handleUpdate = (e) => {
         e.preventDefault()
@@ -137,7 +141,7 @@ function EditCourse( {isOpen, setIsOpen, course, setCourse} ) {
                     />
                 </div>
                 <div className="btn-list">
-                    <button className="btn-primary" type='button' onClick={handleUpdate} disabled={isLoading[1] || isError[1]}>Submit</button>
+                    <button className="btn-primary" type='button' onClick={handleUpdate} disabled={isLoading || isError}>Submit</button>
                     <button className="btn-secondary" onClick={handleClose} type='button'>Cancel</button>
                 </div>
                 </form>

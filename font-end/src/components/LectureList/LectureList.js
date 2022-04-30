@@ -69,15 +69,15 @@ function LectureList( {course_path} ) {
     return (
         <>
         <ToastContainer limit={1} />
-        <AddLecture isOpen={addLectureModal} setIsOpen={setAddLectureModal} course_path={course_path}/>
-        <DeleteLecture isOpen={deleteLectureModal} setIsOpen={setDeleteLectureModal} lecture={selectedLecture} setLecture={setSelectedLecture}/>
-        <EditLecture isOpen={editLectureModal} setIsOpen={setEditLectureModal} lecture={selectedLecture} setLecture={setSelectedLecture}/>
-        <AddLesson isOpen={addLessonModal} setIsOpen={setAddLessonModal} lecture={selectedLecture} setLecture={setSelectedLecture}/>
-        <EditLesson isOpen={editLessonModal} setIsOpen={setEditLessonModal} lesson={selectedLesson} setLesson={setSelectedLesson}/>
-        <DeleteLesson isOpen={deleteLessonModal} setIsOpen={setDeleteLessonModal} lesson={selectedLesson} setLesson={setSelectedLesson}/>
+        { addLectureModal && <AddLecture isOpen={addLectureModal} setIsOpen={setAddLectureModal} course_path={course_path}/>}
+        { deleteLectureModal && <DeleteLecture isOpen={deleteLectureModal} setIsOpen={setDeleteLectureModal} lecture={selectedLecture} setLecture={setSelectedLecture}/>}
+        { editLectureModal && <EditLecture isOpen={editLectureModal} setIsOpen={setEditLectureModal} lecture={selectedLecture} setLecture={setSelectedLecture}/>}
+        { addLessonModal && <AddLesson isOpen={addLessonModal} setIsOpen={setAddLessonModal} lecture={selectedLecture} setLecture={setSelectedLecture}/>}
+        { editLessonModal && <EditLesson isOpen={editLessonModal} setIsOpen={setEditLessonModal} lesson={selectedLesson} setLesson={setSelectedLesson}/>}
+        { deleteLessonModal && <DeleteLesson isOpen={deleteLessonModal} setIsOpen={setDeleteLessonModal} lesson={selectedLesson} setLesson={setSelectedLesson}/>}
         <div className="lecture-list">
             {lectures.map((lecture, index) => (
-                <div className="lecture-item" key={`lecture-${index + 1}`}>
+                <div className="lecture-item" key={`lecture-${index + 1}`} onClick={() => handleOnChange(index)}>
                     <div className="lecture-box">
                         <div className="lecture-index">{index + 1}</div>
                         <div className="lecture-overview">
