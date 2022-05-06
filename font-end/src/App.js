@@ -3,19 +3,35 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate
+  Navigate,
 } from "react-router-dom";
 import Course from "./pages/Course/Course";
 import Learning from "./pages/Learn/Learning";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Register/Signup";
 import Profile from "./pages/Profile/Profile"
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Settings from "./pages/Settings/Settings";
 import Search from "./pages/Search/Search";
+import { useEffect } from 'react'
+import decode from 'jwt-decode';
+import { logout } from "./redux/authSlice";
 
 function App() {
     const user = useSelector((state) => state.auth.user);
+    const token = JSON.parse(localStorage.getItem('accessToken'))
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+      if (token) {
+        const decodedToken = decode(token);
+  
+        if (decodedToken.exp * 1000 < new Date().getTime()) {
+          dispatch(logout())
+        }
+      }
+    }, [dispatch, token]);
+
     return (
       <Router>
         <Routes>

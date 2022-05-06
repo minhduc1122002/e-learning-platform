@@ -35,7 +35,19 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
     const response = await publicRequest.post("/auth/login", user)
-    console.log(response)
+    const { accessToken, ...userData } = response.data
+    localStorage.setItem('user', JSON.stringify(userData))
+    localStorage.setItem('accessToken', JSON.stringify(accessToken))
+    return response.data
+  } catch (error) {
+    const message = error.response.data
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+export const google = createAsyncThunk('auth/google', async (tokenId, thunkAPI) => {
+  try {
+    const response = await publicRequest.post("/auth/google", tokenId)
     const { accessToken, ...userData } = response.data
     localStorage.setItem('user', JSON.stringify(userData))
     localStorage.setItem('accessToken', JSON.stringify(accessToken))
@@ -136,6 +148,20 @@ export const authSlice = createSlice({
         state.isLoading = false
         state.isSuccess = true
         state.user = action.payload
+      })
+      .addCase(google.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(google.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.user = action.payload
+      })
+      .addCase(google.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.user = null
       })
   },
 })

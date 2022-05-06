@@ -1,13 +1,13 @@
 .user-avatar-profile {
     box-shadow: 0 4px 16px 0 rgb(79 114 205 / 30%);
     height: 200px;
-    margin-right: 30px;
+    margin-right: 2rem;
     width: 200px;
     background-position: 50%;
     background-size: cover;
     border-radius: 100%;
     flex-shrink: 0;
-    margin-left: 100px;
+    margin-left: 10%;
 }
 
 .user-profile {
@@ -56,7 +56,6 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 150%;
-    margin-right: 28px;
 }
 .user-details img {
     height: 16px;
@@ -75,13 +74,13 @@
 }
 .user-label hr {
     border-bottom: 3px solid #271B70;
-    width: 5%;
+    width: 32px;
 }
 .user-bio {
     margin-bottom: 3rem;
 }
 .user-bio hr {
-    width: 2% !important;
+    width: 32px !important;
 }
 .user-bio blockquote {
     font-size: 18px;
@@ -117,4 +116,35 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+@media screen and (max-width: 768px) {
+    .user-profile {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .user-info .username {
+        justify-content: center;
+    }
+    .user-info .name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .user-details {
+        justify-content: center;
+    }
+    .user-avatar-profile {
+        margin: 0;
+    }
+}
+@media screen and (max-width: 600px) {
+    .enroll-list {
+        grid-template-columns: repeat(2, 160px);
+        display: grid;
+    }
+    .user-about {
+        width: 100%;
+        padding: 2rem 1.5rem;
+    }
 }

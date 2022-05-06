@@ -8,6 +8,7 @@ function Navigation() {
   const dispatch = useDispatch()
 
   const [isActive, setIsActive] = useState(false)
+  const [isMenu, setIsMenu] = useState(false)
 
   const handleLogout = (e) => {
     e.preventDefault()
@@ -23,8 +24,19 @@ function Navigation() {
                 <li><a href="/courses">Language Tracks</a></li>
             </ul>
         </div>
+        <div className='nav-btn' onClick={() => setIsMenu(!isMenu)}>
+          <img alt="Profile Menu" className="dropdown-icon" src="https://d24y9kuxp2d7l2.cloudfront.net/assets/icons/more-vertical-371ef6f2314bb5dbe5d3892a7ee098c6ebc3cf30.svg"></img>
+        </div>
+        { isMenu && 
+          <div className='user-menu-dropdown'>
+              <ul>
+                <li className='compact'><a href="/">Home</a></li>
+                <li className='compact'><a href="/courses">Language Tracks</a></li>
+              </ul>
+          </div>
+        }
         {user ? (
-          <div className="user-section" onClick={(e) => setIsActive(!isActive)}>
+          <div className="user-section" onClick={() => setIsActive(!isActive)}>
             <div className="user-avatar" style={{backgroundImage: `url('${user.profileImage}')`}}></div>
             <img alt="Profile Menu" className="dropdown-icon" src="https://d24y9kuxp2d7l2.cloudfront.net/assets/icons/more-vertical-371ef6f2314bb5dbe5d3892a7ee098c6ebc3cf30.svg"></img>
           </div>
@@ -46,8 +58,6 @@ function Navigation() {
                 <li><a href={`/profiles/${user._id}`}>Public Profile</a></li>
                 <li><a href="/settings">Settings</a></li>
                 <li><div className='sign-out' onClick={handleLogout}>Sign out</div></li>
-                <li className='compact'><a href="/">Home</a></li>
-                <li className='compact'><a href="/courses">Language Tracks</a></li>
               </ul>
           </div>
         )}

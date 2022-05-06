@@ -47,6 +47,35 @@
     box-sizing: border-box;
     box-shadow: var(--tw-ring-offset-shadow,0 0 #0000), var(--tw-ring-shadow,0 0 #0000), var(--tw-shadow);
 }
+.divider {
+    align-items: center;
+    display: flex;
+    font-family: Source Code Pro,monospace;
+    font-size: 14px;
+    font-weight: 700;
+    justify-content: center;
+    line-height: 160%;
+    margin-bottom: 16px;
+    position: relative;
+    text-transform: uppercase;
+    width: 100%;
+}
+.divider::before {
+    --tw-bg-opacity: 1;
+    background-color: rgb(203 201 217/var(--tw-bg-opacity));
+    content: "";
+    height: 1px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    z-index: 1;
+}
+.divider span {
+    background-color: #fff;
+    padding: 8px 24px;
+    z-index: 2;
+}
 .press {
     width: 100%;
     margin: 1.5rem auto;
@@ -60,6 +89,19 @@
     height: 50px;
     font-family: Poppins,sans-serif;
     transition: background-color .1s ease-in;
+}
+.middle-auth {
+    width: 100%;
+    justify-content: center;
+    margin: 1.5rem auto;
+    box-shadow: 0 4px 7px rgb(79 114 205 / 40%) !important;
+    border-radius: 8px !important;
+    font-family: Poppins,sans-serif !important;
+    transition: background-color .1s ease-in !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+    color: #130b43 !important;
+    border: 1px solid rgb(92 85 137) !important;
 }
 .account {
     display: block !important;

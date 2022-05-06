@@ -123,6 +123,9 @@ li.profile a .info .handle {
 .compact {
     display: none;
 }
+.nav-btn {
+    display: none;
+}
 @media screen and (max-width: 1000px) {
     .navigation {
         position: sticky;
@@ -140,5 +143,8 @@ li.profile a .info .handle {
     }
     .user-section {
         margin-left: auto;
+    }
+    .nav-btn {
+        display: block
     }
 }

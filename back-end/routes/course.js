@@ -26,8 +26,7 @@ router.put("/update/:id", verifyTokenAndAdmin, async (req, res) => {
         {
             $set: req.body
         },
-        { new: true}, 
-        { runValidators: true }
+        { new: true, runValidators: true }
     )
     const updatedLecture = await Lecture.updateMany(
       {course_path: course.path},
@@ -36,6 +35,7 @@ router.put("/update/:id", verifyTokenAndAdmin, async (req, res) => {
       },
       { new: true}
     )
+    
     const user = await User.updateMany( 
       {courses: { $all: [course.path] } },
       {
@@ -77,6 +77,7 @@ router.put("/update/:id", verifyTokenAndAdmin, async (req, res) => {
       res.status(500).json("No Course Found")
     }
   } catch (err) {
+    console.log(err)
     res.status(500).json(err);
   }
 });
@@ -113,14 +114,51 @@ router.get("/findby/:path", async (req, res) => {
           foreignField: "courses",
           as: "students"
         }
-    },
+      },
       { $addFields: {
-          totalLessons: { $size: "$lectures.lessons" },
-          totalLectures: { $size: "$lectures" },
-          totalStudents: { $size: "$students" }
+          totalStudents: { $size: "$students" },
+          totalLectures: { $size: "$lectures" }
         }
       },
-      { $unset: ["students", "lectures"] }
+      { $unwind: 
+        {
+          path: "$lectures", 
+          preserveNullAndEmptyArrays: true 
+        }
+      },
+      { $group: 
+        {
+          _id: '$_id',
+          path: { $first: '$path' },
+          title: { $first: '$title' },
+          description: { $first: '$description'},
+          code: { $first: '$code' },
+          image: { $first: '$image' },
+          totalStudents: { $first: '$totalStudents' },
+          totalLectures: { $first: '$totalLectures' },
+          lessons: { $push: '$lectures.lessons' }
+        }
+      },
+      { $unwind:
+        {
+          path: "$lessons", 
+          preserveNullAndEmptyArrays: true 
+        } 
+      },
+      { $group: 
+        {
+          _id: { $toObjectId: "$_id" },
+          path: { $first: '$path' },
+          title: { $first: '$title' },
+          description: { $first: '$description'},
+          code: { $first: '$code' },
+          image: { $first: '$image' },
+          totalStudents: { $first: '$totalStudents' },
+          totalLectures: { $first: '$totalLectures' },
+          totalLessons: { $sum: { $size: { $ifNull: [ '$lessons', [] ] } } }
+        }
+      },
+      { $unset: ["students"] }
     ]);
     if (course.length > 0) {
       res.status(200).json(course[0]);
@@ -128,6 +166,7 @@ router.get("/findby/:path", async (req, res) => {
       res.status(500).json("No Course Found")
     }
   } catch (err) {
+    console.log(err)
     res.status(500).json(err);
   }
 });
@@ -151,19 +190,58 @@ router.get("/", async (req, res) => {
             foreignField: "courses",
             as: "students"
           }
-      },
+        },
         { $addFields: {
-            totalLessons: { $size: "$lectures.lessons" },
-            totalLectures: { $size: "$lectures" },
-            totalStudents: { $size: "$students" }
+            totalStudents: { $size: "$students" },
+            totalLectures: { $size: "$lectures" }
           }
         },
-        { $unset: ["students", "lectures"] }
+        { $unwind: 
+          {
+            path: "$lectures", 
+            preserveNullAndEmptyArrays: true 
+          }
+        },
+        { $group: 
+          {
+            _id: '$_id',
+            path: { $first: '$path' },
+            title: { $first: '$title' },
+            description: { $first: '$description'},
+            code: { $first: '$code' },
+            image: { $first: '$image' },
+            totalStudents: { $first: '$totalStudents' },
+            totalLectures: { $first: '$totalLectures' },
+            lessons: { $push: '$lectures.lessons' }
+          }
+        },
+        { $unwind:
+          {
+            path: "$lessons", 
+            preserveNullAndEmptyArrays: true 
+          } 
+        },
+        { $group: 
+          {
+            _id: { $toObjectId: "$_id" },
+            path: { $first: '$path' },
+            title: { $first: '$title' },
+            description: { $first: '$description'},
+            code: { $first: '$code' },
+            image: { $first: '$image' },
+            totalStudents: { $first: '$totalStudents' },
+            totalLectures: { $first: '$totalLectures' },
+            totalLessons: { $sum: { $size: { $ifNull: [ '$lessons', [] ] } } }
+          }
+        },
+        { $unset: ["students"] },
+        { $sort: { totalStudents: -1 } }
       ]);
       res.status(200).json(course);
   } catch (err) {
+      console.log(err)
       res.status(500).json(err);
   }
 });
-  
-  module.exports = router;
+
+module.exports = router;

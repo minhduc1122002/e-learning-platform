@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from 'react-toastify'
-import { login, reset } from '../../redux/authSlice'
+import { login, reset, google } from '../../redux/authSlice'
+import { GoogleLogin } from 'react-google-login'
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
@@ -49,13 +50,39 @@ export default function Login() {
             dispatch(login({username, password}));
         }
     }
+    const successGoogle = (res) => {
+        dispatch(google({tokenId: res.tokenId}))
+    }
+    const errorGoogle = (res) => {
+        toast.error(res.details, {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            onClose: () => dispatch(reset())
+        })
+    }
     return (
         <>
             <ToastContainer limit={1}/>
             <div className="login">
-            <form className="form" method="get">   
+            <form className="form">   
                 <div className="head">
                     <h1>Login</h1>
+                </div>
+                <GoogleLogin
+                    clientId="6121299943-jiqf0v9olgtvhck1qg0sjo2p1k8fp2ms.apps.googleusercontent.com"
+                    buttonText="Login with Google"
+                    onSuccess={successGoogle}
+                    onFailure={errorGoogle}
+                    cookiePolicy={'single_host_origin'}
+                    className="middle-auth"
+                />
+                <div className="divider">
+                    <span>or</span>
                 </div>
                 <div className="input">
                     <label htmlFor="username">Username</label>

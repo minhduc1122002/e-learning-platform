@@ -77,7 +77,7 @@ function LectureList( {course_path} ) {
         { deleteLessonModal && <DeleteLesson isOpen={deleteLessonModal} setIsOpen={setDeleteLessonModal} lesson={selectedLesson} setLesson={setSelectedLesson}/>}
         <div className="lecture-list">
             {lectures.map((lecture, index) => (
-                <div className="lecture-item" key={`lecture-${index + 1}`} onClick={() => handleOnChange(index)}>
+                <div className="lecture-item" key={`lecture-${index + 1}`}>
                     <div className="lecture-box">
                         <div className="lecture-index">{index + 1}</div>
                         <div className="lecture-overview">

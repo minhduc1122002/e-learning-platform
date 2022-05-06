@@ -22,6 +22,7 @@ function Settings() {
     const [newPassword, setnewPassword] = useState('')
     const [confirmNewPassword, setConfirmNewPassword] = useState('')
     const [profileImage, setprofileImage] = useState('')
+    const [isMissing, setIsMissing] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -92,6 +93,7 @@ function Settings() {
     const handleChangePass = (e) => {
         e.preventDefault()
         if (!newPassword || !confirmNewPassword || !oldPassword) {
+            setIsMissing(true)
             return toast.error("Please Fill In The Form", {
                 position: "top-right",
                 autoClose: 2000,
@@ -100,9 +102,11 @@ function Settings() {
                 pauseOnHover: false,
                 draggable: false,
                 progress: undefined,
+                onClose: () => setIsMissing(false)
             });
         }
         if (newPassword !== confirmNewPassword) {
+            setIsMissing(true)
             return toast.error("Password confirmation doesn't match Password", {
                 position: "top-right",
                 autoClose: 2000,
@@ -111,6 +115,7 @@ function Settings() {
                 pauseOnHover: false,
                 draggable: false,
                 progress: undefined,
+                onClose: () => setIsMissing(false)
             });
         }
         const updatedUser = {
@@ -123,7 +128,7 @@ function Settings() {
     
     return (
         <>
-            <ToastContainer limit={1}/>
+            <ToastContainer limit={2}/>
             <Navigation/>
             <div className='account-settings'>
                 <article>
@@ -184,7 +189,7 @@ function Settings() {
                                 <input type="password" id="user_password_confirmation" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)}/>
                             </div>
                             <div class="form-footer">
-                                <button class="save-profile-btn" onClick={handleChangePass} disabled={isLoading}>Change password</button>
+                                <button class="save-profile-btn" onClick={handleChangePass} disabled={isLoading || isMissing}>Change password</button>
                             </div>
                         </form>
                     </section>
