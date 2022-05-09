@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from "react-modal";
-import { updateLessontoLecture, reset } from '../../../redux/lectureSlice';
+import { updateBlog, reset } from '../../../redux/blogSlice';
 import ReactMarkdown from 'react-markdown'
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
@@ -9,33 +9,37 @@ import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import "github-markdown-css/github-markdown-light.css"
 import { toast } from 'react-toastify'
-import './LessonModal.css'
 
-function EditLesson( {isOpen, setIsOpen, lesson, setLesson} ) {
+function EditBlog( {isOpen, setIsOpen, blog, setBlog} ) {
+    const user = useSelector(state => state.auth.user)
     const [inputs, setInputs] = useState({
-        title: lesson.title,
-        articles: lesson.articles,
-        video: lesson.video
+        _id: blog._id,
+        creator: user._id,
+        title: blog.title,
+        articles: blog.articles,
+        image: blog.image
     })
     const dispatch = useDispatch()
     const [isEdit, setIsEdit] = useState(true)
+
     const { message } = useSelector(
         (state) => state.lecture
     )
     const isSuccess = useSelector(
-        (state) => state.lecture.isSuccess[5]
+        (state) => state.blog.isSuccess[4]
     )
     const isError = useSelector(
-        (state) => state.lecture.isError[5]
+        (state) => state.blog.isError[4]
     )
     const isLoading = useSelector(
-        (state) => state.lecture.isLoading[5]
+        (state) => state.blog.isLoading[4]
     )
+
     const handleClose = useCallback(() => {
         setIsOpen(false)
-        setLesson({})
+        setBlog({})
         setInputs({})
-    }, [setIsOpen, setLesson])
+    }, [setIsOpen, setBlog])
 
     useEffect(() => {
         if (isError) {
@@ -71,26 +75,27 @@ function EditLesson( {isOpen, setIsOpen, lesson, setLesson} ) {
     };
 
     const handleView = (e) => {
-      e.preventDefault()
-      setIsEdit(false)
-    }
-    const handleEditLesson = (e) => {
         e.preventDefault()
-        dispatch(updateLessontoLecture({...inputs, _id: lesson._id}))
+        setIsEdit(false)
+    }
+
+    const handleEditBlog = (e) => {
+        e.preventDefault()
+        dispatch(updateBlog(inputs))
     }
     return (
-        <div>
+        <>
             <Modal
                 isOpen={isOpen}
                 onRequestClose={handleClose}
-                contentLabel="addmodal"
+                contentLabel="editmodal"
                 className="modal-container"
                 overlayClassName="c-modal"
             >
                 <div className="modal-content">
                     <form className="edit-form">
                     <div className="header-edit">
-                        <h1>Edit Lesson</h1>
+                        <h1>Edit Blog</h1>
                     </div>
 
                     <div className="edit-form-inputs">
@@ -98,10 +103,10 @@ function EditLesson( {isOpen, setIsOpen, lesson, setLesson} ) {
                         <strong>TITLE</strong>
                         </label>
                         <input
-                        name="title"
-                        className="input-edit"
-                        defaultValue={lesson.title}
-                        onChange={handleChange}
+                            name="title"
+                            className="input-edit"
+                            defaultValue={blog.title}
+                            onChange={handleChange}
                         />
                     </div>
         
@@ -119,7 +124,7 @@ function EditLesson( {isOpen, setIsOpen, lesson, setLesson} ) {
                             className={!isEdit ? 'hidden' : 'articles'}
                             name="articles"
                             style={{height: "300px", width: "100%", resize: "vertical", borderTop: 0, borderRadius: 0}}
-                            defaultValue={lesson.articles}
+                            defaultValue={blog.articles}
                             onChange={handleChange}
                         />
                         <div className={!isEdit ? 'markdown-wrap' : 'hidden'}>
@@ -154,26 +159,26 @@ function EditLesson( {isOpen, setIsOpen, lesson, setLesson} ) {
         
                     <div className="edit-form-inputs">
                         <label htmlFor="image" className="label-edit">
-                        <strong>VIDEO</strong>
+                        <strong>Image</strong>
                         </label>
                         <input
                         type="url"
-                        name="video"
+                        name="image"
                         className="input-edit"
-                        defaultValue={lesson.video}
+                        defaultValue={blog.image}
                         onChange={handleChange}
                         />
                     </div>
         
                     <div className="btn-list">
-                        <button className="btn-primary" onClick={handleEditLesson} type="button" disabled={isLoading || isError}>Submit</button>
+                        <button className="btn-primary" onClick={handleEditBlog} type="button">Submit</button>
                         <button className="btn-secondary" onClick={handleClose} type="button">Cancel</button>
                     </div>
                     </form>
                 </div>
             </Modal>
-        </div>
+        </>
     )
 }
-Modal.setAppElement("#root");
-export default EditLesson
+
+export default EditBlog

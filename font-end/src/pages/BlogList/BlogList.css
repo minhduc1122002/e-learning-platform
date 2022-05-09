@@ -1,0 +1,31 @@
+.result-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.blog-item .blog-creator {
+    margin-bottom: 12px;
+}
+.blog-item .blog-creator .creator-name {
+    color: #130b43;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+.blog-item .blog-creator .blog-time {
+    color: #130b43;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+}
+.blog-image {
+    border-radius: 15px;
+    height: 130px;
+    width: auto;
+}
+.r-icon {
+    height: 16px;
+    margin-right: 8px;
+    width: 16px;
+    color: rgb(63, 58, 90);
+}

@@ -48,12 +48,12 @@ router.put("/update/:id", verifyTokenAndAdmin, async (req, res) => {
         $match: {_id: ObjectId(req.params.id)}
       },
       { $lookup:
-          {
-            from: "lectures",
-            localField: "path",
-            foreignField: "course_path",
-            as: "lectures"
-          }
+        {
+          from: "lectures",
+          localField: "path",
+          foreignField: "course_path",
+          as: "lectures"
+        }
       },
       { $lookup:
         {
@@ -62,14 +62,51 @@ router.put("/update/:id", verifyTokenAndAdmin, async (req, res) => {
           foreignField: "courses",
           as: "students"
         }
-    },
+      },
       { $addFields: {
-          totalLessons: { $size: "$lectures.lessons" },
-          totalLectures: { $size: "$lectures" },
-          totalStudents: { $size: "$students" }
+          totalStudents: { $size: "$students" },
+          totalLectures: { $size: "$lectures" }
         }
       },
-      { $unset: ["students", "lectures"] }
+      { $unwind: 
+        {
+          path: "$lectures", 
+          preserveNullAndEmptyArrays: true 
+        }
+      },
+      { $group: 
+        {
+          _id: '$_id',
+          path: { $first: '$path' },
+          title: { $first: '$title' },
+          description: { $first: '$description'},
+          code: { $first: '$code' },
+          image: { $first: '$image' },
+          totalStudents: { $first: '$totalStudents' },
+          totalLectures: { $first: '$totalLectures' },
+          lessons: { $push: '$lectures.lessons' }
+        }
+      },
+      { $unwind:
+        {
+          path: "$lessons", 
+          preserveNullAndEmptyArrays: true 
+        } 
+      },
+      { $group: 
+        {
+          _id: { $toObjectId: "$_id" },
+          path: { $first: '$path' },
+          title: { $first: '$title' },
+          description: { $first: '$description'},
+          code: { $first: '$code' },
+          image: { $first: '$image' },
+          totalStudents: { $first: '$totalStudents' },
+          totalLectures: { $first: '$totalLectures' },
+          totalLessons: { $sum: { $size: { $ifNull: [ '$lessons', [] ] } } }
+        }
+      },
+      { $unset: ["students"] }
     ]);
     if (result.length > 0) {
       res.status(200).json(result[0])

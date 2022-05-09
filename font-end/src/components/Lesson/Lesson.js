@@ -66,15 +66,17 @@ function Lesson( {lessonId} ) {
                 }
                 }}
             />
-            <div className='video-container'>
-                <ReactPlayer 
-                    url={lesson.video}
-                    controls={true}
-                    style={videoStyle}
-                    width= "100%"
-                    height= "auto"
-                />
-            </div>
+            {lesson.video && (
+                <div className='video-container'>
+                    <ReactPlayer 
+                        url={lesson.video}
+                        controls={true}
+                        style={videoStyle}
+                        width= "100%"
+                        height= "auto"
+                    />
+                </div>
+            )}
           </div>
       </div>
     )

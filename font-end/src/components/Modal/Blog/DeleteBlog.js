@@ -1,27 +1,30 @@
 import React, { useCallback, useEffect } from 'react'
 import Modal from "react-modal";
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteLessontoLecture, reset } from '../../../redux/lectureSlice';
+import { deleteBlog, reset } from '../../../redux/blogSlice';
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom';
 
-function DeleteLesson( {isOpen, setIsOpen, lesson, setLesson} ) {
+function DeleteBlog( {isOpen, setIsOpen, blog, setBlog} ) {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { message } = useSelector(
-        (state) => state.lecture
+        (state) => state.blog
     )
     const isSuccess = useSelector(
-        (state) => state.lecture.isSuccess[6]
+        (state) => state.blog.isSuccess[5]
     )
     const isError = useSelector(
-        (state) => state.lecture.isError[6]
+        (state) => state.blog.isError[5]
     )
     const isLoading = useSelector(
-        (state) => state.lecture.isLoading[6]
+        (state) => state.blog.isLoading[5]
     )
     const handleClose = useCallback(() => {
         setIsOpen(false)
-        setLesson({})
-    }, [setIsOpen, setLesson])
+        setBlog({})
+    }, [setIsOpen, setBlog])
+
     useEffect(() => {
         if (isError) {
             toast.error(message, {
@@ -38,15 +41,27 @@ function DeleteLesson( {isOpen, setIsOpen, lesson, setLesson} ) {
             })
         }
         if (isSuccess) {
-            dispatch(reset())
+            toast.success(message, {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                onClose: () => {
+                  dispatch(reset())
+                }
+            })
             handleClose()
+            navigate("/")
         }
         toast.clearWaitingQueue();
     }, [isError, message, dispatch, isSuccess, handleClose])
 
-    const handleDeleteLesson = (e) => {
+    const handleDeleteBlog = (e) => {
         e.preventDefault()
-        dispatch(deleteLessontoLecture(lesson._id))
+        dispatch(deleteBlog(blog))
     }
     return (
         <div>
@@ -60,7 +75,7 @@ function DeleteLesson( {isOpen, setIsOpen, lesson, setLesson} ) {
                 <div className="modal-content">
                 <h2 className="delete-label">Are you sure to delete this lesson?</h2>
                 <div className="btn-list">
-                    <button className="btn-primary" onClick={handleDeleteLesson} disabled={isLoading || isError}>Submit</button>
+                    <button className="btn-primary" onClick={handleDeleteBlog} disabled={isLoading || isError}>Submit</button>
                     <button className="btn-secondary" onClick={handleClose}>Cancel</button>
                 </div>
                 </div>
@@ -68,5 +83,5 @@ function DeleteLesson( {isOpen, setIsOpen, lesson, setLesson} ) {
         </div>
     )
 }
-Modal.setAppElement("#root");
-export default DeleteLesson
+
+export default DeleteBlog

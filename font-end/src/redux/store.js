@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import authReducer from "./authSlice"
 import courseReducer from "./courseSlice"
 import lectureReducer from "./lectureSlice"
+import blogReducer from "./blogSlice"
 import {
   createStateSyncMiddleware,
   initMessageListener,
@@ -17,6 +18,7 @@ export const store = configureStore({
     auth: authReducer,
     course: courseReducer,
     lecture: lectureReducer,
+    blog: blogReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(syncMiddleware),
 })

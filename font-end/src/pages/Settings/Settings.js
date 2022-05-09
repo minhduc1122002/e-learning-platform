@@ -83,11 +83,13 @@ function Settings() {
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                         updatedUser.profileImage = downloadURL
+                        dispatch(update(updatedUser)) 
                     });
                 }
             );
-        }
-        dispatch(update(updatedUser)) 
+        } else {
+            dispatch(update(updatedUser))
+        } 
     }
 
     const handleChangePass = (e) => {

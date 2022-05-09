@@ -24,6 +24,16 @@ const verifyTokenAndAuth = (req, res, next) => {
     })
 }
 
+const verifyTokenAndAuthForBlog = (req, res, next) => {
+    verifyToken(req, res, () => {
+        if (req.user.id === req.body.creator || req.user.isAdmin) {
+            next()
+        } else {
+            res.status(403).json("You don't have the authority")
+        }
+    })
+}
+
 const verifyTokenAndAdmin = (req, res, next) => {
     verifyToken(req, res, () => {
         if (req.user.isAdmin) {
@@ -34,4 +44,4 @@ const verifyTokenAndAdmin = (req, res, next) => {
     })
 }
 
-module.exports = {verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin}
+module.exports = {verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin, verifyTokenAndAuthForBlog}

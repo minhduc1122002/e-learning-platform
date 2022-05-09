@@ -4,6 +4,7 @@ import Footer from "../../components/Footer/Footer";
 import Navigation from "../../components/Navigation/Navigation";
 import { useDispatch, useSelector } from 'react-redux';
 import { getCourseList } from '../../redux/courseSlice'
+import { ToastContainer } from 'react-toastify'
 import "./Home.css"
 
 function Home() {
@@ -16,6 +17,7 @@ function Home() {
     
     return (
         <>
+            <ToastContainer limit={1} />
             <Navigation/>
             <div className="home-header">
                 <div className="home-header-container">

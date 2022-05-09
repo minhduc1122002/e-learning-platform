@@ -1,0 +1,86 @@
+.newblog-wrapper {
+    margin-top: 24px;
+    padding: 0 32px;
+}
+.create-blog {
+    margin-top: 16px;
+}
+.newblog-title {
+    border: none;
+    color: #292929;
+    font-size: 3.2rem;
+    font-weight: 500;
+    min-height: 48px;
+    width: 100%;
+    line-height: 1.4;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+}
+.newblog-title:empty::before {
+    color: #b3b3b1;
+    content: attr(placeholder);
+    pointer-events: none;
+    font-family: 'Montserrat', sans-serif;
+}
+.rc-md-editor {
+    background: #fff;
+    border: none;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1px;
+    position: relative;
+}
+.sec-md {
+    flex: 1 1;
+    min-height: 0;
+    min-width: 0;
+}
+.sec-html {
+    border-left: 1px solid #ebebeb;
+    flex: 1 1;
+    min-height: 0;
+    min-width: 0;
+}
+.sec-md textarea {
+    background: #fff;
+    border: none;
+    box-sizing: border-box;
+    color: #333;
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    height: 100%;
+    min-height: 0;
+    outline: none;
+    overflow-y: scroll;
+    resize: none;
+    width: 100%;
+    overflow: auto;
+    font-family: 'Montserrat', sans-serif;
+}
+.section-container {
+    padding: 10px 15px 15px;
+}
+.blog-texteditor {
+    font-size: 1.5rem!important;
+    line-height: 1.8!important;
+}
+.editor-container {
+    display: flex;
+    flex: 1 1;
+    min-height: 0;
+    position: relative;
+    width: 100%;
+}
+.html-wrap {
+    height: 100%;
+    overflow: auto;
+}
+.submit-btn-list {
+    height: 48px;
+    margin-top: 16px;
+    position: relative;
+    width: 230px;
+    display: flex;
+}

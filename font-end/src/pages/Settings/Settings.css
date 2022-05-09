@@ -202,7 +202,7 @@
 .btn-enhanced:hover {
     cursor: pointer;
 }
-.c-avatar-selector .faux-button input {
+.faux-button input {
     cursor: pointer;
     height: 48px;
     opacity: 0;

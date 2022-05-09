@@ -3,13 +3,15 @@
     transform: scale(1.01);
   }
 .c-modal {
-    background: rgba(251,252,254,.7);
+    background-color: rgba(0,0,0,.2);
     bottom: 0;
     left: 0;
     position: fixed;
     right: 0;
     top: 0;
     z-index: 100;
+    cursor: pointer;
+    will-change: opacity;
 }
 .modal-container {
     align-items: center;
@@ -21,6 +23,7 @@
     right: 0;
     top: 0;
     z-index: 100;
+    will-change: transform;
 }
 .modal-content {
     --tw-shadow: 0px 4px 42px 0px rgba(79,114,205,.3);

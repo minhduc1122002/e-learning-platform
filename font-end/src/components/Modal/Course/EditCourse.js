@@ -66,11 +66,11 @@ function EditCourse( {isOpen, setIsOpen, course, setCourse} ) {
     return (
         <div>
             <Modal
-            isOpen={isOpen}
-            onRequestClose={handleClose}
-            contentLabel="editmodal"
-            className="modal-container"
-            overlayClassName="c-modal"
+                isOpen={isOpen}
+                onRequestClose={handleClose}
+                contentLabel="editmodal"
+                className="modal-container"
+                overlayClassName="c-modal"
             >
             <div className="modal-content">
                 <form className="edit-form">
