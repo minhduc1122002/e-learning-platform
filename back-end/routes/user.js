@@ -2,7 +2,8 @@ const router = require('express').Router()
 const { verifyToken,  verifyTokenAndAuth, verifyTokenAndAdmin} = require("./verifyToken")
 const User = require("../models/User");
 const Course = require('../models/Course');
-const CryptoJS = require('crypto-js')
+const CryptoJS = require('crypto-js');
+const Blog = require('../models/Blog');
 
 //Update
 router.put("/:id", verifyTokenAndAuth, async (req, res) => {
@@ -78,7 +79,7 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //ADD COURSE
-router.put("/enroll/:id", verifyTokenAndAdmin, async (req, res) => {
+router.put("/enroll/:id", verifyTokenAndAuth, async (req, res) => {
   try {
     const user = await User.findById(req.params.id)
     if (!user.courses.includes(req.body)) {
@@ -97,6 +98,80 @@ router.get("/my_course/:id", async (req, res) => {
     const user = await User.findById(req.params.id)
     const courses = await Course.find( { path : { $in : user.courses } } )
     res.status(200).json(courses);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/my_blog/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id)
+    const blogs = await Blog.aggregate([
+      {
+          $match: { creator: user._id.toString() }
+      },
+      { $addFields: {
+          date: { $dateDiff:
+              {
+                  startDate: "$createdAt",
+                  endDate: new Date(),
+                  unit: "hour"
+              }
+          }
+        }
+      },
+      { $lookup:
+          {
+              from: "users",
+              let: { creatorId: { $toObjectId:"$creator" } },
+              pipeline: [
+                  { $match: { $expr: { $eq: [ "$_id", "$$creatorId" ] } } },
+                  { $project: { "fullname": 1, "_id": 1, "profileImage": 1 } }
+              ],
+              as: "creator"
+          }
+      },
+      { $unwind: {
+          path: "$creator", 
+          preserveNullAndEmptyArrays: true 
+        } 
+      },
+      { $unwind: {
+          path: "$comments", 
+          preserveNullAndEmptyArrays: true 
+        }  
+      },
+      { $lookup:
+          {
+              from: "users",
+              let: { userId: { $toObjectId:"$comments.userId" } },
+              pipeline: [
+                  { $match: { $expr: { $eq: [ "$_id", "$$userId" ] } } },
+                  { $project: { "fullname": 1, "_id": 1, "profileImage": 1 } }
+              ],
+              as: "comments.commentator"
+          }
+      },
+      { $unwind: {
+          path: "$comments.commentator", 
+          preserveNullAndEmptyArrays: true 
+        }  
+      },
+      { $unset: "comments.userId" },
+      { $group: {
+          _id: "$_id",
+          creator: { $first: "$creator" },
+          title: { $first: "$title" },
+          articles: { $first: "$articles" },
+          image: { $first: "$image" },
+          likes: { $first: "$likes" },
+          comments: {
+            $push:  { $cond: { if: { $eq: ['$comments', {}] }, then: '$$REMOVE', else: '$comments' }}
+          },
+          dateDiff: { $first: "$date" },
+      }}
+    ])
+    res.status(200).json(blogs);
   } catch (err) {
     res.status(500).json(err);
   }

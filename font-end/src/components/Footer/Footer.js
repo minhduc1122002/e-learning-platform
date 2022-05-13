@@ -10,7 +10,7 @@ function Footer() {
           <div className="info-col first">
             <h2>About</h2>
             <hr/>
-            <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <p>Trường Đại học Công nghệ là một trường đại học thành viên của Đại học Quốc gia Hà Nội, được thành lập vào năm 2004, địa chỉ tại 144 Xuân Thủy, quận Cầu Giấy, Hà Nội.</p>
             <div className="follow-icon-list">
               <a href="https://www.facebook.com/Duccop112">
                 <FontAwesomeIcon icon={faFacebook} className="soical-icon"/>
@@ -31,15 +31,15 @@ function Footer() {
             <hr/>
             <p>
               <FontAwesomeIcon icon={faHome} className="contact-icon"/>
-              {" "}New York, NY 10012, US
+              {" "}E3, 144 Xuân Thủy, Cầu Giấy, Hà Nội
             </p>
             <p>
               <FontAwesomeIcon icon={faEnvelope} className="contact-icon"/>
-              {" "}info@gmail.com
+              {" "}uet@vnu.edu.vn
             </p>
             <p>
               <FontAwesomeIcon icon={faPhone} className="contact-icon"/>
-              {" "}+ 01 234 567 88
+              {" "}024.37547.461
             </p>
           </div>
           <div className="info-col last">
@@ -57,7 +57,7 @@ function Footer() {
           </div>
         </div>
         <hr className='spilt'/>
-        <div className="end-footer">© 2022 Adachi To Shimamura. All rights reserved</div>
+        <div className="end-footer">© Trường Đại học Công nghệ, Đại học Quốc Gia Hà Nội</div>
     </div>
   )
 }

@@ -11,10 +11,9 @@ import "github-markdown-css/github-markdown-light.css"
 import { toast } from 'react-toastify'
 
 function EditBlog( {isOpen, setIsOpen, blog, setBlog} ) {
-    const user = useSelector(state => state.auth.user)
     const [inputs, setInputs] = useState({
         _id: blog._id,
-        creator: user._id,
+        creator: blog.creator,
         title: blog.title,
         articles: blog.articles,
         image: blog.image

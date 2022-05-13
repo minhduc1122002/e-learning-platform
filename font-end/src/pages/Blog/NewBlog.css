@@ -78,9 +78,5 @@
     overflow: auto;
 }
 .submit-btn-list {
-    height: 48px;
-    margin-top: 16px;
-    position: relative;
-    width: 230px;
     display: flex;
 }

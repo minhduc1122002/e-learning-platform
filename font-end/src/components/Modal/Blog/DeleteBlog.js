@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react'
 import Modal from "react-modal";
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteBlog, reset } from '../../../redux/blogSlice';
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
 
 function DeleteBlog( {isOpen, setIsOpen, blog, setBlog} ) {
@@ -41,6 +41,8 @@ function DeleteBlog( {isOpen, setIsOpen, blog, setBlog} ) {
             })
         }
         if (isSuccess) {
+            navigate("/")
+            handleClose()
             toast.success(message, {
                 position: "top-right",
                 autoClose: 2000,
@@ -53,8 +55,6 @@ function DeleteBlog( {isOpen, setIsOpen, blog, setBlog} ) {
                   dispatch(reset())
                 }
             })
-            handleClose()
-            navigate("/")
         }
         toast.clearWaitingQueue();
     }, [isError, message, dispatch, isSuccess, handleClose])
@@ -65,6 +65,7 @@ function DeleteBlog( {isOpen, setIsOpen, blog, setBlog} ) {
     }
     return (
         <div>
+            <ToastContainer limit={1}/>
             <Modal
                 isOpen={isOpen}
                 onRequestClose={handleClose}

@@ -18,14 +18,53 @@
     font-size: 14px;
     font-family: 'Montserrat', sans-serif;
 }
+.blog-image-compact {
+    background: #d3d3d3;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 8px;
+    height: 150px;
+    margin-bottom: 16px;
+    display: none;
+}
 .blog-image {
-    border-radius: 15px;
-    height: 130px;
-    width: auto;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 8px;
+    height: 150px;
 }
 .r-icon {
     height: 16px;
     margin-right: 8px;
     width: 16px;
     color: rgb(63, 58, 90);
+}
+.pagination {
+    font-size: 1.3em;
+    margin-bottom: 2em;
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pagination .page {
+    display: inline-block;
+    min-width: 40px;
+    padding: 5px;
+    color: #262626;
+    text-align: center;
+}
+.current {
+    background-color: #f9f9f9;
+    border-radius: 100%;
+}
+@media screen and (max-width: 768px) {
+    .blog-image-compact {
+        display: block;
+    }
+    .blog-image {
+        display: none;
+    }
 }

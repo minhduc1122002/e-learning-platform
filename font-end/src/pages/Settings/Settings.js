@@ -138,60 +138,60 @@ function Settings() {
                     <section>
                         <form className='profile-form'>
                             <h2>Avatar</h2>
-                            <div class="c-avatar-selector">
+                            <div className="c-avatar-selector">
                                 <label htmlFor="avatar">
-                                    <div class="setting-user-avatar" style={{backgroundImage: `url('${user.profileImage}')`}}></div>
+                                    <div className="setting-user-avatar" style={{backgroundImage: `url('${user.profileImage}')`}}></div>
                                 </label>
-                                <div class="--details">
-                                    <div class="faux-button">
-                                        <div class="btn-enhanced">Upload new image</div>
+                                <div className="--details">
+                                    <div className="faux-button">
+                                        <div className="btn-enhanced btn-s">Upload new image</div>
                                         <input type="file" id="avatar" onChange={(e) => setprofileImage(e.target.files[0])} />
-                                        <div class="hover-bg"></div>
+                                        <div className="hover-bg"></div>
                                     </div>
-                                    <div class="cropping">{profileImage ? "Your Image is here click save to update your profile" : "Show People Who You Are"}</div>
+                                    <div className="cropping">{profileImage ? "Your Image is here click save to update your profile" : "Show People Who You Are"}</div>
                                 </div>
                             </div>
                             <h2>Profile</h2>
-                            <div class="details">
-                                <div class="name field">
-                                    <label htmlFor="user_name" class="label">Name</label>
+                            <div className="details">
+                                <div className="name field">
+                                    <label htmlFor="user_name" className="label">Name</label>
                                     <input id="user_name" type="text" defaultValue={user.fullname} onChange={(e) => setnewName(e.target.value)}/>
                                 </div>
-                                <div class="location field">
-                                    <label htmlFor="user_location" class="label">Location</label>
-                                    <label class="c-faux-input">
-                                        <img src="https://d24y9kuxp2d7l2.cloudfront.net/assets/icons/location-bd26e6dfc9d9d8b448b8e1f4637792133e507d2e.svg" alt="" role="presentation" class="c-icon"/>
+                                <div className="location field">
+                                    <label htmlFor="user_location" className="label">Location</label>
+                                    <label className="c-faux-input">
+                                        <img src="https://d24y9kuxp2d7l2.cloudfront.net/assets/icons/location-bd26e6dfc9d9d8b448b8e1f4637792133e507d2e.svg" alt="" role="presentation" className="c-icon"/>
                                         <input id="user_location" type="text" defaultValue={user.location} onChange={(e) => setnewLocation(e.target.value)}/>
                                     </label>
                                 </div>
                             </div>
-                            <div class="bio field">
-                                <label htmlFor="user_bio" class="label">Bio</label>
+                            <div className="bio field">
+                                <label htmlFor="user_bio" className="label">Bio</label>
                                 <textarea id="user_bio" style={{height: "119px", width:"100%", resize: "vertical"}} onChange={(e) => setnewBio(e.target.value)} defaultValue={user.bio}/>
-                                <div class="instructions">Tell the world about you 🌎. Emojis encouraged!</div>
+                                <div className="instructions">Tell the world about you 🌎. Emojis encouraged!</div>
                             </div>
-                            <div class="form-footer">
-                                <button class="save-profile-btn" onClick={handleSubmitProfile} disabled={isLoading}>Save profile data</button>
+                            <div className="form-footer">
+                                <button className="save-profile-btn" onClick={handleSubmitProfile} disabled={isLoading}>Save profile data</button>
                             </div>
                         </form>
                     </section>
                     <section>
                         <form className='password-form'>
                             <h2>Change your password</h2>
-                            <div class="field">
-                                <label for="user_sudo_password" class="label">Current password</label>
+                            <div className="field">
+                                <label htmlFor="user_sudo_password" className="label">Current password</label>
                                 <input type="password" id="user_sudo_password" value={oldPassword} onChange={(e) => setoldPassword(e.target.value)}/>
                             </div>
-                            <div class="field">
-                                <label for="user_password" class="label">New password</label>
+                            <div className="field">
+                                <label htmlFor="user_password" className="label">New password</label>
                                 <input type="password" id="user_password" value={newPassword} onChange={(e) => setnewPassword(e.target.value)}/>
                             </div>
-                            <div class="field">
-                                <label for="user_password_confirmation" class="label">Confirm new password</label>
+                            <div className="field">
+                                <label htmlFor="user_password_confirmation" className="label">Confirm new password</label>
                                 <input type="password" id="user_password_confirmation" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)}/>
                             </div>
-                            <div class="form-footer">
-                                <button class="save-profile-btn" onClick={handleChangePass} disabled={isLoading || isMissing}>Change password</button>
+                            <div className="form-footer">
+                                <button className="save-profile-btn" onClick={handleChangePass} disabled={isLoading || isMissing}>Change password</button>
                             </div>
                         </form>
                     </section>

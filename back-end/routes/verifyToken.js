@@ -26,7 +26,27 @@ const verifyTokenAndAuth = (req, res, next) => {
 
 const verifyTokenAndAuthForBlog = (req, res, next) => {
     verifyToken(req, res, () => {
-        if (req.user.id === req.body.creator || req.user.isAdmin) {
+        if (req.user.id === req.body.creator._id || req.user.isAdmin) {
+            next()
+        } else {
+            res.status(403).json("You don't have the authority")
+        }
+    })
+}
+
+const verifyTokenAndAuthForComment = (req, res, next) => {
+    verifyToken(req, res, () => {
+        if (req.user.id === req.body.commentator._id || req.user.id === req.body.creator || req.user.isAdmin) {
+            next()
+        } else {
+            res.status(403).json("You don't have the authority")
+        }
+    })
+}
+
+const verifyTokenAndAuthForEditComment = (req, res, next) => {
+    verifyToken(req, res, () => {
+        if (req.user.id === req.body.commentator._id || req.user.isAdmin) {
             next()
         } else {
             res.status(403).json("You don't have the authority")
@@ -44,4 +64,4 @@ const verifyTokenAndAdmin = (req, res, next) => {
     })
 }
 
-module.exports = {verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin, verifyTokenAndAuthForBlog}
+module.exports = {verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin, verifyTokenAndAuthForBlog, verifyTokenAndAuthForComment, verifyTokenAndAuthForEditComment}

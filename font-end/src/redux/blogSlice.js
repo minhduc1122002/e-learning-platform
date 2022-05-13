@@ -4,9 +4,9 @@ import { publicRequest, userRequest } from "../request";
 const initialState = {
     blog: null,
     blogs: [],
-    isError: [false, false, false, false, false, false, false],
-    isSuccess: [false, false, false, false, false, false, false],
-    isLoading: [false, false, false, false, false, false, false],
+    isError: [false, false, false, false, false, false, false, false, false],
+    isSuccess: [false, false, false, false, false, false, false, false, false],
+    isLoading: [false, false, false, false, false, false, false, false, false],
     message: ''
 }
 
@@ -84,7 +84,7 @@ export const updateBlog = createAsyncThunk("blogs/update", async (blog, ThunkAPI
 
 export const deleteBlog = createAsyncThunk("blogs/delete", async (blog, ThunkAPI) => {
     try {
-        const response = await userRequest.delete(`/blogs/${blog._id}`)
+        const response = await userRequest.delete(`/blogs/${blog._id}`, {data: blog})
         return response.data
     } catch(error) {
         const message = (error.response &&
@@ -95,9 +95,36 @@ export const deleteBlog = createAsyncThunk("blogs/delete", async (blog, ThunkAPI
     }
 })
 
-export const getBlogList = createAsyncThunk("blogs/all", async (ThunkAPI) => {
+export const getBlogList = createAsyncThunk("blogs/all", async (query, ThunkAPI) => {
+    const { page, limit } = query
     try {
-        const response = await userRequest.get(`/blogs`)
+        const response = await userRequest.get(`/blogs?${page ? `page=${page}`: ''}${limit ? `&limit=${limit}` : ''}`)
+        return response.data
+    } catch(error) {
+        const message = (error.response &&
+            error.response.data &&
+            error.response.data.message) || error.message ||
+            error.toString()
+        return ThunkAPI.rejectWithValue(message)
+    }
+})
+
+export const deleteComment = createAsyncThunk("blogs/comment/delete", async (comment, ThunkAPI) => {
+    try {
+        const response = await userRequest.put(`/blogs/comment/delete/${comment._id}`, comment)
+        return response.data
+    } catch(error) {
+        const message = (error.response &&
+            error.response.data &&
+            error.response.data.message) || error.message ||
+            error.toString()
+        return ThunkAPI.rejectWithValue(message)
+    }
+})
+
+export const updateComment = createAsyncThunk("blogs/comment/update", async (comment, ThunkAPI) => {
+    try {
+        const response = await userRequest.put(`/blogs/comment/update/${comment._id}`, comment)
         return response.data
     } catch(error) {
         const message = (error.response &&
@@ -113,9 +140,9 @@ export const blogSlice = createSlice({
     initialState,
     reducers: {
       reset: (state) => {
-        state.isLoading = [false, false, false, false, false, false, false]
-        state.isSuccess = [false, false, false, false, false, false, false]
-        state.isError = [false, false, false, false, false, false, false]
+        state.isLoading = [false, false, false, false, false, false, false, false, false]
+        state.isSuccess = [false, false, false, false, false, false, false, false, false]
+        state.isError = [false, false, false, false, false, false, false, false, false]
         state.message = ''
       },
     },
@@ -214,6 +241,32 @@ export const blogSlice = createSlice({
         .addCase(getBlogList.rejected, (state, action) => {
             state.isLoading[6] = false
             state.isError[6] = true
+            state.message = action.payload
+        })
+        .addCase(deleteComment.pending, (state) => {
+            state.isLoading[7] = true
+          })
+        .addCase(deleteComment.fulfilled, (state, action) => {
+            state.isLoading[7] = false
+            state.isSuccess[7] = true
+            state.blog = action.payload
+        })
+        .addCase(deleteComment.rejected, (state, action) => {
+            state.isLoading[7] = false
+            state.isError[7] = true
+            state.message = action.payload
+        })
+        .addCase(updateComment.pending, (state) => {
+            state.isLoading[8] = true
+          })
+        .addCase(updateComment.fulfilled, (state, action) => {
+            state.isLoading[8] = false
+            state.isSuccess[8] = true
+            state.blog = action.payload
+        })
+        .addCase(updateComment.rejected, (state, action) => {
+            state.isLoading[8] = false
+            state.isError[8] = true
             state.message = action.payload
         })
     }

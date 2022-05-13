@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Footer from '../../components/Footer/Footer'
 import Navigation from '../../components/Navigation/Navigation'
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import ReactMarkdown from 'react-markdown'
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
@@ -17,7 +17,7 @@ import Modal from "react-modal";
 import "github-markdown-css/github-markdown-light.css"
 import EditBlog from '../../components/Modal/Blog/EditBlog'
 import DeleteBlog from '../../components/Modal/Blog/DeleteBlog'
-import { ToastContainer } from 'react-toastify'
+import Comment from '../../components/Modal/Comment/Comment'
 
 function Blog() {
     const [isOpen, setIsOpen] = useState(false)
@@ -30,19 +30,33 @@ function Blog() {
     const blog = useSelector(state => state.blog.blog)
     const user = useSelector((state) => state.auth.user)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     useEffect(() => {
         dispatch(getBlog(blogId))
     }, [dispatch, blogId]);
 
     const handleLike = (e) => {
         e.preventDefault()
+        if (!user) {
+            return navigate("/login")
+        }
         dispatch(likeBlog({blogId, userId: user._id}))
     }
     const handleClose = () => {
         setIsOpen(false)
     }
     const handleComment = (e) => {
+        if (!user) {
+            return navigate("/login")
+        }
         setContent(e.currentTarget.textContent)
+    }
+    const handleOpen = () => {
+        if (!user) {
+            return navigate("/login")
+        }
+        setIsOpen(true)
     }
     const handleKeyPress = (e) => {
         if(e.key === 'Enter') {
@@ -66,7 +80,6 @@ function Blog() {
     }
     return (
         <>
-            <ToastContainer limit={1} />
             {editModal && <EditBlog isOpen={editModal} setIsOpen={setEditModal} blog={blogSelected} setBlog={setBlogSelected}/>}
             {deleteModal && <DeleteBlog isOpen={deleteModal} setIsOpen={setDeleteModal} blog={blogSelected} setBlog={setBlogSelected}/>}
             <Modal
@@ -76,20 +89,16 @@ function Blog() {
                 className="modal-vertical"
                 overlayClassName="comment-o-modal"
             >
-                {blog && 
+                {blog && user && 
                     <div className='v-modal-body'>
                         <div className="comment-box">
-                        <div className="user-avatar" style={{backgroundImage: `url('${user.profileImage}')`}}></div>
-                            <div className="comment-input" tabindex="0" contenteditable="true" placeholder="Viết bình luận của bạn..." role="textbox" aria-multiline="true" spellCheck="false" onInput={handleComment} onKeyPress={handleKeyPress}></div>
+                            <div className="user-avatar" style={{backgroundImage: `url('${user.profileImage}')`}}></div>
+                            <div className="comment-input" tabIndex="0" contentEditable="true" placeholder="Viết bình luận của bạn..." role="textbox" aria-multiline="true" spellCheck="false" onInput={handleComment} onKeyPress={handleKeyPress}></div>
                         </div>
                             {blog.comments.length > 0 && blog.comments.map(comment => (
-                                <div className='comment'>
-                                    <div className="user-avatar" style={{backgroundImage: `url('${comment.commentator.profileImage}')`}}></div>
-                                    <div className='comment-body'>
-                                        <h5>{comment.commentator.fullname}</h5>
-                                        <p>{comment.content}</p>
-                                    </div>
-                                </div>
+                                <>
+                                    <Comment comment={comment} creator={blog.creator._id} key={comment._id}/>
+                                </>
                             ))}
                     </div>
                 }
@@ -104,10 +113,10 @@ function Blog() {
                                 <hr/>
                                 <div className='blog-btn'>
                                     <button onClick={handleLike} type="button" className='like-btn'>
-                                        <FontAwesomeIcon icon={faHeart} className={blog.likes.includes(user._id) ? "liked" : "not-liked"}/>
+                                        <FontAwesomeIcon icon={faHeart} className={blog.likes.includes(user?._id) ? "liked" : "not-liked"}/>
                                         <span>{blog.likes.length}</span>
                                     </button>
-                                    <button type="button" className='comment-btn' onClick={() => setIsOpen(true)}>
+                                    <button type="button" className='comment-btn' onClick={handleOpen}>
                                         <FontAwesomeIcon icon={faComment}/>
                                         <span>{blog.comments.length}</span>
                                     </button>
@@ -126,14 +135,14 @@ function Blog() {
                                             <a href={`/profiles/${blog.creator._id}`}><p className="creator_name">{blog.creator.fullname}</p></a>
                                             <p className="BlogDetail_time__J0n0e">{blog.dateDiff} hours ago</p>
                                         </div>
-                                        <div className='modify-btn'>
+                                        {user?._id === blog.creator._id && <div className='modify-btn'>
                                             <div className="edit">
                                                 <button className="fa-edit" onClick={handleEdit}><FontAwesomeIcon icon={faEdit}/></button>
                                             </div>
                                             <div className="delete">
                                                 <button className="delete-fa-icon" onClick={handleDelete}><FontAwesomeIcon icon ={faTrash}/></button>
                                             </div>
-                                        </div>
+                                        </div>}
                                     </div>
                                 </div>
                                 <ReactMarkdown
@@ -165,10 +174,10 @@ function Blog() {
                             </article>
                             <div className='blog-btn'>
                                 <button onClick={handleLike} type="button" className='like-btn'>
-                                    <FontAwesomeIcon icon={faHeart} className={blog.likes.includes(user._id) ? "liked" : "not-liked"}/>
+                                    <FontAwesomeIcon icon={faHeart} className={blog.likes.includes(user?._id) ? "liked" : "not-liked"}/>
                                     <span>{blog.likes.length}</span>
                                 </button>
-                                <button type="button" className='comment-btn' onClick={() => setIsOpen(true)}>
+                                <button type="button" className='comment-btn' onClick={handleOpen}>
                                     <FontAwesomeIcon icon={faComment}/>
                                     <span>{blog.comments.length}</span>
                                 </button>

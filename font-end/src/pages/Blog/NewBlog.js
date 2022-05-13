@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Footer from '../../components/Footer/Footer'
 import Navigation from '../../components/Navigation/Navigation'
 import ReactMarkdown from 'react-markdown'
@@ -75,15 +75,15 @@ function NewBlog() {
         <>
             <Navigation />
             <div className='newblog-wrapper'>
-                <div spellcheck="false" placeholder="Title" role="textbox" contenteditable="true" class="newblog-title" onInput={(e) => setHeader(e.currentTarget.textContent)}></div>
-                <div class="create-blog">
-                    <div class="rc-md-editor" style={{marginBottom: "31px", height: "calc(100vh - 100px)"}}>
-                        <div class="editor-container">
-                            <section class="sec-md">
-                                <textarea name="textarea" placeholder="Nội dung viết ở đây" class="blog-texteditor section-container" wrap="hard" onChange={handleContent}></textarea>
+                <div spellCheck="false" placeholder="Title" role="textbox" contentEditable="true" className="newblog-title" onInput={(e) => setHeader(e.currentTarget.textContent)}></div>
+                <div className="create-blog">
+                    <div className="rc-md-editor" style={{marginBottom: "31px", height: "calc(100vh - 100px)"}}>
+                        <div className="editor-container">
+                            <section className="sec-md">
+                                <textarea name="textarea" placeholder="Nội dung viết ở đây" className="blog-texteditor section-container" wrap="hard" onChange={handleContent}></textarea>
                             </section>
-                            <section class="sec-html">
-                                <div class="section-container html-wrap">
+                            <section className="sec-html">
+                                <div className="section-container html-wrap">
                                     <ReactMarkdown
                                         className='markdown-body'
                                         children={content}
@@ -116,10 +116,10 @@ function NewBlog() {
                     </div>
                     <div className='submit-btn-list'>
                         <div className="btn-primary" onClick={handleAddBlog}>Submit</div>
-                        <div class="faux-button">
-                            <div class="btn-enhanced">Upload new image</div>
+                        <div className="faux-button">
+                            <div className="btn-enhanced btn-s">Upload new image</div>
                             <input type="file" id="avatar" onChange={(e) => setblogImage(e.target.files[0])} />
-                            <div class="hover-bg"></div>
+                            <div className="hover-bg"></div>
                         </div>
                     </div>
                 </div>

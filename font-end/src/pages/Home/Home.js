@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import CourseList from "../../components/CourseList/CourseList";
 import Footer from "../../components/Footer/Footer";
 import Navigation from "../../components/Navigation/Navigation";
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCourseList } from '../../redux/courseSlice'
 import { ToastContainer } from 'react-toastify'
 import "./Home.css"
+import BlogList from "../../components/BlogList/BlogList";
 
 function Home() {
     const courses = useSelector(state => state.course.courses)
@@ -41,6 +42,7 @@ function Home() {
                 </div>
             </div>
             <CourseList/>
+            <BlogList/>
             <Footer/>
         </>
     );
