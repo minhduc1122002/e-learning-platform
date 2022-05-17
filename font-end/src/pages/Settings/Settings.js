@@ -26,8 +26,11 @@ function Settings() {
 
     const dispatch = useDispatch()
 
-    const { isSuccess, isLoading } = useSelector(
-        (state) => state.auth
+    const isLoading = useSelector(
+        (state) => state.auth.isLoading[3]
+    )
+    const isSuccess = useSelector(
+        (state) => state.auth.isSuccess[3]
     )
 
     useEffect(() => {

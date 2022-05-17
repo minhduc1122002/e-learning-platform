@@ -12,8 +12,14 @@ export default function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [isMissing, setIsMissing] = useState(false)
-    const { isLoading, isError, message } = useSelector(
-        (state) => state.auth
+    const isLoading = useSelector(
+        (state) => state.auth.isLoading[1]
+    )
+    const message = useSelector(
+        (state) => state.auth.message
+    )
+    const isError = useSelector(
+        (state) => state.auth.isError[1]
     )
     const dispatch = useDispatch();
     useEffect(() => {

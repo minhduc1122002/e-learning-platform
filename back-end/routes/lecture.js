@@ -91,7 +91,7 @@ router.put("/lessons/:id", verifyTokenAndAdmin, async (req, res) => {
     if (req.body.title) {
       lecture.lessons.push(req.body)
     } else {
-      return res.status(500).json("Title field is required")
+      return res.status(500).send("Title field is required")
     }
     
     lecture.save()

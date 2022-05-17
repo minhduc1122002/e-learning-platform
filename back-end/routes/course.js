@@ -114,7 +114,9 @@ router.put("/update/:id", verifyTokenAndAdmin, async (req, res) => {
       res.status(500).json("No Course Found")
     }
   } catch (err) {
-    console.log(err)
+    if (err.codeName === 'DuplicateKey') {
+      return res.status(500).send("Path field has already been taken");
+    }
     res.status(500).json(err);
   }
 });
@@ -203,7 +205,6 @@ router.get("/findby/:path", async (req, res) => {
       res.status(500).json("No Course Found")
     }
   } catch (err) {
-    console.log(err)
     res.status(500).json(err);
   }
 });
@@ -276,7 +277,6 @@ router.get("/", async (req, res) => {
       ]);
       res.status(200).json(course);
   } catch (err) {
-      console.log(err)
       res.status(500).json(err);
   }
 });

@@ -17,8 +17,8 @@ export const getCourseList = createAsyncThunk('courses/list', async (thunkAPI) =
     return response.data
   } catch (error) {
     const message = (error.response &&
-      error.response.data &&
-      error.response.data.message) || error.message ||
+      (error.response.data ||
+        error.response.data.message)) || error.message ||
       error.toString()
     return thunkAPI.rejectWithValue(message)
   }
@@ -31,8 +31,8 @@ export const getCourse = createAsyncThunk('courses/path', async (coursePath, thu
       return response.data
     } catch (error) {
       const message = (error.response &&
-        error.response.data &&
-        error.response.data.message) || error.message ||
+        (error.response.data ||
+          error.response.data.message)) || error.message ||
         error.toString()
       return thunkAPI.rejectWithValue(message)
     }
@@ -45,8 +45,8 @@ export const addCourse = createAsyncThunk('courses/add', async (course, thunkAPI
     return response.data
   }catch (error) {
     const message =  (error.response &&
-      error.response.data &&
-      error.response.data.message) || error.message ||
+      (error.response.data ||
+        error.response.data.message)) || error.message ||
       error.toString()
     console.log(message)
     return thunkAPI.rejectWithValue(message)
@@ -60,9 +60,10 @@ export const updateCoursebyId = createAsyncThunk('courses/update', async (course
     console.log(response.data)
     return response.data
   }catch (error) {
+    console.log(error.response)
     const message = (error.response &&
-      error.response.data &&
-      error.response.data.message) || error.message ||
+      (error.response.data ||
+      error.response.data.message)) || error.message ||
       error.toString()
     return thunkAPI.rejectWithValue(message)
   }
@@ -75,8 +76,8 @@ export const deleteCourse = createAsyncThunk('courses/delete', async (course_id,
     return course_id
   }catch (error) {
     const message = (error.response &&
-      error.response.data &&
-      error.response.data.message) || error.message ||
+      (error.response.data ||
+        error.response.data.message)) || error.message ||
       error.toString()
     return thunkAPI.rejectWithValue(message)
   }

@@ -16,8 +16,8 @@ export const getLectureofCourse = createAsyncThunk("lectures/path", async (cours
         return response.data
     } catch(error) {
         const message = (error.response &&
-            error.response.data &&
-            error.response.data.message) || error.message ||
+            (error.response.data ||
+                error.response.data.message)) || error.message ||
             error.toString()
         return ThunkAPI.rejectWithValue(message)
     }
@@ -30,8 +30,8 @@ export const getLectureList = createAsyncThunk("lectures/list", async (ThunkAPI)
         return response.data
     } catch(error) {
         const message = (error.response &&
-            error.response.data &&
-            error.response.data.message) || error.message ||
+            (error.response.data ||
+                error.response.data.message)) || error.message ||
             error.toString()
         return ThunkAPI.rejectWithValue(message)
     }
@@ -44,8 +44,8 @@ export const addLecture = createAsyncThunk("lectures/add", async (lecture, Thunk
         return response.data
     } catch(error) {
         const message = (error.response &&
-            error.response.data &&
-            error.response.data.message) || error.message ||
+            (error.response.data ||
+                error.response.data.message)) || error.message ||
             error.toString()
         return ThunkAPI.rejectWithValue(message)
     }
@@ -58,8 +58,8 @@ export const updateLecture = createAsyncThunk("lectures/update", async (lecture,
         return response.data
     } catch(error) {
         const message = (error.response &&
-            error.response.data &&
-            error.response.data.message) || error.message ||
+            (error.response.data ||
+                error.response.data.message)) || error.message ||
             error.toString()
         return ThunkAPI.rejectWithValue(message)
     }
@@ -72,8 +72,8 @@ export const deleteLecture = createAsyncThunk("lectures/delete", async (lecture_
         return lecture_id
     } catch(error) {
         const message = (error.response &&
-            error.response.data &&
-            error.response.data.message) || error.message ||
+            (error.response.data ||
+                error.response.data.message)) || error.message ||
             error.toString()
         return ThunkAPI.rejectWithValue(message)
     }
@@ -86,9 +86,10 @@ export const addLessontoLecture = createAsyncThunk("lectures/addLesson", async (
         const response = await userRequest.put('/lectures/lessons/' + lectureId, others)
         return response.data
     } catch(error) {
+        console.log(error.response)
         const message = (error.response &&
-            error.response.data &&
-            error.response.data.message) || error.message ||
+            (error.response.data ||
+                error.response.data.message)) || error.message ||
             error.toString()
         return ThunkAPI.rejectWithValue(message)
     }
@@ -101,8 +102,8 @@ export const updateLessontoLecture = createAsyncThunk("lectures/updateLesson", a
         return response.data
     } catch(error) {
         const message = (error.response &&
-            error.response.data &&
-            error.response.data.message) || error.message ||
+            (error.response.data ||
+                error.response.data.message)) || error.message ||
             error.toString()
         return ThunkAPI.rejectWithValue(message)
     }
@@ -115,8 +116,8 @@ export const deleteLessontoLecture = createAsyncThunk("lectures/deleteLesson", a
         return response.data
     } catch(error) {
         const message = (error.response &&
-            error.response.data &&
-            error.response.data.message) || error.message ||
+            (error.response.data ||
+                error.response.data.message)) || error.message ||
             error.toString()
         return ThunkAPI.rejectWithValue(message)
     }

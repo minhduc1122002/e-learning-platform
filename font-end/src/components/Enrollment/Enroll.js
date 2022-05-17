@@ -6,8 +6,8 @@ import { enroll, reset } from '../../redux/authSlice'
 
 function Enroll( {course} ) {
     const user = useSelector((state) => state.auth.user)
-    const { enrollSuccess } = useSelector(
-        (state) => state.auth
+    const enrollSuccess = useSelector(
+        (state) => state.auth.isSuccess[2]
     )
     const navigate = useNavigate()
     const dispatch = useDispatch()
