@@ -43,7 +43,7 @@ function Navigation() {
     if (isActive) {
       setTimeout(() => {
         setIsActive(false)
-      }, 200);
+      }, 2000);
     }
   }
   return (

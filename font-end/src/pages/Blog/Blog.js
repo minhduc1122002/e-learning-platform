@@ -135,7 +135,7 @@ function Blog() {
                                             <a href={`/profiles/${blog.creator._id}`}><p className="creator_name">{blog.creator.fullname}</p></a>
                                             <p className="BlogDetail_time__J0n0e">{blog.dateDiff} hours ago</p>
                                         </div>
-                                        {user?._id === blog.creator._id && <div className='modify-btn'>
+                                        {(user?.isAdmin || (user?._id === blog.creator._id)) && <div className='modify-btn'>
                                             <div className="edit">
                                                 <button className="fa-edit" onClick={handleEdit}><FontAwesomeIcon icon={faEdit}/></button>
                                             </div>

@@ -63,7 +63,7 @@ function Comment( {comment, creator} ) {
                     <FontAwesomeIcon icon={faEllipsisV} />
                 </div> 
             }
-            { isActive && (user?._id === comment.commentator._id || user?._id === creator) && 
+            { isActive && (user?.isAdmin || (user?._id === comment.commentator._id || user?._id === creator)) && 
                 <div className='comment-dropdown' onMouseLeave={handleBlur}>
                     <ul>
                         <li><button type='button' onClick={handleDeleteComment} data-onclickparam={JSON.stringify(comment)}>Delete Comment</button></li>
